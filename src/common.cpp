@@ -9,6 +9,7 @@ void error(const string error_message)
 
 const string uuid()
 {
+	// generate uuid from <uuid/uuid.h> library
 	uuid_t id;
 	uuid_generate(id);
 	char *str = new char[100];

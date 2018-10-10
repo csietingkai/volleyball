@@ -13,6 +13,12 @@ enum class Gender
 	female = false
 };
 
+enum class ActiveStatus
+{
+	active = true,
+	inactive = false
+};
+
 class Person
 {
 	public:
@@ -45,6 +51,7 @@ class Person
 		int age;
 		Gender gender; // true <= male, false <= female
 		string phonenumber;
+		bool is_active;
 		
 		static int person_count;
 };
