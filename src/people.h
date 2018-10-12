@@ -1,7 +1,13 @@
 #ifndef PEOPLE_H
 #define PEOPLE_H
 
-#include <vector>
+#include <algorithm>
+#include <fstream>
+#include <iostream>
+#include <set>
+#include <string>
+#include <sstream>
+#include "common.h"
 
 using namespace std;
 
@@ -40,10 +46,6 @@ class Person
 		const Person& operator =(const Person& other);
 		const bool operator ==(const Person& other) const;
 		const bool operator !=(const Person& other) const;
-		const bool operator <(const Person& other) const; // sort by full information
-		const bool operator >(const Person& other) const;
-		const bool operator <=(const Person& other) const;
-		const bool operator >=(const Person& other) const;
 		friend ostream& operator <<(ostream& strm, const Person& other);
 		
 	private:
@@ -85,8 +87,6 @@ class Team
 		void add_member(const Person& member); // add member to set
 		void remove_member(const Person& member); // remove member from set
 		const int size() const;
-		void load_file(const string filename); // load from file: (teamname.csv)
-		void save_file(const string filename); // save to file: (teamname.csv)
 		
 		// static
 		static const int count(); // how many team has construct
@@ -95,10 +95,6 @@ class Team
 		const Team& operator =(const Team& other);
 		const bool operator ==(const Team& other) const;
 		const bool operator !=(const Team& other) const;
-		const bool operator <(const Team& other) const; // sort by name
-		const bool operator >(const Team& other) const;
-		const bool operator <=(const Team& other) const;
-		const bool operator >=(const Team& other) const;
 		
 	private:
 		string name;

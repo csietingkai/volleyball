@@ -1,6 +1,10 @@
 #ifndef GUI_H_
 #define GUI_H_
 
-// use FLTK to design GUI?
+#include <iostream>
+
+#include "common.h"
+
+using namespace std;
 
 #endif // GUI_H_

@@ -1,8 +1,14 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include <algorithm>
+#include <iostream>
+
+#include "common.h"
 #include "people.h"
 #include "datetime.h"
+
+using namespace std;
 
 //=====================/ Game class section /=====================//
 
