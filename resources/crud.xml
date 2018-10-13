@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<select>
+		SELECT [COLUMN_NAME]
+		FROM [TABLE_NAME]
+		WHERE [CODITIONS];
+	</select>
+	<insert>
+		INSERT
+		INTO [TABLE_NAME]
+		VALUES ([VALUES]);
+	</insert>
+	<update>
+		UPDATE [TABLE_NAME]
+		SET [COLUMN_NAME] = [COLUMN_VALUE]
+		WHERE [CODITIONS];
+	</update>
+	<delete>
+		DELETE
+		FROM [TABLE_NAME]
+		WHERE [CONDITION];
+	</delete>
+</commands>

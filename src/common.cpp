@@ -18,3 +18,21 @@ const string uuid()
 	delete[] str;
 	return ret;
 }
+
+void parse_xml(const string filename)
+{
+	pt::ptree tree;
+	string str;
+    set<string> m_modules;
+
+    pt::read_xml(filename, tree);
+
+    str = tree.get<string>("commands.select");
+    cout << str << endl;
+
+    BOOST_FOREACH(pt::ptree::value_type &v, tree.get_child("commands")) 
+    {
+        m_modules.insert(v.second.data());
+        cout << v.second.data() << endl;
+    }
+}
