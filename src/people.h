@@ -7,7 +7,9 @@
 #include <set>
 #include <string>
 #include <sstream>
+#include <vector>
 #include "common.h"
+#include "MySQLConnector.h"
 
 using namespace std;
 
@@ -29,19 +31,17 @@ class Person
 {
 	public:
 		// constructors
-		Person(const string name, const int age, const Gender is_male, const string phonenumber);
+		Person(const string name, const ActiveStatus active, const Gender is_male, const int age, const string phonenumber);
 				
 		// getters
-		const string get_name() const; // get the name
-		const int get_age() const; // get the age
-		const Gender get_gender() const; // get the gender
-		const string get_phonenumber() const; // get the phone number
-		const string to_string() const; // print out person's full information
+		const string get_name() const;
+		const ActiveStatus get_active_status() const;
+		const Gender get_gender() const;
+		const int get_age() const;
+		const string get_phonenumber() const;
+		const string to_string() const;
 		const int hashcode() const; // generate hashcode with full info
-		
-		// static funtions
-		static const int count(); // return how many people has construct
-		
+			
 		// operators
 		const Person& operator =(const Person& other);
 		const bool operator ==(const Person& other) const;
@@ -49,13 +49,12 @@ class Person
 		friend ostream& operator <<(ostream& strm, const Person& other);
 		
 	private:
+		string uuid;
 		string name;
-		int age;
+		ActiveStatus active; // true <= active, false <= inactive
 		Gender gender; // true <= male, false <= female
+		int age;
 		string phonenumber;
-		bool is_active;
-		
-		static int person_count;
 };
 
 // hash function for Person
@@ -97,6 +96,7 @@ class Team
 		const bool operator !=(const Team& other) const;
 		
 	private:
+		string uuid;
 		string name;
 		vector<Person> personset;
 		
