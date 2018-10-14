@@ -9,23 +9,27 @@
 #include "common.h"
 
 using namespace std;
+using namespace sql;
 
 class MySQLConnector
 {
 	public:
+		// constructors
 		MySQLConnector(const string schema, const string table_name);
 		~MySQLConnector();
 		
-		const int select(const string column_name, const string condition);
+		// basic functions
+		ResultSet* select(const string column_name);
+		ResultSet* select(const string column_name, const string condition);
 		const bool insert(const string values);
 		const int update(const string column_name, const string column_value);
 		const int remove(const string codition); // use remove rather than delete
 	
 	private:
-		sql::Driver *driver;
-		sql::Connection *connection;
-		sql::Statement *statement;
-		sql::ResultSet *result_set;
+		Driver *driver;
+		Connection *connection;
+		Statement *statement;
+		ResultSet *result_set;
 		
 		string schema;
 		string table_name;

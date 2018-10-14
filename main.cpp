@@ -5,8 +5,8 @@
 #include <string>
 
 #include "src/common.h"
-#include "src/people.h"
 #include "src/MySQLConnector.h"
+#include "src/people.h"
 
 using namespace std;
  
@@ -15,8 +15,7 @@ const string table_name = "persons";
  
 int main()
 {
-	MySQLConnector connector(schema, table_name);
-	parse_xml("resources/crud.xml");
+	Person p("aaa", 21, Gender::female, "0938282394", ActiveStatus::inactive);
 	
 	return 0;
 }

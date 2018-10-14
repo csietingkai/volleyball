@@ -18,6 +18,6 @@
 	<delete>
 		DELETE
 		FROM [TABLE_NAME]
-		WHERE [CONDITION];
+		WHERE [CONDITIONS];
 	</delete>
 </commands>

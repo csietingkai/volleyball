@@ -2,12 +2,8 @@
 #define PEOPLE_H
 
 #include <algorithm>
-#include <fstream>
 #include <iostream>
-#include <set>
 #include <string>
-#include <sstream>
-#include <vector>
 #include "common.h"
 #include "MySQLConnector.h"
 
@@ -31,8 +27,8 @@ class Person
 {
 	public:
 		// constructors
-		Person(const string name, const ActiveStatus active, const Gender is_male, const int age, const string phonenumber);
-				
+		Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active);
+		
 		// getters
 		const string get_name() const;
 		const ActiveStatus get_active_status() const;
@@ -49,12 +45,16 @@ class Person
 		friend ostream& operator <<(ostream& strm, const Person& other);
 		
 	private:
-		string uuid;
+		string id;
 		string name;
-		ActiveStatus active; // true <= active, false <= inactive
+		unsigned int age;
 		Gender gender; // true <= male, false <= female
-		int age;
 		string phonenumber;
+		ActiveStatus active; // true <= active, false <= inactive
+		
+		const string schema = "htk103u_volleyball";
+		const string table_name = "persons";
+		MySQLConnector connector;
 };
 
 // hash function for Person

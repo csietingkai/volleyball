@@ -7,32 +7,52 @@ void error(const string error_message)
 	throw invalid_argument(error_message);
 }
 
-const string uuid()
+const string generate_sha1(const string str)
 {
-	// generate uuid from <uuid/uuid.h> library
-	uuid_t id;
-	uuid_generate(id);
-	char *str = new char[100];
-	uuid_unparse(id, str);
-	string ret(str);
-	delete[] str;
+	// generate sha1 from <boost/uuid/sha1.hpp> library
+	// stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c
+	boost::uuids::detail::sha1 sha1;
+	sha1.process_bytes(str.data(), str.size());
+	unsigned hash[5] = {0};
+	sha1.get_digest(hash);
+	char buf[41] = {0};
+	for (int i = 0; i < 5; i++)
+	{
+		std::sprintf(buf + (i << 3), "%08x", hash[i]);
+	}
+
+string ret(buf);
 	return ret;
 }
 
-void parse_xml(const string filename)
+const string parse_xml(const SQL sql)
 {
+	// www.boost.org/doc/libs/1_61_0/doc/html/property_tree/tutorial.html
 	pt::ptree tree;
-	string str;
-    set<string> m_modules;
+    pt::read_xml("resources/crud.xml", tree);
+	string command = "commands."+sql_to_string[static_cast<int>(sql)];
+	string str = tree.get<string>(command);
+	return str;
+}
 
-    pt::read_xml(filename, tree);
+const bool replace(string& str, const string& from, const string& to)
+{
+	size_t start_pos = str.find(from);
+	if(start_pos == std::string::npos)
+	{
+		return false;
+	}
+	str.replace(start_pos, from.length(), to);
+	return true;
+}
 
-    str = tree.get<string>("commands.select");
-    cout << str << endl;
-
-    BOOST_FOREACH(pt::ptree::value_type &v, tree.get_child("commands")) 
+const string trim(const string& str)
+{
+    size_t first = str.find_first_not_of(' ');
+    if (string::npos == first)
     {
-        m_modules.insert(v.second.data());
-        cout << v.second.data() << endl;
+        return str;
     }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
 }
