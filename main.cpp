@@ -10,12 +10,9 @@
 
 using namespace std;
  
-const string schema = "htk103u_volleyball";
-const string table_name = "persons";
- 
 int main()
 {
-	Person p("aaa", 21, Gender::female, "0938282394", ActiveStatus::inactive);
+	Person p("sdfojkaaa", 2224, Gender::female, "0938282394", ActiveStatus::active);
 	
 	return 0;
 }

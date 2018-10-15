@@ -21,7 +21,7 @@ const string generate_sha1(const string str)
 		std::sprintf(buf + (i << 3), "%08x", hash[i]);
 	}
 
-string ret(buf);
+	string ret(buf);
 	return ret;
 }
 
@@ -46,7 +46,7 @@ const bool replace(string& str, const string& from, const string& to)
 	return true;
 }
 
-const string trim(const string& str)
+const string trim(const string str)
 {
     size_t first = str.find_first_not_of(' ');
     if (string::npos == first)
@@ -56,3 +56,33 @@ const string trim(const string& str)
     size_t last = str.find_last_not_of(' ');
     return str.substr(first, (last - first + 1));
 }
+
+void trace_log(const string msg)
+{
+	//BOOST_LOG_TRIVIAL(trace) << msg;
+}
+
+/*void debug_log(const string msg)
+{
+	BOOST_LOG_TRIVIAL(debug) << msg;
+}
+
+void info_log(const string msg)
+{
+	BOOST_LOG_TRIVIAL(info) << msg;
+}
+
+void warning_log(const string msg)
+{
+	BOOST_LOG_TRIVIAL(warning) << msg;
+}
+
+void error_log(const string msg)
+{
+	BOOST_LOG_TRIVIAL(error) << msg;
+}
+
+void fatal_log(const string msg)
+{
+	BOOST_LOG_TRIVIAL(fatal) << msg;
+}*/

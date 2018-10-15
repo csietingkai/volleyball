@@ -24,6 +24,7 @@ class MySQLConnector
 		const bool insert(const string values);
 		const int update(const string column_name, const string column_value);
 		const int remove(const string codition); // use remove rather than delete
+		const int removeAll();
 	
 	private:
 		Driver *driver;

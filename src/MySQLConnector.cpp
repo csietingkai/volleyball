@@ -12,6 +12,7 @@ MySQLConnector::MySQLConnector(const string schema, const string table_name)
 
 	this->statement = this->connection->createStatement();
 	this->result_set = this->statement->executeQuery("SELECT * FROM "+this->table_name);
+	trace_log("hah");
 }
 
 MySQLConnector::~MySQLConnector()
@@ -42,7 +43,7 @@ ResultSet* MySQLConnector::select(const string column_name, const string conditi
 	}
 	//cout << query << endl;
 	this->result_set = this->statement->executeQuery(query);
-	/*sql::ResultSetMetaData *res_meta = result_set->getMetaData();
+	/*ResultSetMetaData *res_meta = result_set->getMetaData();
 	int columns = res_meta->getColumnCount();
 	while (result_set->next())
 	{
@@ -94,4 +95,9 @@ const int MySQLConnector::update(const string column_name, const string column_v
 const int MySQLConnector::remove(const string codition)
 {
 	return 0;
+}
+
+const int MySQLConnector::removeAll()
+{
+	return this->remove("ID IS NOT NULL");
 }

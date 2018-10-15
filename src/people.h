@@ -31,12 +31,12 @@ class Person
 		
 		// getters
 		const string get_name() const;
-		const ActiveStatus get_active_status() const;
-		const Gender get_gender() const;
 		const int get_age() const;
+		const Gender get_gender() const;
 		const string get_phonenumber() const;
+		const ActiveStatus get_active_status() const;
 		const string to_string() const;
-		const int hashcode() const; // generate hashcode with full info
+		const string hashcode() const; 
 			
 		// operators
 		const Person& operator =(const Person& other);
@@ -55,20 +55,9 @@ class Person
 		const string schema = "htk103u_volleyball";
 		const string table_name = "persons";
 		MySQLConnector connector;
+		
+		void init();
 };
-
-// hash function for Person
-namespace std
-{
-	template<>
-	struct hash<Person>
-	{
-		size_t operator ()(const Person& obj) const
-		{
-			return obj.hashcode();
-		}
-	};
-}
 
 //=====================/ Team class section /=====================//
 
