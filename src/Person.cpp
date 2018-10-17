@@ -2,7 +2,7 @@
 
 // constructors
 Person::Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active)
-	: connector(schema, table_name)
+	: connector(table_name)
 {
 	this->id = generate_sha1(to_string());
 	this->name = name;
@@ -11,6 +11,7 @@ Person::Person(const string name, const unsigned int age, const Gender is_male, 
 	this->age = age;
 	this->phonenumber = phonenumber;
 	this->init();
+	this->connector.update("age", "22", "");
 }
 
 // getters

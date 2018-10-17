@@ -52,7 +52,6 @@ class Person
 		string phonenumber;
 		ActiveStatus active; // true <= active, false <= inactive
 		
-		const string schema = "htk103u_volleyball";
 		const string table_name = "persons";
 		MySQLConnector connector;
 		
