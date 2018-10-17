@@ -1,5 +1,5 @@
-#ifndef PEOPLE_H
-#define PEOPLE_H
+#ifndef PERSON_H_
+#define PERSON_H_
 
 #include <algorithm>
 #include <iostream>
@@ -58,37 +58,4 @@ class Person
 		void init();
 };
 
-//=====================/ Team class section /=====================//
-
-class Team
-{
-	public:
-		// constructors
-		Team(const string name);
-		
-		// getters
-		const string get_name() const;
-		const Person& get_member(const int index) const; // get meber by index
-		
-		// other member function
-		void add_member(const Person& member); // add member to set
-		void remove_member(const Person& member); // remove member from set
-		const int size() const;
-		
-		// static
-		static const int count(); // how many team has construct
-		
-		// operators
-		const Team& operator =(const Team& other);
-		const bool operator ==(const Team& other) const;
-		const bool operator !=(const Team& other) const;
-		
-	private:
-		string uuid;
-		string name;
-		vector<Person> personset;
-		
-		static int team_count;
-};
-
-#endif //PEOPLE_H
+#endif //PERSON_H_
