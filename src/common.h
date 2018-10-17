@@ -20,7 +20,17 @@ enum class SQL
 const string sql_to_string[] = 
 { "select", "insert", "update", "delete" };
 
-const string parse_xml(const SQL sql);
+const string get_sql_command(const SQL sql);
+
+enum class Connect_info
+{ server = 0, account = 1, pwd = 2, schema = 3 };
+
+const string connect_info_to_string[] = 
+{ "server", "account", "pwd", "schema" };
+
+const string get_connect_info(const Connect_info info);
+
+const string parse_xml(const string filename, const string node_name);
 
 const bool replace(string& str, const string& from, const string& to);
 
@@ -28,7 +38,7 @@ const string trim(const string str);
 
 void trace_log(const string msg);
 
-/*void debug_log(const string msg);
+void debug_log(const string msg);
 
 void info_log(const string msg);
 
@@ -36,6 +46,6 @@ void warning_log(const string msg);
 
 void error_log(const string msg);
 
-void fatal_log(const string msg);*/
+void fatal_log(const string msg);
 
 #endif //COMMON_H_

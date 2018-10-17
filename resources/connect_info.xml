@@ -2,12 +2,6 @@
 <connection>
 	<server>mysql.cs.ccu.edu.tw</server>
 	<account>htk103u</account>
-	<password>htkkoeoh</password>
+	<pwd>htkkoeoh</pwd>
 	<schema>htk103u_volleyball</schema>
-	<tables>
-		<table name="persons">persons</table>
-		<table name="teams">teams</table>
-		<table name="games">games</table>
-		<table name="schedules">schedules</table>
-	</tables>
 </connection>

@@ -25,14 +25,27 @@ const string generate_sha1(const string str)
 	return ret;
 }
 
-const string parse_xml(const SQL sql)
+const string get_sql_command(const SQL sql)
+{
+	string filename = "resources/crud.xml";
+	string node_name = "commands."+sql_to_string[static_cast<int>(sql)];
+	return parse_xml(filename, node_name);
+}
+
+const string get_connect_info(const Connect_info info)
+{
+	string filename = "resources/connect_info.xml";
+	string node_name = "connection."+connect_info_to_string[static_cast<int>(info)];
+	return parse_xml(filename, node_name);
+}
+
+const string parse_xml(const string filename, const string node_name)
 {
 	// www.boost.org/doc/libs/1_61_0/doc/html/property_tree/tutorial.html
 	pt::ptree tree;
-    pt::read_xml("resources/crud.xml", tree);
-	string command = "commands."+sql_to_string[static_cast<int>(sql)];
-	string str = tree.get<string>(command);
-	return str;
+    pt::read_xml(filename, tree);
+	string str = tree.get<string>(node_name);
+	return trim(str);
 }
 
 const bool replace(string& str, const string& from, const string& to)
@@ -56,33 +69,3 @@ const string trim(const string str)
     size_t last = str.find_last_not_of(' ');
     return str.substr(first, (last - first + 1));
 }
-
-void trace_log(const string msg)
-{
-	//BOOST_LOG_TRIVIAL(trace) << msg;
-}
-
-/*void debug_log(const string msg)
-{
-	BOOST_LOG_TRIVIAL(debug) << msg;
-}
-
-void info_log(const string msg)
-{
-	BOOST_LOG_TRIVIAL(info) << msg;
-}
-
-void warning_log(const string msg)
-{
-	BOOST_LOG_TRIVIAL(warning) << msg;
-}
-
-void error_log(const string msg)
-{
-	BOOST_LOG_TRIVIAL(error) << msg;
-}
-
-void fatal_log(const string msg)
-{
-	BOOST_LOG_TRIVIAL(fatal) << msg;
-}*/

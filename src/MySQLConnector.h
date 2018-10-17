@@ -14,15 +14,17 @@ using namespace sql;
 class MySQLConnector
 {
 	public:
+		const static string CLASS_NAME;
+		
 		// constructors
-		MySQLConnector(const string schema, const string table_name);
+		MySQLConnector(const string table_name);
 		~MySQLConnector();
 		
 		// basic functions
 		ResultSet* select(const string column_name);
 		ResultSet* select(const string column_name, const string condition);
 		const bool insert(const string values);
-		const int update(const string column_name, const string column_value);
+		const int update(const string column_name, const string column_value, const string conditions);
 		const int remove(const string codition); // use remove rather than delete
 		const int removeAll();
 	
@@ -32,12 +34,14 @@ class MySQLConnector
 		Statement *statement;
 		ResultSet *result_set;
 		
-		string schema;
 		string table_name;
 		
-		const string server = "mysql.cs.ccu.edu.tw";
-		const string account = "htk103u";
-		const string password = "htkkoeoh";
+		const string server = get_connect_info(Connect_info::server);
+		const string account = get_connect_info(Connect_info::account);
+		const string pwd = get_connect_info(Connect_info::pwd);
+		const string schema = get_connect_info(Connect_info::schema);
+		
+		void print_sql_exception(const SQLException e);
 };
 
 #endif
