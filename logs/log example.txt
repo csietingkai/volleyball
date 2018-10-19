@@ -1,0 +1,9 @@
+想要 log 在 console 跟檔案那邊輸出
+輸出的格式長這樣
+========================================
+[現在時間] [Log等級] 		(class名稱) 輸出訊息
+[TimeStamp] [%Severity%] 	(class name) message
+========================================
+
+可以參考 https://blog.scalyr.com/2018/07/getting-started-quickly-c-logging/ 這篇
+class名稱前面要對齊

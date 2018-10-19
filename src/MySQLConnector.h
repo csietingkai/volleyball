@@ -35,6 +35,7 @@ class MySQLConnector
 		ResultSet *result_set;
 		
 		string table_name;
+		Logger logger;
 		
 		const string server = get_connect_info(Connect_info::server);
 		const string account = get_connect_info(Connect_info::account);

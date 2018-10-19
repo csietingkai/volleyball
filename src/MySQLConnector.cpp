@@ -4,6 +4,7 @@ const string MySQLConnector::CLASS_NAME = "MySQLConnector";
 
 // constructor
 MySQLConnector::MySQLConnector(const string table_name)
+	: logger(MySQLConnector::CLASS_NAME)
 {
 	this->table_name = table_name;
 	
@@ -76,7 +77,7 @@ const bool MySQLConnector::insert(const string values)
 	}
 	else
 	{
-		error("sql insert error: values can't be empty");
+		//error("sql insert error: values can't be empty");
 	}
 	
 	try

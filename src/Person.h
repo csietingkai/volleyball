@@ -26,6 +26,7 @@ enum class ActiveStatus
 class Person
 {
 	public:
+		const static string CLASS_NAME;
 		// constructors
 		Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active);
 		
@@ -54,6 +55,7 @@ class Person
 		
 		const string table_name = "persons";
 		MySQLConnector connector;
+		Logger logger;
 		
 		void init();
 };

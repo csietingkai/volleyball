@@ -1,12 +1,5 @@
 #include "common.h"
 
-void error(const string error_message)
-{
-	// throw an exception
-	// which output error message and shut whole program down
-	throw invalid_argument(error_message);
-}
-
 const string generate_sha1(const string str)
 {
 	// generate sha1 from <boost/uuid/sha1.hpp> library

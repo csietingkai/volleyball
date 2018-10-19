@@ -1,8 +1,11 @@
 #include "Person.h"
 
+const string Person::CLASS_NAME = "Person";
+
 // constructors
 Person::Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active)
 	: connector(table_name)
+	, logger(Person::CLASS_NAME)
 {
 	this->id = generate_sha1(to_string());
 	this->name = name;
