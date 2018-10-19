@@ -1,4 +1,4 @@
-#include "people.h"
+#include "Person.h"
 
 // constructors
 Person::Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active)
@@ -11,7 +11,7 @@ Person::Person(const string name, const unsigned int age, const Gender is_male, 
 	this->age = age;
 	this->phonenumber = phonenumber;
 	this->init();
-	this->connector.update("age", "22", "");
+	//this->connector.update("age", "22", "");
 }
 
 // getters
