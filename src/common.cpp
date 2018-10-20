@@ -54,11 +54,8 @@ const bool replace(string& str, const string& from, const string& to)
 
 const string trim(const string str)
 {
-    size_t first = str.find_first_not_of(' ');
-    if (string::npos == first)
-    {
-        return str;
-    }
-    size_t last = str.find_last_not_of(' ');
-    return str.substr(first, (last - first + 1));
+	string ret = str;
+    ret.erase(remove(ret.begin(), ret.end(), '\t'), ret.end());
+    ret.erase(remove(ret.begin(), ret.end(), ' '), ret.end());
+    return ret;
 }
