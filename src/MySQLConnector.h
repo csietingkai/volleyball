@@ -11,6 +11,15 @@
 using namespace std;
 using namespace sql;
 
+#define interface class
+
+interface Connectable
+{
+	protected:
+		virtual void init() = 0;
+		virtual void update(const string column_name, const string column_value) = 0;
+};
+
 class MySQLConnector
 {
 	public:

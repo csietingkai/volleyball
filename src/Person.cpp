@@ -1,10 +1,8 @@
 #include "Person.h"
 
-const string Person::CLASS_NAME = "Person";
-
 // constructors
 Person::Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status)
-	: connector(TABLE_NAME)
+	: connector(Person::TABLE_NAME)
 	, logger(Person::CLASS_NAME)
 {
 	this->name = name;
@@ -88,7 +86,6 @@ const string Person::to_string() const
 }
 
 // operators
-// operators
 const Person& Person::operator =(const Person& other)
 {
 	if(this == &other)
@@ -125,10 +122,8 @@ ostream& operator <<(ostream& strm, const Person& other)
 	return strm;
 }
 
-// private
-const string Person::TABLE_NAME = "persons";
-
-void Person::init()
+// protected
+void Person::init() 
 {
 	sql::ResultSet *result_set = connector.select("ID", "ID = '" + id + "'");
 	if (0 == result_set->rowsCount())
@@ -154,3 +149,8 @@ void Person::update(const string column_name, const string column_value)
 	connector.update(column_name, column_value, conditions);
 	connector.update("ID", this->id, conditions);
 }
+
+// private
+const string Person::TABLE_NAME = "persons";
+
+const string Person::CLASS_NAME = "Person";

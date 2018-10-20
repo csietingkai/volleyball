@@ -23,10 +23,11 @@ enum class ActiveStatus
 	inactive = false
 };
 
-class Person
+class Person : Connectable
 {
 	public:
-		const static string CLASS_NAME;
+		typedef Connectable super;
+		
 		// constructors
 		Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status);
 		
@@ -50,6 +51,10 @@ class Person
 		const bool operator ==(const Person& other) const;
 		const bool operator !=(const Person& other) const;
 		friend ostream& operator <<(ostream& strm, const Person& other);
+	
+	protected:
+		void init() override;
+		void update(const string column_name, const string column_value) override;
 		
 	private:
 		string id;
@@ -61,10 +66,8 @@ class Person
 		
 		const static string TABLE_NAME;
 		MySQLConnector connector;
+		const static string CLASS_NAME;
 		Logger logger;
-		
-		void init();
-		void update(const string column_name, const string column_value);
 };
 
 #endif //PERSON_H_
