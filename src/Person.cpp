@@ -25,18 +25,26 @@ void Person::set_name(const string name)
 
 void Person::set_age(const unsigned int age)
 {
+	this->age = age;
+	this->update("age", std::to_string(this->get_age()));
 }
 
 void Person::set_gender(const Gender gender)
 {
+	this->gender = gender;
+	this->update("gender", std::to_string(static_cast<int>(gender)));
 }
 
 void Person::set_phonenumber(const string phonenumber)
 {
+	this->phonenumber = phonenumber;
+	this->update("phonenumber", "'"+this->get_phonenumber()+"'");
 }
 
 void Person::set_active_status(const ActiveStatus status)
 {
+	this->status = status;
+	this->update("is_active", std::to_string(static_cast<int>(status)));
 }
 
 
@@ -79,6 +87,44 @@ const string Person::to_string() const
 	return re;
 }
 
+// operators
+// operators
+const Person& Person::operator =(const Person& other)
+{
+	if(this == &other)
+	{
+		return *this;
+	}
+	
+	this->name = other.get_name();
+	this->age = other.get_age();
+	this->gender = other.get_gender();
+	this->phonenumber = other.get_phonenumber();
+	
+	return *this;
+}
+
+const bool Person::operator ==(const Person& other) const
+{
+	bool re = false;
+	if(this->to_string().compare(other.to_string()) == 0)
+	{
+		re = true;
+	}
+	return re;
+}
+
+const bool Person::operator !=(const Person& other) const
+{
+	return !(operator==(other));
+}
+
+ostream& operator <<(ostream& strm, const Person& other)
+{
+	strm << other.to_string();
+	return strm;
+}
+
 // private
 const string Person::TABLE_NAME = "persons";
 
@@ -97,8 +143,6 @@ void Person::init()
 		values += std::to_string(static_cast<int>(status));
 		connector.insert(values);
 	}
-	string conditions = "ID = '" + this->id + "'";
-	cout << connector.remove(conditions) << endl;
 }
 
 void Person::update(const string column_name, const string column_value)
@@ -108,5 +152,5 @@ void Person::update(const string column_name, const string column_value)
 	const string conditions = "ID = '"+ori_id+"'";
 	const string new_id = "'"+this->id+"'";
 	connector.update(column_name, column_value, conditions);
-	//connector.update("ID", this->id, conditions);
+	connector.update("ID", this->id, conditions);
 }
