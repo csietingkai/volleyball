@@ -101,7 +101,6 @@ const int MySQLConnector::update(const string column_name, const string column_v
 	replace(query, "[COLUMN_NAME]", column_name);
 	replace(query, "[COLUMN_VALUE]", column_value);
 	replace(query, "[CONDITIONS]", conditions);
-	cout << query << endl;
 	
 	try
 	{
@@ -115,9 +114,24 @@ const int MySQLConnector::update(const string column_name, const string column_v
 	return ret;
 }
 
-const int MySQLConnector::remove(const string codition)
+const int MySQLConnector::remove(const string conditions)
 {
-	return 0;
+	int ret = 0;
+	
+	string query = get_sql_command(SQL::remove);
+	replace(query, "[TABLE_NAME]", this->table_name);
+	replace(query, "[CONDITIONS]", conditions);
+	
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (SQLException e)
+	{
+		print_sql_exception(e);
+	}
+	
+	return ret;
 }
 
 const int MySQLConnector::removeAll()

@@ -97,6 +97,8 @@ void Person::init()
 		values += std::to_string(static_cast<int>(status));
 		connector.insert(values);
 	}
+	string conditions = "ID = '" + this->id + "'";
+	cout << connector.remove(conditions) << endl;
 }
 
 void Person::update(const string column_name, const string column_value)
