@@ -7,6 +7,7 @@
 #include "src/common.h"
 #include "src/MySQLConnector.h"
 #include "src/Person.h"
+#include "src/Team.h"
 
 using namespace std;
  

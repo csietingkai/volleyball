@@ -10,7 +10,7 @@
 
 using namespace std;
 
-class Team
+class Team : Connectable
 {
 	public:
 		// constructors
@@ -18,7 +18,7 @@ class Team
 		
 		// getters
 		const string get_name() const;
-		const Person& get_member(const int index) const; // get meber by index
+		const Person& get_member(const unsigned int index) const;
 		
 		// other member function
 		void add_member(const Person& member); // add member to set
@@ -30,12 +30,19 @@ class Team
 		const bool operator ==(const Team& other) const;
 		const bool operator !=(const Team& other) const;
 		
+	protected:
+		void insert() override;
+		void update(const string column_name, const string column_value) override;
+		
 	private:
 		string id;
 		string name;
 		vector<Person> personset;
 		
-		static int team_count;
+		const static string TABLE_NAME;
+		MySQLConnector connector;
+		const static string CLASS_NAME;
+		Logger logger;
 };
 
 #endif //TEAM_H_

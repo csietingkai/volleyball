@@ -53,7 +53,7 @@ class Person : Connectable
 		friend ostream& operator <<(ostream& strm, const Person& other);
 	
 	protected:
-		void init() override;
+		void insert() override;
 		void update(const string column_name, const string column_value) override;
 		
 	private:

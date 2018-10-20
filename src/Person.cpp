@@ -11,7 +11,7 @@ Person::Person(const string name, const unsigned int age, const Gender gender, c
 	this->age = age;
 	this->phonenumber = phonenumber;
 	this->id = generate_sha1(to_string());
-	this->init();
+	this->insert();
 }
 
 // setters
@@ -123,7 +123,7 @@ ostream& operator <<(ostream& strm, const Person& other)
 }
 
 // protected
-void Person::init() 
+void Person::insert() 
 {
 	sql::ResultSet *result_set = connector.select("ID", "ID = '" + id + "'");
 	if (0 == result_set->rowsCount())
