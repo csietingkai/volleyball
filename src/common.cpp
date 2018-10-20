@@ -55,7 +55,13 @@ const bool replace(string& str, const string& from, const string& to)
 const string trim(const string str)
 {
 	string ret = str;
-    ret.erase(remove(ret.begin(), ret.end(), '\t'), ret.end());
-    ret.erase(remove(ret.begin(), ret.end(), ' '), ret.end());
-    return ret;
+	ret.erase(remove(ret.begin(), ret.end(), '\t'), ret.end());
+	ret.erase(remove(ret.begin(), ret.end(), '\n'), ret.end());
+	size_t first = ret.find_first_not_of(' ');
+    if (string::npos == first)
+    {
+        return str;
+    }
+    size_t last = ret.find_last_not_of(' ');
+    return ret.substr(first, (last - first + 1));
 }
