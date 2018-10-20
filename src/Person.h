@@ -28,7 +28,14 @@ class Person
 	public:
 		const static string CLASS_NAME;
 		// constructors
-		Person(const string name, const unsigned int age, const Gender is_male, const string phonenumber, const ActiveStatus active);
+		Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status);
+		
+		// setters
+		void set_name(const string name);
+		void set_age(const unsigned int age);
+		void set_gender(const Gender gender);
+		void set_phonenumber(const string phonenumber);
+		void set_active_status(const ActiveStatus status);
 		
 		// getters
 		const string get_name() const;
@@ -37,7 +44,6 @@ class Person
 		const string get_phonenumber() const;
 		const ActiveStatus get_active_status() const;
 		const string to_string() const;
-		const string hashcode() const; 
 			
 		// operators
 		const Person& operator =(const Person& other);
@@ -51,13 +57,14 @@ class Person
 		unsigned int age;
 		Gender gender; // true <= male, false <= female
 		string phonenumber;
-		ActiveStatus active; // true <= active, false <= inactive
+		ActiveStatus status; // true <= active, false <= inactive
 		
-		const string table_name = "persons";
+		const static string TABLE_NAME;
 		MySQLConnector connector;
 		Logger logger;
 		
 		void init();
+		void update(const string column_name, const string column_value);
 };
 
 #endif //PERSON_H_

@@ -36,11 +36,11 @@ ResultSet* MySQLConnector::select(const string column_name, const string conditi
 	replace(query, "[TABLE_NAME]", this->table_name);
 	if (!trim(conditions).empty())
 	{
-		replace(query, "[CODITIONS]", conditions);
+		replace(query, "[CONDITIONS]", conditions);
 	}
 	else
 	{
-		replace(query, "[CODITIONS]", "ID IS NOT NULL");
+		replace(query, "[CONDITIONS]", "ID IS NOT NULL");
 	}
 	//cout << query << endl;
 	
@@ -94,7 +94,7 @@ const bool MySQLConnector::insert(const string values)
 
 const int MySQLConnector::update(const string column_name, const string column_value, const string conditions)
 {
-	bool ret = true;
+	int ret = 0;
 	
 	string query = get_sql_command(SQL::update);
 	replace(query, "[TABLE_NAME]", this->table_name);
