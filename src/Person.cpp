@@ -6,11 +6,20 @@ Person::Person(const string name, const unsigned int age, const Gender gender, c
 	, logger(Person::CLASS_NAME)
 {
 	this->name = name;
-	this->status = status;
 	this->gender = gender;
 	this->age = age;
 	this->phonenumber = phonenumber;
+	this->status = status;
 	this->id = generate_sha1(to_string());
+	this->insert();
+}
+
+Person::Person(const Person& other)
+	: connector(Person::TABLE_NAME)
+	, logger(Person::CLASS_NAME)
+{
+	// needed by vector.push_back()
+	this->operator=(other);
 	this->insert();
 }
 
@@ -47,6 +56,11 @@ void Person::set_active_status(const ActiveStatus status)
 
 
 // getters
+const string Person::get_id() const
+{
+	return this->id;
+}
+
 const string Person::get_name() const
 {
 	return this->name;
@@ -97,6 +111,8 @@ const Person& Person::operator =(const Person& other)
 	this->age = other.get_age();
 	this->gender = other.get_gender();
 	this->phonenumber = other.get_phonenumber();
+	this->status = other.get_active_status();
+	this->id = generate_sha1(to_string());
 	
 	return *this;
 }

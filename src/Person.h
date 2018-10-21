@@ -30,6 +30,7 @@ class Person : Connectable
 		
 		// constructors
 		Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status);
+		Person(const Person& other);
 		
 		// setters
 		void set_name(const string name);
@@ -39,6 +40,7 @@ class Person : Connectable
 		void set_active_status(const ActiveStatus status);
 		
 		// getters
+		const string get_id() const;
 		const string get_name() const;
 		const int get_age() const;
 		const Gender get_gender() const;
