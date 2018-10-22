@@ -26,8 +26,6 @@ enum class ActiveStatus
 class Person : Connectable
 {
 	public:
-		typedef Connectable super;
-		
 		// constructors
 		Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status);
 		Person(const Person& other);

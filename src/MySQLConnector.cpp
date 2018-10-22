@@ -1,7 +1,5 @@
 #include "MySQLConnector.h"
 
-const string MySQLConnector::CLASS_NAME = "MySQLConnector";
-
 // constructor
 MySQLConnector::MySQLConnector(const string table_name)
 	: logger(MySQLConnector::CLASS_NAME)
@@ -26,7 +24,7 @@ MySQLConnector::~MySQLConnector()
 // basic functions
 ResultSet* MySQLConnector::select(const string column_name)
 {
-	return this->select(column_name, "");
+	return this->select(column_name, "ID IS NOT NULL");
 }
 
 ResultSet* MySQLConnector::select(const string column_name, const string conditions)
@@ -34,14 +32,7 @@ ResultSet* MySQLConnector::select(const string column_name, const string conditi
 	string query = get_sql_command(SQL::select);
 	replace(query, "[COLUMN_NAME]", column_name);
 	replace(query, "[TABLE_NAME]", this->table_name);
-	if (!trim(conditions).empty())
-	{
-		replace(query, "[CONDITIONS]", conditions);
-	}
-	else
-	{
-		replace(query, "[CONDITIONS]", "ID IS NOT NULL");
-	}
+	replace(query, "[CONDITIONS]", conditions);
 	//cout << query << endl;
 	
 	try
@@ -139,7 +130,9 @@ const int MySQLConnector::removeAll()
 	return this->remove("ID IS NOT NULL");
 }
 
-// private functions
+// private
+const string MySQLConnector::CLASS_NAME = "MySQLConnector";
+
 void MySQLConnector::print_sql_exception(const SQLException e)
 {
 	cout << "# ERR: SQLException in " << __FILE__;

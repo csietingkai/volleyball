@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "common.h"
 #include "MySQLConnector.h"
 #include "Person.h"
@@ -16,14 +17,18 @@ class Team : Connectable
 		// constructors
 		Team(const string name);
 		
+		// setters
+		void set_name(const string name);
+		
 		// getters
+		const string get_id() const;
 		const string get_name() const;
 		const Person& get_member(const unsigned int index) const;
+		const unsigned int size() const;
 		
 		// other member function
-		void add_member(const Person& member); // add member to set
-		void remove_member(const Person& member); // remove member from set
-		const int size() const;
+		void add_member(const Person& member);
+		void remove_member(const Person& member);
 		
 		// operators
 		const Team& operator =(const Team& other);
@@ -31,8 +36,10 @@ class Team : Connectable
 		const bool operator !=(const Team& other) const;
 		
 	protected:
+		void select() override;
 		void insert() override;
 		void update(const string column_name, const string column_value) override;
+		void remove(const string member_id) override;
 		
 	private:
 		string id;
