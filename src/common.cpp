@@ -1,5 +1,12 @@
 #include "common.h"
 
+const string generate_uuid()
+{
+	boost::uuids::random_generator generator;
+	boost::uuids::uuid uuid = generator();
+	return boost::uuids::to_string(uuid);
+}
+
 const string generate_sha1(const string str)
 {
 	// generate sha1 from <boost/uuid/sha1.hpp> library

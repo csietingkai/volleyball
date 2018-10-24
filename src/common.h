@@ -5,11 +5,16 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/uuid/sha1.hpp>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
 #include <iostream>
 #include "Logger.h"
 
 using namespace std;
 namespace pt = boost::property_tree;
+
+const string generate_uuid();
 
 const string generate_sha1(const string str);
 
