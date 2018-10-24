@@ -85,7 +85,7 @@ void Team::select()
 	while (columns > 0 && result_set->next())
 	{
 		Person p(result_set->getString(1));
-		this->add_member(p);
+		personset.push_back(p);
 	}
 }
 

@@ -154,11 +154,13 @@ void Person::select()
 	ResultSet* result_set = connector.select(column_name, conditions);
 	while (result_set->next())
 	{
-		this->name = result_set->getString(2);
-		this->age = stoi(result_set->getString(3));
-		this->gender = static_cast<Gender>(stoi(result_set->getString(4)));
-		this->phonenumber = result_set->getString(4);
-		this->status = static_cast<ActiveStatus>(stoi(result_set->getString(5)));
+		int column_count = 1;
+		column_count++;
+		this->name = result_set->getString(column_count++);
+		this->age = stoi(result_set->getString(column_count++));
+		this->gender = static_cast<Gender>(stoi(result_set->getString(column_count++)));
+		this->phonenumber = result_set->getString(column_count++);
+		this->status = static_cast<ActiveStatus>(stoi(result_set->getString(column_count++)));
 	}
 }
 
