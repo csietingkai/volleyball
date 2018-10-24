@@ -34,6 +34,7 @@ class Team : Connectable
 		const Team& operator =(const Team& other);
 		const bool operator ==(const Team& other) const;
 		const bool operator !=(const Team& other) const;
+		const Person& operator [](const unsigned int index) const;
 		
 	protected:
 		void select() override;

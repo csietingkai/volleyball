@@ -4,12 +4,17 @@
 #include "src/MySQLConnector.h"
 #include "src/Person.h"
 #include "src/Team.h"
+#include "src/View.h"
 
 using namespace std;
- 
-int main()
+using namespace Gtk;
+using namespace Glib;
+
+int main(int argc, char* argv[])
 {
-	Team t1("test");
+	RefPtr<Application> app = Application::create(argc, argv);
 	
-	return 0;
+	View window;
+	
+	return app->run(window);
 }
