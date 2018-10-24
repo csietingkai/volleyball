@@ -16,7 +16,7 @@ using namespace sql;
 interface Connectable
 {
 	protected:
-		virtual void select() {};
+		virtual void select() = 0;
 		virtual void insert() = 0;
 		virtual void update(const string column_name, const string column_value) = 0;
 		virtual void remove(const string id) {};

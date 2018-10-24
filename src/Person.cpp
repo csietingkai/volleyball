@@ -14,6 +14,14 @@ Person::Person(const string name, const unsigned int age, const Gender gender, c
 	this->insert();
 }
 
+Person::Person(const string id)
+	: connector(Person::TABLE_NAME)
+	, logger(Person::CLASS_NAME)
+{
+	this->id = id;
+	this->select();
+}
+
 Person::Person(const Person& other)
 	: connector(Person::TABLE_NAME)
 	, logger(Person::CLASS_NAME)
@@ -139,6 +147,21 @@ ostream& operator <<(ostream& strm, const Person& other)
 }
 
 // protected
+void Person::select()
+{
+	string column_name = "*";
+	string conditions = "ID = '"+this->get_id()+"'";
+	ResultSet* result_set = connector.select(column_name, conditions);
+	while (result_set->next())
+	{
+		this->name = result_set->getString(2);
+		this->age = stoi(result_set->getString(3));
+		this->gender = static_cast<Gender>(stoi(result_set->getString(4)));
+		this->phonenumber = result_set->getString(4);
+		this->status = static_cast<ActiveStatus>(stoi(result_set->getString(5)));
+	}
+}
+
 void Person::insert() 
 {
 	sql::ResultSet *result_set = connector.select("ID", "ID = '" + id + "'");

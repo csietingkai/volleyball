@@ -77,18 +77,15 @@ void Team::remove_member(const Person& member)
 // protected
 void Team::select()
 {
-	string column_name = "*";
+	string column_name = "member_id";
 	string conditions = "ID = '"+this->get_id()+"'";
 	ResultSet* result_set = connector.select(column_name, conditions);
 	ResultSetMetaData *res_meta = result_set->getMetaData();
 	int columns = res_meta->getColumnCount();
 	while (columns > 0 && result_set->next())
 	{
-		for (int i = 1; i <= columns; i++)
-		{
-			cout << result_set->getString(i) << "|" ;
-		}
-		cout << endl;
+		Person p(result_set->getString(1));
+		this->add_member(p);
 	}
 }
 

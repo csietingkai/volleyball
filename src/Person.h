@@ -28,6 +28,7 @@ class Person : Connectable
 	public:
 		// constructors
 		Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status);
+		Person(const string id);
 		Person(const Person& other);
 		
 		// setters
@@ -53,6 +54,7 @@ class Person : Connectable
 		friend ostream& operator <<(ostream& strm, const Person& other);
 	
 	protected:
+		void select() override;
 		void insert() override;
 		void update(const string column_name, const string column_value) override;
 		
