@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <connection>
-	<server>mysql.cs.ccu.edu.tw</server>
-	<account>htk103u</account>
-	<pwd>htkkoeoh</pwd>
-	<schema>htk103u_volleyball</schema>
+	<server>
+		mysql.cs.ccu.edu.tw
+	</server>
+	<account>
+		htk103u
+	</account>
+	<pwd>
+		htkkoeoh
+	</pwd>
+	<schema>
+		htk103u_volleyball
+	</schema>
 </connection>
