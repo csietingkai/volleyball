@@ -31,7 +31,7 @@ void test_team()
 	Team test_team("test_team");
 	for(int i = 0; i < test_team.size(); i++)
 	{
-		cout << test_team.get_member(i) << endl;
+		cout << i << ": " << test_team.get_member(i) << endl;
 	}
 }
 

@@ -66,8 +66,6 @@ class Person : Connectable
 		string phonenumber;
 		ActiveStatus status; // true <= active, false <= inactive
 		
-		const static string TABLE_NAME;
-		MySQLConnector connector;
 		const static string CLASS_NAME;
 		Logger logger;
 };

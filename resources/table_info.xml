@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tables>
+	<!-- node name is class name -->
+	<!-- node value is correspond table name in database -->
+	<Person>
+		persons
+	</Person>
+	<Team>
+		teams
+	</Team>
+</tables>

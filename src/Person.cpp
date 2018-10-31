@@ -2,7 +2,7 @@
 
 // constructors
 Person::Person(const string name, const unsigned int age, const Gender gender, const string phonenumber, const ActiveStatus status)
-	: connector(Person::TABLE_NAME)
+	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
 	this->name = name;
@@ -15,7 +15,7 @@ Person::Person(const string name, const unsigned int age, const Gender gender, c
 }
 
 Person::Person(const string id)
-	: connector(Person::TABLE_NAME)
+	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
 	this->id = id;
@@ -23,7 +23,7 @@ Person::Person(const string id)
 }
 
 Person::Person(const Person& other)
-	: connector(Person::TABLE_NAME)
+	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
 	// needed by vector.push_back()
@@ -192,6 +192,4 @@ void Person::update(const string column_name, const string column_value)
 }
 
 // private
-const string Person::TABLE_NAME = "persons";
-
 const string Person::CLASS_NAME = "Person";

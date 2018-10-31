@@ -47,8 +47,6 @@ class Team : Connectable
 		string name;
 		vector<Person> personset;
 		
-		const static string TABLE_NAME;
-		MySQLConnector connector;
 		const static string CLASS_NAME;
 		Logger logger;
 };

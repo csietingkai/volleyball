@@ -2,7 +2,7 @@
 
 // constructors
 Team::Team(const string name)
-	: connector(TABLE_NAME)
+	: Connectable(get_table_name(Team::CLASS_NAME))
 	, logger(CLASS_NAME)
 {
 	this->name = name;
@@ -108,6 +108,4 @@ void Team::remove(const string member_id)
 }
 
 // private
-const string Team::TABLE_NAME = "teams";
-
 const string Team::CLASS_NAME = "Team";

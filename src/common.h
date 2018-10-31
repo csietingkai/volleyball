@@ -34,6 +34,8 @@ const string connect_info_to_string[] =
 
 const string get_connect_info(const Connect_info info);
 
+const string get_table_name(const string class_name);
+
 const string parse_xml(const string filename, const string node_name);
 
 const bool replace(string& str, const string& from, const string& to);

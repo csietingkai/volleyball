@@ -39,6 +39,13 @@ const string get_connect_info(const Connect_info info)
 	return parse_xml(filename, node_name);
 }
 
+const string get_table_name(const string class_name)
+{
+	string filename = "resources/table_info.xml";
+	string node_name = "tables."+class_name;
+	return parse_xml(filename, node_name);
+}
+
 const string parse_xml(const string filename, const string node_name)
 {
 	// www.boost.org/doc/libs/1_61_0/doc/html/property_tree/tutorial.html

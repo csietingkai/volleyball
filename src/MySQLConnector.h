@@ -11,17 +11,6 @@
 using namespace std;
 using namespace sql;
 
-#define interface class
-
-interface Connectable
-{
-	protected:
-		virtual void select() = 0;
-		virtual void insert() = 0;
-		virtual void update(const string column_name, const string column_value) = 0;
-		virtual void remove(const string id) {};
-};
-
 class MySQLConnector
 {
 	public:
@@ -53,6 +42,20 @@ class MySQLConnector
 		const string schema = get_connect_info(Connect_info::schema);
 		
 		void print_sql_exception(const SQLException e);
+};
+
+#define interface class
+
+interface Connectable
+{
+	public:
+		Connectable(const string table_name): connector(table_name){};
+	protected:
+		MySQLConnector connector;
+		virtual void select() = 0;
+		virtual void insert() = 0;
+		virtual void update(const string column_name, const string column_value) = 0;
+		virtual void remove(const string id) {};
 };
 
 #endif
