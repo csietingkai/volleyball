@@ -8,3 +8,17 @@
 可以參考 https://blog.scalyr.com/2018/07/getting-started-quickly-c-logging/ 這篇
 class名稱前面要對齊
 還有 log 檔的名稱會叫 '[今天的日期].log'，比如說 '2018-10-20.log'這樣
+
+然後寫出來的 code 要符合格式
+像是
+const int function_name
+{
+	int some_variable;
+	// some implements
+}
+
+這樣
+1. 回傳的資料型態前面盡量加 const (void 除外)
+2. 大括號的開頭放在下一行
+3. 變數名稱請務必要讓人看得懂，單字之間用底線（'_'）分開
+4. 想到會再補充
