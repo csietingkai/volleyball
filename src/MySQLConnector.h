@@ -49,9 +49,12 @@ class MySQLConnector
 interface Connectable
 {
 	public:
+		// pass in the table's name which you need to connect
 		Connectable(const string table_name): connector(table_name){};
+		
 	protected:
 		MySQLConnector connector;
+		
 		virtual void select() = 0;
 		virtual void insert() = 0;
 		virtual void update(const string column_name, const string column_value) = 0;

@@ -3,9 +3,19 @@
 // constructors
 Team::Team(const string name)
 	: Connectable(get_table_name(Team::CLASS_NAME))
-	, logger(CLASS_NAME)
+	, logger(Team::CLASS_NAME)
 {
 	this->name = name;
+	this->personset.clear();
+	this->id = generate_sha1(this->get_name());
+	this->select();
+}
+
+Team::Team(const Team& other)
+	: Connectable(get_table_name(Team::CLASS_NAME))
+	, logger(Team::CLASS_NAME)
+{
+	this->name = other.get_name();
 	this->personset.clear();
 	this->id = generate_sha1(this->get_name());
 	this->select();
@@ -16,6 +26,8 @@ void Team::set_name(const string name)
 {
 	this->name = name;
 	this->update("name", "'"+this->get_name()+"'");
+	this->personset.clear();
+	this->select();
 }
 
 // getters
@@ -74,6 +86,22 @@ void Team::remove_member(const Person& member)
 	}
 }
 
+// operators
+const bool Team::operator ==(const Team& other) const
+{
+	return this->get_name() == other.get_name();
+}
+
+const bool Team::operator !=(const Team& other) const
+{
+	return !this->operator==(other);
+}
+
+const Person& Team:: operator [](const unsigned int index) const
+{
+	return this->get_member(index);
+}
+
 // protected
 void Team::select()
 {
@@ -100,11 +128,18 @@ void Team::insert()
 
 void Team::update(const string column_name, const string column_value)
 {
+	const string ori_id = this->id;
+	this->id = generate_sha1(this->get_name());
+	const string conditions = "ID = '"+ori_id+"'";
+	const string new_id = "'"+this->id+"'";
+	connector.update(column_name, column_value, conditions);
+	connector.update("ID", new_id, conditions);
 }
 
 void Team::remove(const string member_id)
 {
-	
+	const string conditions = "MEMBER_ID = '"+member_id+"'";
+	connector.remove(conditions);
 }
 
 // private

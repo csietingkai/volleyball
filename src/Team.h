@@ -16,6 +16,7 @@ class Team : Connectable
 	public:
 		// constructors
 		Team(const string name);
+		Team(const Team& other);
 		
 		// setters
 		void set_name(const string name);
@@ -31,7 +32,7 @@ class Team : Connectable
 		void remove_member(const Person& member);
 		
 		// operators
-		const Team& operator =(const Team& other);
+		//const Team& operator =(const Team& other);
 		const bool operator ==(const Team& other) const;
 		const bool operator !=(const Team& other) const;
 		const Person& operator [](const unsigned int index) const;

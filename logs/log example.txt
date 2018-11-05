@@ -11,9 +11,11 @@ class名稱前面要對齊
 
 然後寫出來的 code 要符合格式
 像是
-const int function_name
+const int function_name(const int num)
 {
+	int num_temp = num;
 	int some_variable;
+	int someVariable;
 	// some implements
 }
 
