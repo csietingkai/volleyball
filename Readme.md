@@ -1,13 +1,21 @@
 # Volleyball Scheduling
-Author: Ting-Kai Hu
 
-Today Date: 2018--
+A scheduling application for CCU Volleyball League.
+
+Using techniques:
+
++ MySQL
++ Gtkmm
++ C++
++ Gliffy (to design application structure and view)
+
+## Developers: 
+
++ [Ting-Kai Hu](https://github.com/csietingkai)
++ [RB Lin](https://github.com/RBRBRB)
 
 ## Abstract
-This is a simple practice for 
+
 
 ## Usage
-### DataTime (class)
- ```
- code example
- ```
+
