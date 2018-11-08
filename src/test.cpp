@@ -18,6 +18,15 @@ void test_common()
 	assert(after_trim.compare(before_trim) == 0);
 }
 
+void test_date()
+{
+	Date date;
+}
+
+void test_datetime()
+{
+}
+
 void test_logger()
 {
 }
@@ -34,10 +43,17 @@ void test_team()
 {
 }
 
+void test_time()
+{
+}
+
 void test_main()
 {
 	test_common();
+	test_date();
+	test_datetime();
 	test_mysql();
 	test_person();
 	test_team();
+	test_time();
 }
