@@ -1,4 +1,7 @@
 想要 log 在 console 跟檔案那邊輸出
+終端機輸出最低等級為 INFO
+檔案輸出最低等級為 TRACE
+
 輸出的格式長這樣
 ========================================
 [現在時間] [Log等級] 		(class名稱) 輸出訊息
@@ -15,7 +18,6 @@ const int function_name(const int num)
 {
 	int num_temp = num;
 	int some_variable;
-	int someVariable;
 	// some implements
 }
 
@@ -23,4 +25,5 @@ const int function_name(const int num)
 1. 回傳的資料型態前面盡量加 const (void 除外)
 2. 大括號的開頭放在下一行
 3. 變數名稱請務必要讓人看得懂，單字之間用底線（'_'）分開
-4. 想到會再補充
+4. 啊對了，我新增了 test.cpp 跟 test.h，記得在裡面多弄一個 test_logger 的 function，logger 裡的每個 public functions 都要測到窩 >.^
+
