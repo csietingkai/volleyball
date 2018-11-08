@@ -4,7 +4,7 @@ LDFLAGS = -g
 GTKMM_FLAG = `pkg-config gtkmm-3.0 --cflags --libs`
 MYSQL_FLAG = -lmysqlcppconn
 
-EXE = test.exe
+EXE = volleyball.exe
 SRCDIR := ./src
 OBJDIR := ./obj
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
