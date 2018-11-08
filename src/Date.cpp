@@ -67,15 +67,15 @@ const Week Date::get_week() const
 // private
 void Date::check_member_vars()
 {
-	assert(this->year > 9999 || this->year < 1900);
-	assert(this->month > 12 || this->month < 1);
+	assert(this->year <= 9999 && this->year >= 1900);
+	assert(this->month <= 12 && this->month >= 1);
 	if(this->month == 2 && this->is_leap == true)	// if leap year and Feb
 	{
-		assert(this->day > DAY_OF_MONTHS[this->month]+1 || this->day < 1);
+		assert(this->day <= DAY_OF_MONTHS[this->month]+1 && this->day >= 1);
 	}
 	else
 	{
-		assert(this->day > DAY_OF_MONTHS[this->month] || this->day < 1);
+		assert(this->day <= DAY_OF_MONTHS[this->month] && this->day >= 1);
 	}
 }
 
