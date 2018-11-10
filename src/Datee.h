@@ -1,5 +1,5 @@
-#ifndef DATE_H_
-#define DATE_H_
+#ifndef DATEE_H_
+#define DATEE_H_
 
 #include <iostream>
 #include <ctime>
@@ -49,12 +49,13 @@ enum class Week
 	SATURDAY = 6
 };
 
-class Date
+// name Date as Datee to prevent ambugious in Glib::Date
+class Datee
 {
 	public:
 		// constructors
-		Date(const int year = 1900, const int month = 1, const int day = 1);
-		Date(const Date& other);
+		Datee(const int year = 1900, const int month = 1, const int day = 1);
+		Datee(const Datee& other);
 		
 		// setters
 		void set_year(const int year);
@@ -69,17 +70,17 @@ class Date
 		const string to_string() const;	// format: yyyy-mm-dd, week
 		
 		// operators
-		const Date& operator =(const Date& other);
-		const bool operator ==(const Date& other) const;
-		const bool operator !=(const Date& other) const;
-		const bool operator <(const Date& other) const;
-		const bool operator >(const Date& other) const;
-		const bool operator <=(const Date& other) const;
-		const bool operator >=(const Date& other) const;
-		friend ostream& operator <<(ostream& strm, const Date& other);
+		const Datee& operator =(const Datee& other);
+		const bool operator ==(const Datee& other) const;
+		const bool operator !=(const Datee& other) const;
+		const bool operator <(const Datee& other) const;
+		const bool operator >(const Datee& other) const;
+		const bool operator <=(const Datee& other) const;
+		const bool operator >=(const Datee& other) const;
+		friend ostream& operator <<(ostream& strm, const Datee& other);
 		
 		// static 
-		const static Date Now();
+		const static Datee Now();
 	
 	private:
 		int year;
@@ -95,4 +96,4 @@ class Date
 		const Week calculate_week() const; // calculate week by year, month and day
 };
 
-#endif // DATE_H_
+#endif // DATEE_H_

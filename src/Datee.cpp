@@ -1,7 +1,7 @@
-#include "Date.h"
+#include "Datee.h"
 
 // constructors
-Date::Date(const int year, const int month, const int day)
+Datee::Datee(const int year, const int month, const int day)
 {
 	this->year = year;
 	this->month = month;
@@ -10,27 +10,27 @@ Date::Date(const int year, const int month, const int day)
 	this->week = this->calculate_week();
 }
 
-Date::Date(const Date& other)
+Datee::Datee(const Datee& other)
 {
 	this->operator=(other);
 }
 
 // setters
-void Date::set_year(const int year)
+void Datee::set_year(const int year)
 {
 	this->year = year;
 	this->check_member_vars();
 	this->week = this->calculate_week();
 }
 
-void Date::set_month(const int month)
+void Datee::set_month(const int month)
 {
 	this->month = month;
 	this->check_member_vars();
 	this->week = this->calculate_week();
 }
 
-void Date::set_day(const int day)
+void Datee::set_day(const int day)
 {
 	this->day = day;
 	this->check_member_vars();
@@ -38,27 +38,27 @@ void Date::set_day(const int day)
 }
 
 // getters
-const int Date::get_year() const
+const int Datee::get_year() const
 {
 	return this->year;
 }
 
-const int Date::get_month() const
+const int Datee::get_month() const
 {
 	return this->month;
 }
 
-const int Date::get_day() const
+const int Datee::get_day() const
 {
 	return this->day;
 }
 
-const Week Date::get_week() const
+const Week Datee::get_week() const
 {
 	return this->week;
 }
 
-const string Date::to_string() const
+const string Datee::to_string() const
 {
 	// format: yyyy-mm-dd, week
 	string re = "";
@@ -73,7 +73,7 @@ const string Date::to_string() const
 }
 
 // operators
-const Date& Date::operator =(const Date& other)
+const Datee& Datee::operator =(const Datee& other)
 {
 	this->year = other.get_year();
 	this->month = other.get_month();
@@ -83,7 +83,7 @@ const Date& Date::operator =(const Date& other)
 	return *this;
 }
 
-const bool Date::operator ==(const Date& other) const
+const bool Datee::operator ==(const Datee& other) const
 {
 	bool ret = true;
 	ret = ret && (this->year == other.get_year());
@@ -92,12 +92,12 @@ const bool Date::operator ==(const Date& other) const
 	return ret;
 }
 
-const bool Date::operator !=(const Date& other) const
+const bool Datee::operator !=(const Datee& other) const
 {
 	return !this->operator==(other);
 }
 
-const bool Date::operator <(const Date& other) const
+const bool Datee::operator <(const Datee& other) const
 {
 	bool ret = this->get_year() < other.get_year();
 	if(this->get_year() == other.get_year())
@@ -111,29 +111,29 @@ const bool Date::operator <(const Date& other) const
 	return ret;
 }
 
-const bool Date::operator >(const Date& other) const
+const bool Datee::operator >(const Datee& other) const
 {
 	return other.operator<(*this);
 }
 
-const bool Date::operator <=(const Date& other) const
+const bool Datee::operator <=(const Datee& other) const
 {
 	return !this->operator>(other);
 }
 
-const bool Date::operator >=(const Date& other) const
+const bool Datee::operator >=(const Datee& other) const
 {
 	return !this->operator<(other);
 }
 
-ostream& operator <<(ostream& strm, const Date& other)
+ostream& operator <<(ostream& strm, const Datee& other)
 {
 	strm << other.to_string();
 	return strm;
 }
 
 // static
-const Date Date::Now()
+const Datee Datee::Now()
 {
 	time_t t = time(0);
 	tm* tt = localtime(&t);
@@ -141,13 +141,14 @@ const Date Date::Now()
 	int month = tt->tm_mon+1;
 	int day = tt->tm_mday;
 	
-	Date now(year, month, day);
+	Datee now(year, month, day);
 	return now;
 }
 
 // private
-void Date::check_member_vars()
+void Datee::check_member_vars()
 {
+	// TODO use 'logger.error' or 'assert' or both?
 	assert(this->year <= 9999 && this->year >= 1900);
 	assert(this->month <= 12 && this->month >= 1);
 	if(this->month == 2 && this->is_leap == true)	// if leap year and Feb
@@ -160,7 +161,7 @@ void Date::check_member_vars()
 	}
 }
 
-const bool Date::calculate_leap() const
+const bool Datee::calculate_leap() const
 {
 	// return a boolean value of this year is leap year or not
 	int year = get_year();
@@ -179,7 +180,7 @@ const bool Date::calculate_leap() const
 	return false;
 }
 
-const Week Date::calculate_week() const
+const Week Datee::calculate_week() const
 {
 	// Kim larsson calculation formula
 	// w = (d+2*m+3*(m+1)/5+y+y/4-y/100+y/400)%7;
