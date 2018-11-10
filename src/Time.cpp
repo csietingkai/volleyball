@@ -132,11 +132,118 @@ ostream& operator <<(ostream& strm, const Time& other)
 	return strm;
 }
 
+// other functions
+const Time Time::next_hour() const
+{
+	int hour = this->get_hour()+1;
+	int minute = this->get_minute();
+	int second = this->get_second();
+	if (hour >= HOUR_PER_DAY)
+	{
+		hour -= HOUR_PER_DAY;
+	}
+	Time ret(hour, minute, second);
+	return ret;
+}
+
+const Time Time::previous_hour() const
+{
+	int hour = this->get_hour()-1;
+	int minute = this->get_minute();
+	int second = this->get_second();
+	if (hour < 0)
+	{
+		hour += HOUR_PER_DAY;
+	}
+	Time ret(hour, minute, second);
+	return ret;
+}
+
+const Time Time::next_minute() const
+{
+	bool carry = false;
+	
+	int hour = this->get_hour();
+	int minute = this->get_minute()+1;
+	int second = this->get_second();
+	if (minute >= MINUTE_PER_HOUR)
+	{
+		minute -= MINUTE_PER_HOUR;
+		carry = true;
+	}
+	Time ret(hour, minute, second);
+	if (carry)
+	{
+		ret = ret.next_hour();
+	}
+	return ret;
+}
+
+const Time Time::previous_minute() const
+{
+	bool carry = false;
+	
+	int hour = this->get_hour();
+	int minute = this->get_minute()-1;
+	int second = this->get_second();
+	if (minute < 0)
+	{
+		minute += MINUTE_PER_HOUR;
+		carry = true;
+	}
+	Time ret(hour, minute, second);
+	if (carry)
+	{
+		ret = ret.previous_hour();
+	}
+	return ret;
+}
+
+const Time Time::next_second() const
+{
+	bool carry = false;
+	
+	int hour = this->get_hour();
+	int minute = this->get_minute();
+	int second = this->get_second()+1;
+	if (second >= SECOND_PER_MINUTE)
+	{
+		second -= SECOND_PER_MINUTE;
+		carry = true;
+	}
+	Time ret(hour, minute, second);
+	if (carry)
+	{
+		ret = ret.next_minute();
+	}
+	return ret;
+}
+
+const Time Time::previous_second() const
+{
+	bool carry = false;
+	
+	int hour = this->get_hour();
+	int minute = this->get_minute();
+	int second = this->get_second()-1;
+	if (second < 0)
+	{
+		second += SECOND_PER_MINUTE;
+		carry = true;
+	}
+	Time ret(hour, minute, second);
+	if (carry)
+	{
+		ret = ret.previous_minute();
+	}
+	return ret;
+}
+
 // private
 void Time::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?
-	assert(this->hour <= 23 && this->hour >= 0);
-	assert(this->minute <= 60 && this->minute >= 0);
-	assert(this->second <= 60 && this->second >= 0);
+	assert(this->hour < HOUR_PER_DAY && this->hour >= 0);
+	assert(this->minute < MINUTE_PER_HOUR && this->minute >= 0);
+	assert(this->second < SECOND_PER_MINUTE && this->second >= 0);
 }

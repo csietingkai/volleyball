@@ -86,9 +86,9 @@ const Datee& Datee::operator =(const Datee& other)
 const bool Datee::operator ==(const Datee& other) const
 {
 	bool ret = true;
-	ret = ret && (this->year == other.get_year());
-	ret = ret && (this->month == other.get_month());
-	ret = ret && (this->day == other.get_day());
+	ret = ret && (this->get_year() == other.get_year());
+	ret = ret && (this->get_month() == other.get_month());
+	ret = ret && (this->get_day() == other.get_day());
 	return ret;
 }
 
@@ -145,19 +145,127 @@ const Datee Datee::Now()
 	return now;
 }
 
+// other functions
+const Datee Datee::next_year() const
+{
+	int year = this->get_year()+1;
+	int month = this->get_month();
+	int day = this->get_day();
+	Datee ret(year, month, day);
+	return ret;
+}
+
+const Datee Datee::previous_year() const
+{
+	int year = this->get_year()-1;
+	int month = this->get_month();
+	int day = this->get_day();
+	Datee ret(year, month, day);
+	return ret;
+}
+
+const Datee Datee::next_month() const
+{
+	bool carry = false;
+	int year = this->get_year();
+	int month = this->get_month()+1;
+	int day = this->get_day();
+	if (month >= MONTHS_PER_YEAR)
+	{
+		month -= MONTHS_PER_YEAR;
+		carry = true;
+	}
+	Datee ret(year, month, day);
+	if (carry)
+	{
+		ret = ret.next_year();
+	}
+	return ret;
+}
+
+const Datee Datee::previous_month() const
+{
+	bool carry = false;
+	
+	int year = this->get_year();
+	int month = this->get_month()-1;
+	int day = this->get_day();
+	if (month < 1)
+	{
+		month += MONTHS_PER_YEAR;
+	}
+	Datee ret(year, month, day);
+	if (carry)
+	{
+		ret = ret.previous_year();
+	}
+	return ret;
+}
+
+const Datee Datee::next_day() const
+{
+	bool carry = false;
+	
+	int year = this->get_year();
+	int month = this->get_month();
+	int day = this->get_day()+1;
+	int days_limit = DAYS_PER_MONTH[month]+((this->is_leap && month == 2) ? 1 : 0);
+	if (day > days_limit)
+	{
+		day -= days_limit;
+		carry = true;
+	}
+	Datee ret(year, month, day);
+	if (carry)
+	{
+		ret = ret.next_month();
+	}
+	return ret;
+}
+
+const Datee Datee::previous_day() const
+{
+	bool carry = false;
+	
+	int year = this->get_year();
+	int month = this->get_month();
+	int day = this->get_day()-1;
+	int days_limit = DAYS_PER_MONTH[month]+((this->is_leap && month == 3) ? 1 : 0);
+	if (day < 1)
+	{
+		day += days_limit;
+		carry = true;
+	}
+	Datee ret(year, month, day);
+	if (carry)
+	{
+		ret = ret.previous_month();
+	}
+	return ret;
+}
+
 // private
+const int Datee::DAYS_PER_MONTH[] = 
+{
+	31,				// Dec,
+	31, 28, 31, 	// Jan, Feb, Mar
+	30, 31, 30, 	// Apr, May, Jun
+	31, 31, 30, 	// Jul, Aug, Sept
+	31, 30, 31		// Oct, Nov, Dec
+};
+
 void Datee::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?
-	assert(this->year <= 9999 && this->year >= 1900);
-	assert(this->month <= 12 && this->month >= 1);
-	if(this->month == 2 && this->is_leap == true)	// if leap year and Feb
+	assert(this->get_year() <= YEAR_UPPER_LIMIT && this->get_year() >= YEAR_LOWER_LIMIT);
+	assert(this->get_month() <= MONTHS_PER_YEAR && this->get_month() >= 1);
+	if(this->get_month() == 2 && this->is_leap == true)	// if leap year and Feb
 	{
-		assert(this->day <= DAY_OF_MONTHS[this->month]+1 && this->day >= 1);
+		assert(this->get_day() <= DAYS_PER_MONTH[this->get_month()]+1 && this->get_day() >= 1);
 	}
 	else
 	{
-		assert(this->day <= DAY_OF_MONTHS[this->month] && this->day >= 1);
+		assert(this->get_day() <= DAYS_PER_MONTH[this->get_month()] && this->get_day() >= 1);
 	}
 }
 

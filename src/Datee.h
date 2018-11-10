@@ -18,15 +18,6 @@ const string MONTHS[] =
 	"October", "November", "December"
 };
 
-const int DAY_OF_MONTHS[] = 
-{
-	31,				// Dec,
-	31, 28, 31, 	// Jan, Feb, Mar
-	30, 31, 30, 	// Apr, May, Jun
-	31, 31, 30, 	// Jul, Aug, Sept
-	31, 30, 31		// Oct, Nov, Dec
-};
-
 const string DAY_OF_WEEK[] = 
 {
 	"Sunday",
@@ -81,6 +72,14 @@ class Datee
 		
 		// static 
 		const static Datee Now();
+		
+		// other functions
+		const Datee next_year() const;
+		const Datee previous_year() const;
+		const Datee next_month() const;
+		const Datee previous_month() const;
+		const Datee next_day() const;
+		const Datee previous_day() const;
 	
 	private:
 		int year;
@@ -88,6 +87,11 @@ class Datee
 		int day;
 		Week week;
 		bool is_leap;
+		
+		const static int YEAR_UPPER_LIMIT = 9999;
+		const static int YEAR_LOWER_LIMIT = 1900;
+		const static int MONTHS_PER_YEAR = 12;
+		const static int DAYS_PER_MONTH[];
 		
 		// check year range in 1900~9999, check month range 1~12, check day range 1~28/29/30/31
 		void check_member_vars();

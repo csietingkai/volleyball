@@ -47,5 +47,7 @@ class DateTime
 		Datee date;
 		Time time;
 		
+		const static Time GAME_TIME_SECTIONS[];
+		
 };
 #endif //DATETIME_H_

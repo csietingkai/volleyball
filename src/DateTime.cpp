@@ -103,9 +103,82 @@ ostream& operator <<(ostream& strm, const DateTime& other)
 // other functions
 const DateTime DateTime::next_section()
 {
+	Datee date = this->date;
+	Time time = this->time;
+	
+	// 00:00~18:59
+	if (time < GAME_TIME_SECTIONS[0])
+	{
+		time = GAME_TIME_SECTIONS[0];
+	}
+	// 19:00~20:29
+	else if (time >= GAME_TIME_SECTIONS[0] && time < GAME_TIME_SECTIONS[1])
+	{
+		time = GAME_TIME_SECTIONS[1];
+	}
+	// 20:30~21:59
+	else if (time >= GAME_TIME_SECTIONS[1] && time < GAME_TIME_SECTIONS[2])
+	{
+		time = GAME_TIME_SECTIONS[2];
+	}
+	// 22:00~22:59
+	else if (time >= GAME_TIME_SECTIONS[2] && time < GAME_TIME_SECTIONS[3])
+	{
+		time = GAME_TIME_SECTIONS[3];
+	}
+	// 23:00~23:59
+	else
+	{
+		time = GAME_TIME_SECTIONS[0];
+		date = date.next_day();
+	}
+	
+	DateTime ret(date, time);
+	return ret;
 }
 
 const DateTime DateTime::previous_section()
 {
+	Datee date = this->date;
+	Time time = this->time;
+	
+	// 00:00~19:00
+	if (time <= GAME_TIME_SECTIONS[0])
+	{
+		time = GAME_TIME_SECTIONS[3];
+		date = date.previous_day();
+	}
+	// 19:01~20:30
+	else if (time > GAME_TIME_SECTIONS[0] && time <= GAME_TIME_SECTIONS[1])
+	{
+		time = GAME_TIME_SECTIONS[0];
+	}
+	// 20:31~22:00
+	else if (time > GAME_TIME_SECTIONS[1] && time <= GAME_TIME_SECTIONS[2])
+	{
+		time = GAME_TIME_SECTIONS[1];
+	}
+	// 22:01~23:00
+	else if (time > GAME_TIME_SECTIONS[2] && time <= GAME_TIME_SECTIONS[3])
+	{
+		time = GAME_TIME_SECTIONS[2];
+	}
+	// 23:00~23:59
+	else
+	{
+		time = GAME_TIME_SECTIONS[3];
+	}
+	
+	DateTime ret(date, time);
+	return ret;
 }
+
+// private
+const Time DateTime::GAME_TIME_SECTIONS[] = 
+{
+	{19, 0, 0}, 
+	{20, 30, 0}, 
+	{22, 0, 0},
+	{23, 0, 0}
+};
 
