@@ -12,11 +12,7 @@ Date::Date(const int year, const int month, const int day)
 
 Date::Date(const Date& other)
 {
-	this->year = other.get_year();
-	this->month = other.get_month();
-	this->day = other.get_day();
-	this->check_member_vars();
-	this->week = this->calculate_week();
+	this->operator=(other);
 }
 
 // setters
@@ -62,8 +58,92 @@ const Week Date::get_week() const
 	return this->week;
 }
 
+const string to_string() const
+{
+	// format: yyyy-mm-dd, week
+	string re = "";
+	
+	re += std::to_string(get_year())+"-";
+	re += (this->get_month()<10?"0":"")+std::to_string(this->get_month())+"-";
+	re += (this->get_day()<10?"0":"")+std::to_string(this->get_day())+", ";
+	
+	re += DAY_OF_WEEK[static_cast<int>(get_week())];
+	
+	return re;
+}
+
 // operators
+const Date& Date::operator =(const Date& other)
+{
+	this->year = other.get_year();
+	this->month = other.get_month();
+	this->day = other.get_day();
+	this->check_member_vars();
+	this->week = this->calculate_week();
+}
+
+const bool Date::operator ==(const Date& other) const
+{
+	bool ret = true;
+	ret = ret && (this->year == other.get_year());
+	ret = ret && (this->month == other.get_month());
+	ret = ret && (this->day == other.get_day());
+	return ret;
+}
+
+const bool Date::operator !=(const Date& other) const
+{
+	return !this->operator==(other);
+}
+
+const bool Date::operator <(const Date& other) const
+{
+	bool ret = this->get_year() < other.get_year();
+	if(this->get_year() == other.get_year())
+	{
+		ret = this->get_month() < other.get_month();
+		if(this->get_month() == other.get_month())
+		{
+			ret = this->get_day() < other.get_day();
+		}
+	}
+	return ret;
+}
+
+const bool Date::operator >(const Date& other) const
+{
+	return other.operator<(*this);
+}
+
+const bool Date::operator <=(const Date& other) const
+{
+	return !this->operator>(other)
+}
+
+const bool Date::operator >=(const Date& other) const
+{
+	return !this->operator<(other)
+}
+
+ostream& operator <<(ostream& strm, const Date& other)
+{
+	strm << other.to_string();
+	return strm;
+}
+
 // static
+const Date Date::Now()
+{
+	time_t t = time(0);
+	tm* tt = localtime(&t);
+	int year = tt->tm_year+1900;
+	int month = tt->tm_mon+1;
+	int day = tt->tm_mday;
+	
+	Date now(year, month, day);
+	return now;
+}
+
 // private
 void Date::check_member_vars()
 {

@@ -83,7 +83,7 @@ class Date
 	
 	private:
 		int year;
-		int month; // store -1, range 0~11
+		int month;
 		int day;
 		Week week;
 		bool is_leap;
