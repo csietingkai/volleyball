@@ -10,7 +10,7 @@
 
 可以參考 https://blog.scalyr.com/2018/07/getting-started-quickly-c-logging/ 這篇
 class名稱前面要對齊
-還有 log 檔的名稱會叫 '[今天的日期].log'，比如說 '2018-10-20.log'這樣
+還有 log 檔的名稱會叫 '[今天的日期]_[隨機六位英文數字].log'，比如說 '2018-10-20_3jdl8s.log'這樣
 
 然後寫出來的 code 要符合格式
 像是

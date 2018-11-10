@@ -14,10 +14,11 @@ using namespace std;
 
 // TODO List
 // frontend view
-// Logger class
-// DateTime to (Date, Time, DateTime)
+// Logger class							// RB doing
+// DateTime to (Date, Time, DateTime)	// tingkai almost finish
 // test unit in test.cpp
 // algorithm for scheduling games
+// add git .gitignore
 
 #define TEST_MODE true
 
