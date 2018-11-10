@@ -58,7 +58,7 @@ const Week Date::get_week() const
 	return this->week;
 }
 
-const string to_string() const
+const string Date::to_string() const
 {
 	// format: yyyy-mm-dd, week
 	string re = "";
@@ -80,6 +80,7 @@ const Date& Date::operator =(const Date& other)
 	this->day = other.get_day();
 	this->check_member_vars();
 	this->week = this->calculate_week();
+	return *this;
 }
 
 const bool Date::operator ==(const Date& other) const
@@ -117,12 +118,12 @@ const bool Date::operator >(const Date& other) const
 
 const bool Date::operator <=(const Date& other) const
 {
-	return !this->operator>(other)
+	return !this->operator>(other);
 }
 
 const bool Date::operator >=(const Date& other) const
 {
-	return !this->operator<(other)
+	return !this->operator<(other);
 }
 
 ostream& operator <<(ostream& strm, const Date& other)
