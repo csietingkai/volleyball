@@ -1,5 +1,4 @@
 # Set Operating System as Ubuntu 18.04
-os: linux
 dist: xenial
 
 sudo: true
