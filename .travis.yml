@@ -1,3 +1,19 @@
+# Set Operating System as Ubuntu 18.04
+os: linux
+dist: xenial
+
+sudo: true
+before_install:
+	- sudo apt-get install libboost-all-dev
+	- sudo apt-get install libmysqlcppconn-dev
+	- sudo apt-get install libgtkmm-3.0-dev
+	- sudo apt-get install libgstreamermm-1.0-dev
+  
+# Enable C++ support
 language: cpp
+
+# Compiler selection
+compiler:
+  - gcc
 
 script: make && ./volleyball.exe
