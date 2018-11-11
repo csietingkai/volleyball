@@ -11,6 +11,7 @@
 #include "../src/Person.h"
 #include "../src/Team.h"
 #include "../src/Time.h"
+#include "../src/Logger.h"
 
 using namespace std;
 
