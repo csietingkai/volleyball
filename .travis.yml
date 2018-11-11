@@ -1,14 +1,14 @@
-before_install:
-	- sudo apt-get install libboost-all-dev
-	- sudo apt-get install libmysqlcppconn-dev
-	- sudo apt-get install libgtkmm-3.0-dev
-	- sudo apt-get install libgstreamermm-1.0-dev
-  
 # Enable C++ support
 language: cpp
 
 # Compiler selection
 compiler:
   - gcc
+
+before_install:
+ - sudo apt-get install libboost-all-dev
+ - sudo apt-get install libmysqlcppconn-dev
+ - sudo apt-get install libgtkmm-3.0-dev
+ - sudo apt-get install libgstreamermm-1.0-dev
 
 script: make && ./volleyball.exe
