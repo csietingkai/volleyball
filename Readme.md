@@ -7,7 +7,7 @@ Using techniques:
 + MySQL
 + Gtkmm
 + C++ Boost
-+ Gliffy (to design application structure and view)
++ Gliffy (to design application structure and view) 
 
 ## Build Status
 [![Build Status](https://travis-ci.org/csietingkai/volleyball.svg?branch=master)](https://travis-ci.org/csietingkai/volleyball)
