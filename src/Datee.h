@@ -1,5 +1,5 @@
-#ifndef DATE_H_
-#define DATE_H_
+#ifndef DATEE_H_
+#define DATEE_H_
 
 #include <iostream>
 #include <ctime>
@@ -16,15 +16,6 @@ const string MONTHS[] =
 	"April", "May", "June", 
 	"July", "August", "September", 
 	"October", "November", "December"
-};
-
-const int DAY_OF_MONTHS[] = 
-{
-	31,				// Dec,
-	31, 28, 31, 	// Jan, Feb, Mar
-	30, 31, 30, 	// Apr, May, Jun
-	31, 31, 30, 	// Jul, Aug, Sept
-	31, 30, 31		// Oct, Nov, Dec
 };
 
 const string DAY_OF_WEEK[] = 
@@ -49,12 +40,13 @@ enum class Week
 	SATURDAY = 6
 };
 
-class Date
+// name Date as Datee to prevent ambugious in Glib::Date
+class Datee
 {
 	public:
 		// constructors
-		Date(const int year = 1900, const int month = 1, const int day = 1);
-		Date(const Date& other);
+		Datee(const int year = 1900, const int month = 1, const int day = 1);
+		Datee(const Datee& other);
 		
 		// setters
 		void set_year(const int year);
@@ -69,17 +61,25 @@ class Date
 		const string to_string() const;	// format: yyyy-mm-dd, week
 		
 		// operators
-		const Date& operator =(const Date& other);
-		const bool operator ==(const Date& other) const;
-		const bool operator !=(const Date& other) const;
-		const bool operator <(const Date& other) const;
-		const bool operator >(const Date& other) const;
-		const bool operator <=(const Date& other) const;
-		const bool operator >=(const Date& other) const;
-		friend ostream& operator <<(ostream& strm, const Date& other);
+		const Datee& operator =(const Datee& other);
+		const bool operator ==(const Datee& other) const;
+		const bool operator !=(const Datee& other) const;
+		const bool operator <(const Datee& other) const;
+		const bool operator >(const Datee& other) const;
+		const bool operator <=(const Datee& other) const;
+		const bool operator >=(const Datee& other) const;
+		friend ostream& operator <<(ostream& strm, const Datee& other);
 		
 		// static 
-		const static Date Now();
+		const static Datee Now();
+		
+		// other functions
+		const Datee next_year() const;
+		const Datee previous_year() const;
+		const Datee next_month() const;
+		const Datee previous_month() const;
+		const Datee next_day() const;
+		const Datee previous_day() const;
 	
 	private:
 		int year;
@@ -88,6 +88,11 @@ class Date
 		Week week;
 		bool is_leap;
 		
+		const static int YEAR_UPPER_LIMIT = 9999;
+		const static int YEAR_LOWER_LIMIT = 1900;
+		const static int MONTHS_PER_YEAR = 12;
+		const static int DAYS_PER_MONTH[];
+		
 		// check year range in 1900~9999, check month range 1~12, check day range 1~28/29/30/31
 		void check_member_vars();
 		
@@ -95,4 +100,4 @@ class Date
 		const Week calculate_week() const; // calculate week by year, month and day
 };
 
-#endif // DATE_H_
+#endif // DATEE_H_

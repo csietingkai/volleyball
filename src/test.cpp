@@ -18,9 +18,9 @@ void test_common()
 	assert(after_trim.compare(before_trim) == 0);
 }
 
-void test_date()
+void test_datee()
 {
-	Date date;
+	Datee date;
 }
 
 void test_datetime()
@@ -50,7 +50,7 @@ void test_time()
 void test_main()
 {
 	test_common();
-	test_date();
+	test_datee();
 	test_datetime();
 	test_mysql();
 	test_person();

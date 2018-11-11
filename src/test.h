@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "common.h"
-#include "Date.h"
+#include "Datee.h"
 #include "DateTime.h"
 #include "MySQLConnector.h"
 #include "Person.h"
@@ -15,7 +15,7 @@
 using namespace std;
 
 void test_common();
-void test_date();
+void test_datee();
 void test_datetime();
 void test_logger();
 void test_mysql();

@@ -1,21 +1,24 @@
 #include <iostream>
 
 #include "src/common.h"
+#include "src/Datee.h"
+#include "src/DateTime.h"
 #include "src/MySQLConnector.h"
 #include "src/Person.h"
 #include "src/Team.h"
 #include "src/View.h"
 #include "src/test.h"
+#include "src/Time.h"
 
 using namespace std;
-using namespace Gtk;
-using namespace Glib;
 
 // TODO List
 // frontend view
-// Logger class
-// DateTime to (Date, Time, DateTime)
+// Logger class							// RB doing
+// DateTime to (Date, Time, DateTime)	// tingkai almost finish
 // test unit in test.cpp
+// algorithm for scheduling games
+// add git .gitignore
 
 #define TEST_MODE true
 
