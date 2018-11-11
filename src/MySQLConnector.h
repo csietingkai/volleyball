@@ -44,9 +44,7 @@ class MySQLConnector
 		void print_sql_exception(const SQLException e);
 };
 
-#define interface class
-
-interface Connectable
+class Connectable
 {
 	public:
 		// pass in the table's name which you need to connect
