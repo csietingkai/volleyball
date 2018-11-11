@@ -29,6 +29,9 @@ void test_datetime()
 
 void test_logger()
 {
+	Logger log("This is a test message");
+	log.init_logging();
+	log.trace("This is a test message");
 }
 
 void test_mysql()
@@ -56,4 +59,5 @@ void test_main()
 	test_person();
 	test_team();
 	test_time();
+	test_logger();
 }
