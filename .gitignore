@@ -1,1 +1,3 @@
+#The file in this region will be ignore
 *.o
+*.exe
