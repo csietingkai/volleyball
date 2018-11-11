@@ -20,7 +20,7 @@ using namespace std;
 // algorithm for scheduling games
 // add git .gitignore
 
-#define TEST_MODE true
+#define TEST_MODE false
 
 int main(int argc, char* argv[])
 {
