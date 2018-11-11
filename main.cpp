@@ -3,7 +3,7 @@
 #include "src/common.h"
 #include "src/Datee.h"
 #include "src/DateTime.h"
-#include "src/MainWindow.h"
+#include "src/MainWindowView.h"
 #include "src/MySQLConnector.h"
 #include "src/Person.h"
 #include "src/Team.h"
