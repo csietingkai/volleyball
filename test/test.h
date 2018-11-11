@@ -4,13 +4,13 @@
 #include <assert.h>
 #include <iostream>
 
-#include "common.h"
-#include "Datee.h"
-#include "DateTime.h"
-#include "MySQLConnector.h"
-#include "Person.h"
-#include "Team.h"
-#include "Time.h"
+#include "../src/common.h"
+#include "../src/Datee.h"
+#include "../src/DateTime.h"
+#include "../src/MySQLConnector.h"
+#include "../src/Person.h"
+#include "../src/Team.h"
+#include "../src/Time.h"
 
 using namespace std;
 

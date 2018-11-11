@@ -7,8 +7,8 @@
 #include "src/Person.h"
 #include "src/Team.h"
 #include "src/View.h"
-#include "src/test.h"
 #include "src/Time.h"
+#include "test/test.h"
 
 using namespace std;
 
@@ -20,7 +20,7 @@ using namespace std;
 // algorithm for scheduling games
 // add git .gitignore
 
-#define TEST_MODE false
+#define TEST_MODE true
 
 int main(int argc, char* argv[])
 {

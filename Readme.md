@@ -27,7 +27,6 @@ Using techniques:
 sudo apt-get install libboost-all-dev
 sudo apt-get install libmysqlcppconn-dev
 sudo apt-get install libgtkmm-3.0-dev
-sudo apt-get install libgstreamermm-1.0-dev
 ```
 
 ## Usage

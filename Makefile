@@ -6,9 +6,11 @@ MYSQL_FLAG = -lmysqlcppconn
 
 EXE = volleyball.exe
 SRCDIR := ./src
+TESTDIR := ./test
 OBJDIR := ./obj
 SRCS := $(wildcard $(SRCDIR)/*.cpp)
-OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/main.o
+TESTS := $(wildcard $(SRCDIR)/*.cpp)
+OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test.o $(OBJDIR)/main.o
 
 all: $(EXE)
 
@@ -16,6 +18,10 @@ $(EXE): $(OBJS)
 	$(CPP) $(LDFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG)
 	
 $(OBJDIR)/main.o: ./main.cpp
+	@mkdir -p $(@D)
+	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG)
+
+$(OBJDIR)/test.o: $(TESTDIR)/test.cpp
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG)
 
