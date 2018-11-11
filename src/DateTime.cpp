@@ -172,13 +172,3 @@ const DateTime DateTime::previous_section()
 	DateTime ret(date, time);
 	return ret;
 }
-
-// private
-const Time DateTime::GAME_TIME_SECTIONS[] = 
-{
-	{19, 0, 0}, 
-	{20, 30, 0}, 
-	{22, 0, 0},
-	{23, 0, 0}
-};
-

@@ -69,6 +69,7 @@ const bool replace(string& str, const string& from, const string& to)
 const string trim(const string str)
 {
 	string ret = str;
+	// also remove add 'tab' & 'new line' in the string
 	ret.erase(remove(ret.begin(), ret.end(), '\t'), ret.end());
 	ret.erase(remove(ret.begin(), ret.end(), '\n'), ret.end());
 	size_t first = ret.find_first_not_of(' ');

@@ -40,14 +40,22 @@ class DateTime
 		friend ostream& operator <<(ostream& strm, const DateTime& other);
 		
 		// other functions
+		// each schedule has four sections can place a game in
+		// which means on day can have four games at maximum
 		const DateTime next_section();
 		const DateTime previous_section();
 	
 	private:
 		Datee date;
 		Time time;
-		
-		const static Time GAME_TIME_SECTIONS[];
-		
 };
+
+const static Time GAME_TIME_SECTIONS[4] = 
+{
+	{19, 0, 0}, 
+	{20, 30, 0}, 
+	{22, 0, 0},
+	{23, 0, 0}
+};
+
 #endif //DATETIME_H_

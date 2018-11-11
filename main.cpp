@@ -27,8 +27,7 @@ int main(int argc, char* argv[])
 {
 #if TEST_MODE
 	test_main();
-#endif
-	
+#else
 	/*RefPtr<Application> app = Application::create(argc, argv);
 	
 	View window;
@@ -36,4 +35,7 @@ int main(int argc, char* argv[])
 	return app->run(window);*/
 	
 	return 0;
+#endif
+	
+	
 }

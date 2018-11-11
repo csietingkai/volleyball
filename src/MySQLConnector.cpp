@@ -119,6 +119,7 @@ const int MySQLConnector::remove(const string conditions)
 	}
 	catch (SQLException e)
 	{
+		// TODO exception in logger
 		print_sql_exception(e);
 	}
 	

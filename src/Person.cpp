@@ -96,7 +96,6 @@ const ActiveStatus Person::get_active_status() const
 
 const string Person::to_string() const 
 {
-	// to_string() function
 	// format: name, age, [male|female], phone number
 	string re = get_name() + ",";
 	re += std::to_string(get_age()) + ",";
