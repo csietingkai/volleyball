@@ -16,10 +16,6 @@ Using techniques:
 
 + [Ting-Kai Hu](https://github.com/csietingkai)
 + [RB Lin](https://github.com/RBRBRB)
-	```
-	+ gitignore
-	+ Logger class
-	```
 
 ## Things To Do Before Execute
 
