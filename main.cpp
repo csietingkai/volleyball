@@ -8,6 +8,7 @@
 #include "src/Team.h"
 #include "src/View.h"
 #include "src/Time.h"
+#include "src/Logger.h" 
 #include "test/test.h"
 
 using namespace std;
