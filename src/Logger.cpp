@@ -1,5 +1,6 @@
 #include "Logger.h"
 namespace logging = boost::log;
+namespace keywords = boost::log::keywords;
 
 Logger::Logger(const string class_name)
 {
@@ -8,7 +9,7 @@ Logger::Logger(const string class_name)
 void Logger::init_logging()
 {
     logging::add_file_log("sample.log");
-
+    logging::add_console_log(std::cout, keywords::format = ">> %Message%");
     logging::core::get()->set_filter
     (
         logging::trivial::severity >= logging::trivial::trace
