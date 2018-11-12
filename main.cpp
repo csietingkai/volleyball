@@ -21,16 +21,20 @@ using namespace std;
 // add git .gitignore
 // set team conditions
 
-#define TEST_MODE true
-
 int main(int argc, char* argv[])
 {
+	int ret = 0;
+	
 #if TEST_MODE
 	test_main();
-#endif
+#else
+	// TODO need to test manually
 	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
 	
 	MainWindowView window;
 	
-	return app->run(window);
+	ret = app->run(window);
+#endif
+	
+	return ret;
 }

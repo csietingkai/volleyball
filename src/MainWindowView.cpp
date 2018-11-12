@@ -70,3 +70,8 @@ void MainWindowView::set_signal_handler()
 // private functions
 const string MainWindowView::CLASS_NAME = "MainWindowView";
 const string MainWindowView::WINDOW_TITLE = "WINDOW_TITLE";
+
+void MainWindowView::on_btn_close_click()
+{
+	close();
+}

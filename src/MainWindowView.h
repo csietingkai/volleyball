@@ -2,6 +2,7 @@
 #define MAIN_WINDOW_View_H_
 
 #include <gtkmm.h>
+#include <unistd.h>
 
 #include "common.h"
 #include "Datee.h"
@@ -49,6 +50,8 @@ class MainWindowView : public Window
 		const static int CONTAINER_BORDER_SIZE = 20;
 		const static int SPACING_BORDER_SIZE = 10;
 		const static int BUTTON_SPACING_SIZE = 5;
+		
+		void on_btn_close_click();
 };
 
 #endif // MAIN_WINDOW_H_
