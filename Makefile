@@ -3,7 +3,7 @@ CPPFLAGS = -std=c++11 -c -g -Wall -DBOOST_LOG_DYN_LINK -lpthread
 LDFLAGS = -g
 GTKMM_FLAG = `pkg-config gtkmm-3.0 --cflags --libs`
 MYSQL_FLAG = -lmysqlcppconn
-BOOST_LOG_FLAG = -lboost_log -lboost_system
+BOOST_LOG_FLAG = -lboost_log -lboost_system -lboost_thread
 
 EXE = volleyball.exe
 SRCDIR := ./src
