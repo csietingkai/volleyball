@@ -7,7 +7,7 @@ Logger::Logger(const string class_name)
 }
 void Logger::init_logging()
 {
-    //logging::add_file_log("sample.log");
+    logging::add_file_log("sample.log");
 
     logging::core::get()->set_filter
     (
