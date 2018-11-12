@@ -14,9 +14,8 @@
 using namespace std;
 
 // TODO List
-// frontend view
+// frontend view						// tingkai doing
 // Logger class							// RB doing
-// DateTime to (Date, Time, DateTime)	// tingkai almost finish
 // test unit in test.cpp
 // algorithm for scheduling games
 // add git .gitignore
@@ -28,15 +27,10 @@ int main(int argc, char* argv[])
 {
 #if TEST_MODE
 	test_main();
-#else
-	/*RefPtr<Application> app = Application::create(argc, argv);
-	
-	View window;
-	
-	return app->run(window);*/
-	
-	return 0;
 #endif
+	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
 	
+	MainWindowView window;
 	
+	return app->run(window);
 }
