@@ -20,17 +20,19 @@ class Logger
 		Logger(const string class_name);
 		
 		// public functions
-		void init_logging();
 		void trace(const string message);
 		void debug(const string message);
 		void info(const string message);
 		void warning(const string message);
 		void error(const string message);
 		void fatal(const string message);
-		
+			
 
 	private:
 		// add any functions and variables you need
+		void init_logging();
+		void update_logging_low();
+		void update_logging_up();
 		string log_message;
 };
 
