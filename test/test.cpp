@@ -30,8 +30,14 @@ void test_datetime()
 void test_logger()
 {
 	Logger log("This is a test message");
-	log.init_logging();
-	log.trace("This is a test message");
+	
+	log.trace("This is a trace message1");
+	log.warning("This is a warning message");
+	log.fatal("This is a fatal message");
+	//log.warning("This is a warning message");
+	
+	//log.update_logging("haha");
+	//log.error("This is a fatal message");
 }
 
 void test_mysql()
