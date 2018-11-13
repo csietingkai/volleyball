@@ -22,7 +22,7 @@ using namespace std;
 // find the way to test gui on travis and trigger close button after few seconds
 // create data in database for testing
 
-#define TEST_MODE false
+#define TEST_MODE true
 
 int main(int argc, char* argv[])
 {
