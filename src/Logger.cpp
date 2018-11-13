@@ -45,7 +45,7 @@ void Logger::init_logging()
     boost::shared_ptr< sinks::text_ostream_backend > backend =
         boost::make_shared< sinks::text_ostream_backend >();
     backend->add_stream(
-        boost::shared_ptr< std::ostream >(&std::clog, boost::null_deleter()));
+        boost::shared_ptr< std::ostream >(&std::clog, boost::serialization::null_deleter()));
 
     // Enable auto-flushing after each log record written
     backend->auto_flush(true);

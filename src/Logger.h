@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include <boost/core/null_deleter.hpp>
 #include <boost/log/core.hpp>
 #include <boost/log/trivial.hpp>
 #include <boost/log/expressions.hpp>
@@ -19,6 +18,7 @@
 #include <boost/log/sinks/text_ostream_backend.hpp>
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/log/support/date_time.hpp>
+#include <boost/serialization/shared_ptr.hpp> // for null_deleter
 #include <boost/smart_ptr/shared_ptr.hpp>
 #include <boost/smart_ptr/make_shared_object.hpp>
 
