@@ -31,4 +31,4 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o $@ $< $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 
 clean:
-	rm -rf $(OBJDIR)/*.o $(EXE) *.log
+	rm -rf $(OBJDIR)/*.o $(EXE)
