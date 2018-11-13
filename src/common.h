@@ -14,8 +14,6 @@
 using namespace std;
 namespace pt = boost::property_tree;
 
-#define TEST_MODE true
-
 const string generate_uuid();
 
 const string generate_sha1(const string str);

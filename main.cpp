@@ -14,12 +14,15 @@
 using namespace std;
 
 // TODO List
-// frontend view						// tingkai doing
+// frontend view
 // Logger class							// RB doing
 // test unit in test.cpp
 // algorithm for scheduling games
-// add git .gitignore
-// set team conditions
+// set team conditions					// tingkai doing
+// find the way to test gui on travis and trigger close button after few seconds
+// create data in database for testing
+
+#define TEST_MODE false
 
 int main(int argc, char* argv[])
 {

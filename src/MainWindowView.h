@@ -24,9 +24,21 @@ class MainWindowView : public Window
 		virtual ~MainWindowView();
 	
 	protected:
+		//Tree model columns:
+		class ModelColumns : public TreeModel::ColumnRecord
+		{
+			public:
+				TreeModelColumn<ustring> id;
+				TreeModelColumn<ustring> name;
+				
+				ModelColumns() { add(id); add(name); }
+		};
 		Box hbox_all;
 			Box vbox_tree_view_teams;
-				// TreeView team_list
+				ScrolledWindow scrolled_tree_view;
+					TreeView tv_team_list;
+					RefPtr<TreeStore> ref_team_list_model;
+					ModelColumns model_columns;
 			Box vbox_schedule;
 				// Custom widegt calander
 				Box hbox_btngroup;
@@ -40,6 +52,8 @@ class MainWindowView : public Window
 		void set_signal_handler();
 		
 	private:
+		vector<Team> team_list;
+		
 		Logger logger;
 		
 		const static string CLASS_NAME;
@@ -51,7 +65,10 @@ class MainWindowView : public Window
 		const static int SPACING_BORDER_SIZE = 10;
 		const static int BUTTON_SPACING_SIZE = 5;
 		
+		void on_btn_start_click();
 		void on_btn_close_click();
+		
+		void fetch_team_data();
 };
 
 #endif // MAIN_WINDOW_H_
