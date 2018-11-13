@@ -28,10 +28,10 @@ Logger::Logger(const string class_name)
 }
 void Logger::init_logging()
 {    
-    MethodBase methodInfo = new StackTrace().GetFrame(1).GetMethod();
+    //MethodBase methodInfo = new StackTrace().GetFrame(1).GetMethod();
     //Type declaringType = method.DeclaringType;
-    string class_name = methodInfo.ReflectedType.Name;
-    printf(class_name);
+    //string class_name = methodInfo.ReflectedType.Name;
+    
     /*
     logging::core::get()->set_filter
     (
