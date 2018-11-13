@@ -1,4 +1,10 @@
 #include "test.h"
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
+namespace expr = boost::log::expressions;
+namespace attrs = boost::log::attributes;
 
 void test_common()
 {
@@ -29,15 +35,9 @@ void test_datetime()
 
 void test_logger()
 {
-	Logger log("This is a test message");
-	
-	log.trace("This is a trace message1");
-	log.warning("This is a warning message");
-	log.fatal("This is a fatal message");
-	//log.warning("This is a warning message");
-	
-	//log.update_logging("haha");
-	//log.error("This is a fatal message");
+	Logger log("test");
+	log.trace("test message");
+	log.fatal("fatal message");
 }
 
 void test_mysql()
