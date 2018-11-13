@@ -18,16 +18,20 @@ enum severity_level
     fatal
 };
 BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", severity_level)*/
-
 Logger::Logger(const string class_name)
 {
     this->log_message = class_name;
+    logging::add_common_attributes();
     init_logfile();
     init_logging();
     
 }
 void Logger::init_logging()
 {    
+    MethodBase methodInfo = new StackTrace().GetFrame(1).GetMethod();
+    //Type declaringType = method.DeclaringType;
+    string class_name = methodInfo.ReflectedType.Name;
+    printf(class_name);
     /*
     logging::core::get()->set_filter
     (
@@ -50,32 +54,49 @@ void Logger::init_logging()
     // The backend requires synchronization in the frontend.
     typedef sinks::synchronous_sink< sinks::text_ostream_backend > sink_t;
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
-    
+    sink->set_formatter(
+    expr::stream
+        << '['
+        << expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%m-%d %H:%M:%S")
+        << "]("
+        << logging::trivial::severity
+        <<") "
+        << expr::smessage
+    );
     //sink->set_filter(severity >= warning);
     core->add_sink(sink);
     
 }
 void Logger::init_logfile()
 {
-    // Construct the sink
     boost::shared_ptr< logging::core > core = logging::core::get();
-
-    // Create a backend and attach a couple of streams to it
-    boost::shared_ptr< sinks::text_ostream_backend > backend =
-        boost::make_shared< sinks::text_ostream_backend >();
-    backend->add_stream(
-        boost::shared_ptr< std::ostream >(new std::ofstream("sample.log")));
-
-    // Enable auto-flushing after each log record written
-    backend->auto_flush(true);
+    //boost::log::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
+    boost::shared_ptr< sinks::text_file_backend > backend =
+        boost::make_shared< sinks::text_file_backend >(
+            keywords::file_name = "logs/file_%5N.log",                                          
+            keywords::rotation_size = 5 * 1024 * 1024,                                     
+            keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
+            //keywords::format = "[%TimeStamp%]: %Message%"  //will be ignore.... WTF???
+            
+        );
 
     // Wrap it into the frontend and register in the core.
     // The backend requires synchronization in the frontend.
-    typedef sinks::synchronous_sink< sinks::text_ostream_backend > sink_t;
+    typedef sinks::synchronous_sink< sinks::text_file_backend > sink_t;
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
-    
+    //sink->set_formatter(&formatter);
+    sink->set_formatter(
+    expr::stream
+        << '['
+        << expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S")
+        << "]("
+        << logging::trivial::severity
+        <<")"
+        << expr::smessage
+    );
     core->add_sink(sink);
 }
+
 void Logger::trace(const string message)
 {
     //src::severity_logger< severity_level > lg;

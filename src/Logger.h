@@ -19,9 +19,16 @@
 #include <boost/log/sources/global_logger_storage.hpp>
 #include <boost/smart_ptr/shared_ptr.hpp>
 #include <boost/smart_ptr/make_shared_object.hpp>
+#include <boost/log/support/date_time.hpp>
 
 using namespace std;
 // add namespace you need
+namespace logging = boost::log;
+namespace src = boost::log::sources;
+namespace sinks = boost::log::sinks;
+namespace keywords = boost::log::keywords;
+namespace expr = boost::log::expressions;
+namespace attrs = boost::log::attributes;
 
 class Logger
 {
