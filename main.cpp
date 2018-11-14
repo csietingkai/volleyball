@@ -29,6 +29,9 @@ int main(int argc, char* argv[])
 	int ret = 0;
 	
 #if TEST_MODE
+	Logger main_log("Main");
+	main_log.trace("trace in main!");
+	main_log.fatal("fatal in main!!!");
 	test_main();
 #else
 	// TODO need to test manually
