@@ -35,8 +35,11 @@ void test_datetime()
 
 void test_logger()
 {
-	Logger log("test");
-	log.trace("test message");
+	Logger log("Test");
+	log.trace("test message1");
+	log.warning("warning message");
+	log.trace("test message2");
+	log.info("info message");
 	log.fatal("fatal message");
 }
 
