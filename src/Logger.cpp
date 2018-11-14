@@ -6,21 +6,14 @@ namespace keywords = boost::log::keywords;
 namespace expr = boost::log::expressions;
 namespace attrs = boost::log::attributes;
 
-/*using namespace logging::trivial;
-src::severity_logger< severity_level > lg;
-enum severity_level
-{
-    trace,
-    debug,
-    info,
-    warning,
-    error,
-    fatal
-};
-BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", severity_level)*/
+using namespace logging::trivial;
+/*src::severity_logger< severity_level > lg;*/
+
+
 Logger::Logger(const string class_name)
 {
-    this->log_message = class_name;
+
+    this->class_name = class_name;
     logging::add_common_attributes();
     init_logfile();
     init_logging();
@@ -28,16 +21,7 @@ Logger::Logger(const string class_name)
 }
 void Logger::init_logging()
 {    
-    //MethodBase methodInfo = new StackTrace().GetFrame(1).GetMethod();
-    //Type declaringType = method.DeclaringType;
-    //string class_name = methodInfo.ReflectedType.Name;
-    
-    /*
-    logging::core::get()->set_filter
-    (
-        logging::trivial::severity >= logging::trivial::warning
-    );*/
-    
+    boost::log::core::get()->remove_all_sinks();
     // Construct the sink
     boost::shared_ptr< logging::core > core = logging::core::get();
 
@@ -55,15 +39,10 @@ void Logger::init_logging()
     typedef sinks::synchronous_sink< sinks::text_ostream_backend > sink_t;
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
     sink->set_formatter(
-    expr::stream
-        << '['
-        << expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%m-%d %H:%M:%S")
-        << "]("
-        << logging::trivial::severity
-        <<") "
-        << expr::smessage
+    expr::format("[%1%][%2%] (%3%): %4%") % expr::format_date_time < boost::posix_time::ptime
+                > ("TimeStamp", "%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage 
     );
-    //sink->set_filter(severity >= warning);
+    sink->set_filter(logging::trivial::severity >= logging::trivial::info);
     core->add_sink(sink);
     
 }
@@ -73,11 +52,9 @@ void Logger::init_logfile()
     //boost::log::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
     boost::shared_ptr< sinks::text_file_backend > backend =
         boost::make_shared< sinks::text_file_backend >(
-            keywords::file_name = "logs/file_%5N.log",                                          
+            keywords::file_name = "logs/%Y-%m-%d_%5N.log",                                          
             keywords::rotation_size = 5 * 1024 * 1024,                                     
             keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
-            //keywords::format = "[%TimeStamp%]: %Message%"  //will be ignore.... WTF???
-            
         );
 
     // Wrap it into the frontend and register in the core.
@@ -86,47 +63,34 @@ void Logger::init_logfile()
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
     //sink->set_formatter(&formatter);
     sink->set_formatter(
-    expr::stream
-        << '['
-        << expr::format_date_time<boost::posix_time::ptime>("TimeStamp", "%Y-%m-%d %H:%M:%S")
-        << "]("
-        << logging::trivial::severity
-        <<")"
-        << expr::smessage
+    expr::format("[%1%][%2%] (%3%): %4%") % expr::format_date_time < boost::posix_time::ptime
+                > ("TimeStamp", "%Y-%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage
+    
     );
     core->add_sink(sink);
 }
 
 void Logger::trace(const string message)
 {
-    //src::severity_logger< severity_level > lg;
-    //BOOST_LOG_SEV(lg, trace) << message;
-    BOOST_LOG_TRIVIAL(trace) << "This is a trace severity message";
+    BOOST_LOG_TRIVIAL(trace) << message;
 }
 void Logger::debug(const string message)
 {
-    //src::severity_logger< severity_level > lg;
-    //BOOST_LOG_SEV(lg, debug) << message;
-    BOOST_LOG_TRIVIAL(debug) << "This is a debug severity message";
+    BOOST_LOG_TRIVIAL(debug) << message;
 }
 void Logger::info(const string message)
 {
-    //src::severity_logger< severity_level > lg;
-    //BOOST_LOG_SEV(lg, info) << message;
-    BOOST_LOG_TRIVIAL(info) << "This is an informational severity message";
+    BOOST_LOG_TRIVIAL(info) << message;
 }
 void Logger::warning(const string message)
 {
-    //BOOST_LOG_SEV(lg, warning) << message;
-    BOOST_LOG_TRIVIAL(warning) << "This is a warning severity message";
+    BOOST_LOG_TRIVIAL(warning) << message;
 }
 void Logger::error(const string message)
 {
-    //BOOST_LOG_SEV(lg, error) << message;
-    BOOST_LOG_TRIVIAL(error) << "This is an error severity message";
+    BOOST_LOG_TRIVIAL(error) << message;
 }
 void Logger::fatal(const string message)
 {
-    //BOOST_LOG_SEV(lg, fatal) << message;
-    BOOST_LOG_TRIVIAL(fatal) << "This is a fatal severity message";
+    BOOST_LOG_TRIVIAL(fatal) << message;
 }
