@@ -12,6 +12,7 @@
 #include <boost/log/utility/setup/console.hpp>
 #include <boost/log/sources/severity_logger.hpp>
 #include <boost/log/sources/logger.hpp>
+#include <boost/log/sources/severity_feature.hpp>
 #include <boost/log/sources/record_ostream.hpp>
 #include <boost/log/sinks/text_file_backend.hpp>
 #include <boost/log/sinks/sync_frontend.hpp>
@@ -33,7 +34,7 @@ namespace attrs = boost::log::attributes;
 
 class Logger
 {
-	public:
+	public:		
 		// constructors
 		Logger(const string class_name);
 		
@@ -45,12 +46,13 @@ class Logger
 		void error(const string message);
 		void fatal(const string message);
 			
-
 	private:
 		// add any functions and variables you need
+		string class_name;
 		void init_logging();
 		void init_logfile();
-		string log_message;
+		
 };
-
+//BOOST_LOG_ATTRIBUTE_KEYWORD(severity, "Severity", severity_level)
+//BOOST_LOG_ATTRIBUTE_KEYWORD(tag_attr, "Tag", std::string)
 #endif // LOGGER_H_
