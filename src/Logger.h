@@ -24,7 +24,7 @@
 #include <boost/smart_ptr/make_shared_object.hpp>
 
 using namespace std;
-// add namespace you need
+
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace sinks = boost::log::sinks;
@@ -47,8 +47,8 @@ class Logger
 		void fatal(const string message);
 			
 	private:
-		// add any functions and variables you need
 		string class_name;
+		
 		void init_logterm();
 		void init_logfile();
 		
