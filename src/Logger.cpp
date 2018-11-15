@@ -7,14 +7,12 @@ namespace expr = boost::log::expressions;
 namespace attrs = boost::log::attributes;
 
 using namespace logging::trivial;
-/*src::severity_logger< severity_level > lg;*/
-//BOOST_LOG_ATTRIBUTE_KEYWORD(channel, "Channel", std::string)
+
 int init_cnt = 0; //Just Initialize Once
 
 Logger::Logger(const string class_name)
 {
     this->class_name = class_name;
-    //keywords::channel = class_name;
     logging::add_common_attributes();
 
     if(init_cnt == 0){
