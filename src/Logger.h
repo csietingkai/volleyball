@@ -49,7 +49,7 @@ class Logger
 	private:
 		// add any functions and variables you need
 		string class_name;
-		void init_logging();
+		void init_logterm();
 		void init_logfile();
 		
 };

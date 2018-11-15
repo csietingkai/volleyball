@@ -8,15 +8,22 @@ namespace attrs = boost::log::attributes;
 
 using namespace logging::trivial;
 /*src::severity_logger< severity_level > lg;*/
+//BOOST_LOG_ATTRIBUTE_KEYWORD(channel, "Channel", std::string)
+int init_cnt = 0; //Just Initialize Once
 
 Logger::Logger(const string class_name)
 {
     this->class_name = class_name;
+    //keywords::channel = class_name;
     logging::add_common_attributes();
-    init_logfile();
-    init_logging();
+
+    if(init_cnt == 0){
+        init_logfile();
+        init_logterm();
+    }
+    init_cnt++;
 }
-void Logger::init_logging()
+void Logger::init_logterm()
 {    
     // Construct the sink
     boost::shared_ptr< logging::core > core = logging::core::get();
@@ -35,7 +42,6 @@ void Logger::init_logging()
 
     sink->locked_backend()->auto_flush(true);
     
-
     sink->set_formatter(
     expr::format("[%1%][%2%] (%3%): %4%") % expr::format_date_time < boost::posix_time::ptime
                 > ("TimeStamp", "%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage 
@@ -43,18 +49,17 @@ void Logger::init_logging()
     sink->set_filter(logging::trivial::severity >= logging::trivial::info);
     
     core->add_sink(sink);
-    
-    
 }
 void Logger::init_logfile()
 {  
     boost::shared_ptr< logging::core > core = logging::core::get();
-    //boost::log::register_simple_formatter_factory< boost::log::trivial::severity_level, char >("Severity");
+    
     boost::shared_ptr< sinks::text_file_backend > backend =
         boost::make_shared< sinks::text_file_backend >(
             keywords::file_name = "logs/%Y-%m-%d_%N.log",                                          
             keywords::rotation_size = 5 * 1024 * 1024,                                     
             keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
+
         );
 
     // Wrap it into the frontend and register in the core.
@@ -63,13 +68,14 @@ void Logger::init_logfile()
     boost::shared_ptr< sink_t > sink(new sink_t(backend));
     // Enable auto-flushing after each log record written
     sink->locked_backend()->auto_flush(true);
+
     //sink->set_formatter(&formatter);
     sink->set_formatter(
     expr::format("[%1%][%2%] (%3%): %4%") % expr::format_date_time < boost::posix_time::ptime
                 > ("TimeStamp", "%Y-%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage
     
     );
-    //boost::log::core::get()->remove_all_sinks();  // has bug
+    
     core->add_sink(sink);
 }
 

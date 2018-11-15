@@ -33,6 +33,9 @@ int main(int argc, char* argv[])
 	main_log.trace("trace in main!");
 	main_log.fatal("fatal in main!!!");
 	test_main();
+	Logger main_log2("Main");
+	main_log2.error("error in main!2");
+	main_log2.fatal("fatal in main!!!2");
 #else
 	// TODO need to test manually
 	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
