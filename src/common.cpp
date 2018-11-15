@@ -80,3 +80,20 @@ const string trim(const string str)
     size_t last = ret.find_last_not_of(' ');
     return ret.substr(first, (last - first + 1));
 }
+
+const string random_string()
+{
+	return random_string(6);
+}
+
+const string random_string(const int length)
+{
+	string str("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+	
+	random_device rd;
+	mt19937 generator(rd());
+
+	shuffle(str.begin(), str.end(), generator);
+
+	return str.substr(0, length);
+}

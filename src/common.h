@@ -8,6 +8,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <random>
 #include <iostream>
 #include "Logger.h"
 
@@ -41,5 +42,9 @@ const string parse_xml(const string filename, const string node_name);
 const bool replace(string& str, const string& from, const string& to);
 
 const string trim(const string str);
+
+const string random_string();
+
+const string random_string(const int length);
 
 #endif //COMMON_H_
