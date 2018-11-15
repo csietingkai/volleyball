@@ -14,6 +14,7 @@ class DateTime
 {
 	public:
 		// constructors
+		DateTime(){};
 		DateTime(const Datee date, const Time time);
 		DateTime(const DateTime& datetime);
 		

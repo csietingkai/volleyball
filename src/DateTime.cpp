@@ -2,9 +2,9 @@
 
 // constructors
 DateTime::DateTime(const Datee date, const Time time)
+	: date(date)
+	, time(time)
 {
-	this->date = date;
-	this->time = time;
 }
 
 DateTime::DateTime(const DateTime& datetime)

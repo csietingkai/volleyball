@@ -8,4 +8,7 @@
 	<Team>
 		teams
 	</Team>
+	<Game>
+		games
+	</Game>
 </tables>

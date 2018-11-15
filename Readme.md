@@ -25,5 +25,15 @@ sudo apt-get install libmysqlcppconn-dev
 sudo apt-get install libgtkmm-3.0-dev
 ```
 
+## TODO List
+
++ set team conditions
++ implement of class 'Game' & 'Schedule'
++ frontend view
++ algorithm for scheduling games
++ find the way to test gui on travis and trigger close button after few seconds
++ create data in database for testing
++ test unit in test.cpp
+
 ## Usage
 
