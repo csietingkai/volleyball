@@ -6,7 +6,6 @@ Game::Game(const Team team1, const Team team2)
 	, logger(Game::CLASS_NAME)
 	, team1(team1)
 	, team2(team2)
-	, datetime()
 {
 }
 /*
@@ -25,7 +24,7 @@ void Game::set_team2(const Team team2)
 {
 }
 
-void Game::set_datetime(const DateTime datetime)
+void Game::set_datetime(const DateeTime DateeTime)
 {
 }
 
@@ -39,7 +38,7 @@ const Team Game::get_team2() const
 {
 }
 
-const DateTime Game::get_datetime() const
+const DateeTime Game::get_datetime() const
 {
 }
 

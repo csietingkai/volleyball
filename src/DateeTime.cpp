@@ -1,62 +1,62 @@
-#include "DateTime.h"
+#include "DateeTime.h"
 
 // constructors
-DateTime::DateTime(const Datee date, const Time time)
+DateeTime::DateeTime(const Datee date, const Time time)
 	: date(date)
 	, time(time)
 {
 }
 
-DateTime::DateTime(const DateTime& datetime)
+DateeTime::DateeTime(const DateeTime& DateeTime)
 {
-	this->operator=(datetime);
+	this->operator=(DateeTime);
 }
 
 // setters
-void DateTime::set_date(const Datee date)
+void DateeTime::set_date(const Datee date)
 {
 	this->date = date;
 }
 
-void DateTime::set_time(const Time time)
+void DateeTime::set_time(const Time time)
 {
 	this->time = time;
 }
 
 // getters
-const Datee DateTime::get_date() const
+const Datee DateeTime::get_date() const
 {
 	return this->date;
 }
 
-const Time DateTime::get_time() const
+const Time DateeTime::get_time() const
 {
 	return this->time;
 }
 
-const string DateTime::to_string() const
+const string DateeTime::to_string() const
 {
 	return this->date.to_string()+" "+this->time.to_string();
 }
 
 // static
-const DateTime DateTime::Now()
+const DateeTime DateeTime::Now()
 {
 	Datee dnow = Datee::Now();
 	Time tnow = Time::Now();
-	DateTime dtnow(dnow, tnow);
+	DateeTime dtnow(dnow, tnow);
 	return dtnow;
 }
 
 // operators
-const DateTime& DateTime::operator =(const DateTime& other)
+const DateeTime& DateeTime::operator =(const DateeTime& other)
 {
 	this->date = other.get_date();
 	this->time = other.get_time();
 	return *this;
 }
 
-const bool DateTime::operator ==(const DateTime& other) const
+const bool DateeTime::operator ==(const DateeTime& other) const
 {
 	bool ret = true;
 	ret = ret && (this->get_date() == other.get_date());
@@ -64,12 +64,12 @@ const bool DateTime::operator ==(const DateTime& other) const
 	return ret;
 }
 
-const bool DateTime::operator !=(const DateTime& other) const
+const bool DateeTime::operator !=(const DateeTime& other) const
 {
 	return !this->operator==(other);
 }
 
-const bool DateTime::operator <(const DateTime& other) const
+const bool DateeTime::operator <(const DateeTime& other) const
 {
 	bool ret = this->get_date() < other.get_date();
 	if(this->get_date() == other.get_date())
@@ -79,29 +79,29 @@ const bool DateTime::operator <(const DateTime& other) const
 	return ret;
 }
 
-const bool DateTime::operator >(const DateTime& other) const
+const bool DateeTime::operator >(const DateeTime& other) const
 {
 	return other.operator<(*this);
 }
 
-const bool DateTime::operator <=(const DateTime& other) const
+const bool DateeTime::operator <=(const DateeTime& other) const
 {
 	return !this->operator>(other);
 }
 
-const bool DateTime::operator >=(const DateTime& other) const
+const bool DateeTime::operator >=(const DateeTime& other) const
 {
 	return !this->operator<(other);
 }
 
-ostream& operator <<(ostream& strm, const DateTime& other)
+ostream& operator <<(ostream& strm, const DateeTime& other)
 {
 	strm << other.to_string();
 	return strm;
 }
 
 // other functions
-const DateTime DateTime::next_section()
+const DateeTime DateeTime::next_section()
 {
 	Datee date = this->date;
 	Time time = this->time;
@@ -133,11 +133,11 @@ const DateTime DateTime::next_section()
 		date = date.next_day();
 	}
 	
-	DateTime ret(date, time);
+	DateeTime ret(date, time);
 	return ret;
 }
 
-const DateTime DateTime::previous_section()
+const DateeTime DateeTime::previous_section()
 {
 	Datee date = this->date;
 	Time time = this->time;
@@ -169,6 +169,6 @@ const DateTime DateTime::previous_section()
 		time = GAME_TIME_SECTIONS[3];
 	}
 	
-	DateTime ret(date, time);
+	DateeTime ret(date, time);
 	return ret;
 }

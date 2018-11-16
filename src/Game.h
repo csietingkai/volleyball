@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "common.h"
-#include "DateTime.h"
+#include "DateeTime.h"
 #include "Team.h"
 
 class Game : Connectable
@@ -17,12 +17,12 @@ class Game : Connectable
 		// setters
 		void set_team1(const Team team1);
 		void set_team2(const Team team2);
-		void set_datetime(const DateTime datetime);
+		void set_datetime(const DateeTime datetime);
 		
 		// getters
 		const Team get_team1() const;
 		const Team get_team2() const;
-		const DateTime get_datetime() const;
+		const DateeTime get_datetime() const;
 		const string to_string() const;
 		
 		// operators
@@ -42,7 +42,7 @@ class Game : Connectable
 		
 	private:
 		string id;
-		DateTime datetime;
+		DateeTime datetime;
 		Team team1;
 		Team team2;
 		bool is_timeset;	// this variable used to record 'set_datetime' function is called or not
