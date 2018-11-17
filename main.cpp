@@ -14,7 +14,7 @@
 
 using namespace std;
 
-#define TEST_MODE false
+#define TEST_MODE true
 
 int main(int argc, char* argv[])
 {
