@@ -4,6 +4,8 @@
 MySQLConnector::MySQLConnector(const string table_name)
 	: logger(MySQLConnector::CLASS_NAME)
 {
+	logger.trace("initializing MySQLConnector with table_name='"+table_name+"'");
+	
 	this->table_name = table_name;
 	
 	this->driver = get_driver_instance();
@@ -11,7 +13,7 @@ MySQLConnector::MySQLConnector(const string table_name)
 	this->connection->setSchema(schema);
 
 	this->statement = this->connection->createStatement();
-	this->result_set = this->statement->executeQuery("SELECT * FROM "+this->table_name);
+	this->result_set = this->statement->executeQuery("SELECT * FROM " + this->table_name);
 }
 
 MySQLConnector::~MySQLConnector()
@@ -33,7 +35,8 @@ ResultSet* MySQLConnector::select(const string column_name, const string conditi
 	replace(query, "[COLUMN_NAME]", column_name);
 	replace(query, "[TABLE_NAME]", this->table_name);
 	replace(query, "[CONDITIONS]", conditions);
-	//cout << query << endl;
+	
+	logger.debug("select query: " + query);
 	
 	try
 	{
@@ -41,6 +44,7 @@ ResultSet* MySQLConnector::select(const string column_name, const string conditi
 	}
 	catch (SQLException e)
 	{
+		logger.error("SQL Exception happened !!");
 		print_sql_exception(e);
 	}
 	/*ResultSetMetaData *res_meta = result_set->getMetaData();
@@ -68,8 +72,12 @@ const bool MySQLConnector::insert(const string values)
 	}
 	else
 	{
-		//error("sql insert error: values can't be empty");
+		logger.error("sql insert error: values can't be empty");
+		ret = false;
+		return ret;
 	}
+	
+	logger.debug("insert query: " + query);
 	
 	try
 	{
@@ -77,6 +85,7 @@ const bool MySQLConnector::insert(const string values)
 	}
 	catch (SQLException e)
 	{
+		logger.error("SQL Exception happened !!");
 		print_sql_exception(e);
 	}
 	
@@ -93,12 +102,15 @@ const int MySQLConnector::update(const string column_name, const string column_v
 	replace(query, "[COLUMN_VALUE]", column_value);
 	replace(query, "[CONDITIONS]", conditions);
 	
+	logger.debug("update query: " + query);
+	
 	try
 	{
 		ret = this->statement->execute(query);
 	}
 	catch (SQLException e)
 	{
+		logger.error("SQL Exception happened !!");
 		print_sql_exception(e);
 	}
 	
@@ -113,13 +125,15 @@ const int MySQLConnector::remove(const string conditions)
 	replace(query, "[TABLE_NAME]", this->table_name);
 	replace(query, "[CONDITIONS]", conditions);
 	
+	logger.debug("delete query: " + query);
+	
 	try
 	{
 		ret = this->statement->execute(query);
 	}
 	catch (SQLException e)
 	{
-		// TODO exception in logger
+		logger.error("SQL Exception happened !!");
 		print_sql_exception(e);
 	}
 	
