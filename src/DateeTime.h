@@ -30,6 +30,12 @@ class DateeTime
 		// static
 		const static DateeTime Now();
 		
+		// other functions
+		// each schedule has four sections can place a game in
+		// which means on day can have four games at maximum
+		const DateeTime next_section();
+		const DateeTime previous_section();
+		
 		// operators
 		const DateeTime& operator =(const DateeTime& other);
 		const bool operator ==(const DateeTime& other) const;
@@ -39,24 +45,10 @@ class DateeTime
 		const bool operator <=(const DateeTime& other) const;
 		const bool operator >=(const DateeTime& other) const;
 		friend ostream& operator <<(ostream& strm, const DateeTime& other);
-		
-		// other functions
-		// each schedule has four sections can place a game in
-		// which means on day can have four games at maximum
-		const DateeTime next_section();
-		const DateeTime previous_section();
 	
 	private:
 		Datee date;
 		Time time;
-};
-
-const static Time GAME_TIME_SECTIONS[4] = 
-{
-	{19, 0, 0}, 
-	{20, 30, 0}, 
-	{22, 0, 0},
-	{23, 0, 0}
 };
 
 #endif // DATEETIME_H_

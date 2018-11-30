@@ -29,6 +29,14 @@ class Time
 		// static
 		const static Time Now();
 		
+		// other functions
+		const Time next_hour() const;
+		const Time previous_hour() const;
+		const Time next_minute() const;
+		const Time previous_minute() const;
+		const Time next_second() const;
+		const Time previous_second() const;
+		
 		// operators
 		const Time& operator =(const Time& other);
 		const bool operator ==(const Time& other) const;
@@ -38,14 +46,6 @@ class Time
 		const bool operator <=(const Time& other) const;
 		const bool operator >=(const Time& other) const;
 		friend ostream& operator <<(ostream& strm, const Time& other);
-		
-		// other functions
-		const Time next_hour() const;
-		const Time previous_hour() const;
-		const Time next_minute() const;
-		const Time previous_minute() const;
-		const Time next_second() const;
-		const Time previous_second() const;
 	
 	private:
 		int hour;
@@ -58,6 +58,16 @@ class Time
 		
 		// check hour range in 0~23, check minute & second range 0~59
 		void check_member_vars();
+};
+
+// specific game time section
+class GAME_TIME
+{
+	public:
+		const static Time FIRST_SECTION;
+		const static Time SECOND_SECTION;
+		const static Time THIRD_SECTION;
+		const static Time FORTH_SECTION;
 };
 
 #endif //TIME_H_

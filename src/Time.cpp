@@ -73,65 +73,6 @@ const Time Time::Now()
 	return now;
 }
 
-
-// operators
-const Time& Time::operator =(const Time& other)
-{
-	this->hour = other.get_hour();
-	this->minute = other.get_minute();
-	this->second = other.get_second();
-	this->check_member_vars();
-	return *this;
-}
-
-const bool Time::operator ==(const Time& other) const
-{
-	bool ret = true;
-	ret = ret && (this->hour == other.get_hour());
-	ret = ret && (this->minute == other.get_minute());
-	ret = ret && (this->second == other.get_second());
-	return ret;
-}
-
-const bool Time::operator !=(const Time& other) const
-{
-	return !this->operator==(other);
-}
-
-const bool Time::operator <(const Time& other) const
-{
-	bool ret = this->get_hour() < other.get_hour();
-	if(this->get_hour() == other.get_hour())
-	{
-		ret = this->get_minute() < other.get_minute();
-		if(this->get_minute() == other.get_minute())
-		{
-			ret = this->get_second() < other.get_second();
-		}
-	}
-	return ret;
-}
-
-const bool Time::operator >(const Time& other) const
-{return other.operator<(*this);
-}
-
-const bool Time::operator <=(const Time& other) const
-{
-	return !this->operator>(other);
-}
-
-const bool Time::operator >=(const Time& other) const
-{
-	return !this->operator<(other);
-}
-
-ostream& operator <<(ostream& strm, const Time& other)
-{
-	strm << other.to_string();
-	return strm;
-}
-
 // other functions
 const Time Time::next_hour() const
 {
@@ -239,6 +180,64 @@ const Time Time::previous_second() const
 	return ret;
 }
 
+// operators
+const Time& Time::operator =(const Time& other)
+{
+	this->hour = other.get_hour();
+	this->minute = other.get_minute();
+	this->second = other.get_second();
+	this->check_member_vars();
+	return *this;
+}
+
+const bool Time::operator ==(const Time& other) const
+{
+	bool ret = true;
+	ret = ret && (this->hour == other.get_hour());
+	ret = ret && (this->minute == other.get_minute());
+	ret = ret && (this->second == other.get_second());
+	return ret;
+}
+
+const bool Time::operator !=(const Time& other) const
+{
+	return !this->operator==(other);
+}
+
+const bool Time::operator <(const Time& other) const
+{
+	bool ret = this->get_hour() < other.get_hour();
+	if(this->get_hour() == other.get_hour())
+	{
+		ret = this->get_minute() < other.get_minute();
+		if(this->get_minute() == other.get_minute())
+		{
+			ret = this->get_second() < other.get_second();
+		}
+	}
+	return ret;
+}
+
+const bool Time::operator >(const Time& other) const
+{return other.operator<(*this);
+}
+
+const bool Time::operator <=(const Time& other) const
+{
+	return !this->operator>(other);
+}
+
+const bool Time::operator >=(const Time& other) const
+{
+	return !this->operator<(other);
+}
+
+ostream& operator <<(ostream& strm, const Time& other)
+{
+	strm << other.to_string();
+	return strm;
+}
+
 // private
 void Time::check_member_vars()
 {
@@ -247,3 +246,9 @@ void Time::check_member_vars()
 	assert(this->minute < MINUTE_PER_HOUR && this->minute >= 0);
 	assert(this->second < SECOND_PER_MINUTE && this->second >= 0);
 }
+
+// specific game time section
+const Time GAME_TIME::FIRST_SECTION(19, 0, 0);
+const Time GAME_TIME::SECOND_SECTION(20, 30, 0);
+const Time GAME_TIME::THIRD_SECTION(22, 0, 0);
+const Time GAME_TIME::FORTH_SECTION(23, 0, 0);

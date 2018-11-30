@@ -17,7 +17,7 @@ using namespace std;
 
 void test_common();
 void test_datee();
-void test_datetime();
+void test_dateetime();
 void test_logger();
 void test_mysql();
 void test_person();

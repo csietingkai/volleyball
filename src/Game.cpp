@@ -53,30 +53,38 @@ const Game& Game::operator =(const Game& other)
 
 const bool Game::operator ==(const Game& other) const
 {
+	return false;
 }
 
 const bool Game::operator !=(const Game& other) const
 {
+	return this->operator==(other);
 }
 
 const bool Game::operator <(const Game& other) const
 {
+	return false;
 }
 
 const bool Game::operator >(const Game& other) const
 {
+	return other.operator<(*this);
 }
 
 const bool Game::operator <=(const Game& other) const
 {
+	return !(this->operator>(other));
 }
 
 const bool Game::operator >=(const Game& other) const
 {
+	return !(this->operator<(other));
 }
 
 ostream& operator <<(ostream& strm, const Game& other)
 {
+	strm << other.to_string();
+	return strm;
 }
 
 

@@ -77,7 +77,7 @@ void Logger::init_logterm()
     
     sink->set_formatter(
     expr::format("[%1%][%2%] (%3%): %4%") % expr::format_date_time < boost::posix_time::ptime
-                > ("TimeStamp", "%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage 
+                > ("TimeStamp", "%Y-%m-%d %H:%M:%S") % logging::trivial::severity % this->class_name % expr::smessage 
     );
     sink->set_filter(logging::trivial::severity >= logging::trivial::info);
     
@@ -90,7 +90,7 @@ void Logger::init_logfile()
     
     boost::shared_ptr< sinks::text_file_backend > backend =
         boost::make_shared< sinks::text_file_backend >(
-            keywords::file_name = "logs/%Y-%m-%d_%N.log",                                          
+            keywords::file_name = "logs/%Y-%m-%d_"+random_string(6)+".log",                                          
             keywords::rotation_size = 5 * 1024 * 1024,                                     
             keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
         );

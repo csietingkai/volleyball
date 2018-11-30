@@ -23,6 +23,8 @@
 #include <boost/smart_ptr/shared_ptr.hpp>
 #include <boost/smart_ptr/make_shared_object.hpp>
 
+#include "common.h"
+
 using namespace std;
 
 namespace logging = boost::log;

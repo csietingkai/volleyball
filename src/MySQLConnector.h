@@ -30,7 +30,6 @@ class MySQLConnector
 		Driver *driver;
 		Connection *connection;
 		Statement *statement;
-		ResultSet *result_set;
 		
 		string table_name;
 		const static string CLASS_NAME;

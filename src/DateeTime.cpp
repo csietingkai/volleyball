@@ -107,29 +107,29 @@ const DateeTime DateeTime::next_section()
 	Time time = this->time;
 	
 	// 00:00~18:59
-	if (time < GAME_TIME_SECTIONS[0])
+	if (time < GAME_TIME::FIRST_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[0];
+		time = GAME_TIME::FIRST_SECTION;
 	}
 	// 19:00~20:29
-	else if (time >= GAME_TIME_SECTIONS[0] && time < GAME_TIME_SECTIONS[1])
+	else if (time >= GAME_TIME::FIRST_SECTION && time < GAME_TIME::SECOND_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[1];
+		time = GAME_TIME::SECOND_SECTION;
 	}
 	// 20:30~21:59
-	else if (time >= GAME_TIME_SECTIONS[1] && time < GAME_TIME_SECTIONS[2])
+	else if (time >= GAME_TIME::SECOND_SECTION && time < GAME_TIME::THIRD_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[2];
+		time = GAME_TIME::THIRD_SECTION;
 	}
 	// 22:00~22:59
-	else if (time >= GAME_TIME_SECTIONS[2] && time < GAME_TIME_SECTIONS[3])
+	else if (time >= GAME_TIME::THIRD_SECTION && time < GAME_TIME::FORTH_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[3];
+		time = GAME_TIME::FORTH_SECTION;
 	}
 	// 23:00~23:59
 	else
 	{
-		time = GAME_TIME_SECTIONS[0];
+		time = GAME_TIME::FIRST_SECTION;
 		date = date.next_day();
 	}
 	
@@ -143,30 +143,30 @@ const DateeTime DateeTime::previous_section()
 	Time time = this->time;
 	
 	// 00:00~19:00
-	if (time <= GAME_TIME_SECTIONS[0])
+	if (time <= GAME_TIME::FIRST_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[3];
+		time = GAME_TIME::FORTH_SECTION;
 		date = date.previous_day();
 	}
 	// 19:01~20:30
-	else if (time > GAME_TIME_SECTIONS[0] && time <= GAME_TIME_SECTIONS[1])
+	else if (time > GAME_TIME::FIRST_SECTION && time <= GAME_TIME::SECOND_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[0];
+		time = GAME_TIME::FIRST_SECTION;
 	}
 	// 20:31~22:00
-	else if (time > GAME_TIME_SECTIONS[1] && time <= GAME_TIME_SECTIONS[2])
+	else if (time > GAME_TIME::SECOND_SECTION && time <= GAME_TIME::THIRD_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[1];
+		time = GAME_TIME::SECOND_SECTION;
 	}
 	// 22:01~23:00
-	else if (time > GAME_TIME_SECTIONS[2] && time <= GAME_TIME_SECTIONS[3])
+	else if (time > GAME_TIME::THIRD_SECTION && time <= GAME_TIME::FORTH_SECTION)
 	{
-		time = GAME_TIME_SECTIONS[2];
+		time = GAME_TIME::THIRD_SECTION;
 	}
 	// 23:00~23:59
 	else
 	{
-		time = GAME_TIME_SECTIONS[3];
+		time = GAME_TIME::FORTH_SECTION;
 	}
 	
 	DateeTime ret(date, time);

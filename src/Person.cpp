@@ -5,6 +5,8 @@ Person::Person(const string name, const unsigned int age, const Gender gender, c
 	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
+	logger.trace("initializing "+Person::CLASS_NAME+" by normal constructor");
+	
 	this->name = name;
 	this->gender = gender;
 	this->age = age;
@@ -18,6 +20,8 @@ Person::Person(const string id)
 	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
+	logger.trace("initializing "+Person::CLASS_NAME+" by id constructor");
+	
 	this->id = id;
 	this->select();
 }
@@ -26,6 +30,8 @@ Person::Person(const Person& other)
 	: Connectable(get_table_name(Person::CLASS_NAME))
 	, logger(Person::CLASS_NAME)
 {
+	logger.trace("initializing "+Person::CLASS_NAME+" by copy constructor");
+	
 	// needed by vector.push_back()
 	this->operator=(other);
 	this->insert();
@@ -148,6 +154,8 @@ ostream& operator <<(ostream& strm, const Person& other)
 // protected
 void Person::select()
 {
+	logger.debug("select in '"+Person::CLASS_NAME+"'");
+	
 	string column_name = "*";
 	string conditions = "ID = '"+this->get_id()+"'";
 	ResultSet* result_set = connector.select(column_name, conditions);
@@ -165,6 +173,8 @@ void Person::select()
 
 void Person::insert() 
 {
+	logger.debug("insert in '"+Person::CLASS_NAME+"'");
+	
 	sql::ResultSet *result_set = connector.select("ID", "ID = '" + id + "'");
 	if (0 == result_set->rowsCount())
 	{
@@ -182,6 +192,8 @@ void Person::insert()
 
 void Person::update(const string column_name, const string column_value)
 {
+	logger.debug("update in '"+Person::CLASS_NAME+"'");
+	
 	const string ori_id = this->id;
 	this->id = generate_sha1(to_string());
 	const string conditions = "ID = '"+ori_id+"'";
