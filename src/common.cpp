@@ -34,7 +34,7 @@ const string get_sql_command(const SQL sql)
 
 const string get_connect_info(const Connect_info info)
 {
-	string filename = "resources/connect_info.xml";
+	string filename = "resources/server_info.xml";
 	string node_name = "connection."+connect_info_to_string[static_cast<int>(info)];
 	return parse_xml(filename, node_name);
 }

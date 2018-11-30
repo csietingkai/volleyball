@@ -219,7 +219,8 @@ const bool Time::operator <(const Time& other) const
 }
 
 const bool Time::operator >(const Time& other) const
-{return other.operator<(*this);
+{
+	return other.operator<(*this);
 }
 
 const bool Time::operator <=(const Time& other) const
