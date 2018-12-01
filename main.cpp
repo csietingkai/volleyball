@@ -14,22 +14,20 @@
 
 using namespace std;
 
-#define TEST_MODE true
-
 int main(int argc, char* argv[])
 {
-	int ret = 0;
-	
-#if TEST_MODE
-	test_main();
-#else
-	// TODO need to test manually
-	Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
-	
-	MainWindowView window;
-	
-	ret = app->run(window);
-#endif
-	
-	return ret;
+	if (argc > 1 && strcmp(argv[1], "test") == 0)
+	{
+		test_main();
+		return 0;
+	}
+	else
+	{
+		// TODO need to test manually
+		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+
+		MainWindowView window;
+
+		return app->run(window);
+	}
 }

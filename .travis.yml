@@ -3,12 +3,32 @@ language: cpp
 
 # Compiler selection
 compiler:
-  - gcc
+	- gcc
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+    - os: linux
+    	dist: xenial
+
+branchs:
+	only:
+		- master
+
+notifications:
+  email:
+    recipients:
+      - tingkai@csie.io
+      - qaz8899921@gmail.com
+    on_success: never
+    on_failure: always
 
 before_install:
- - sudo apt-get install libboost-all-dev
- - sudo apt-get install libmysqlcppconn-dev
- - sudo apt-get install libgtkmm-3.0-dev
-# - sudo apt-get install libgstreamermm-1.0-dev
+  - sudo apt-get install libboost-all-dev
+	- sudo apt-get install libmysqlcppconn-dev
+	- sudo apt-get install libgtkmm-3.0-dev
 
-script: make && ./volleyball.exe
+script: 
+	- make
+	- ./volleyball test
