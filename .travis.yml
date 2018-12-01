@@ -3,25 +3,25 @@ language: cpp
 
 # Compiler selection
 compiler:
-	- gcc
+  - gcc
 
 branchs:
-	only:
-		- master
+  only:
+    - master
 
 notifications:
   email:
     recipients:
       - tingkai@csie.io 
       - qaz8899921@gmail.com 
-    on_success: never
-    on_failure: always
+  on_success: never
+  on_failure: always
 
 before_install:
   - sudo apt-get install libboost-all-dev
-	- sudo apt-get install libmysqlcppconn-dev
-	- sudo apt-get install libgtkmm-3.0-dev
+  - sudo apt-get install libmysqlcppconn-dev
+  - sudo apt-get install libgtkmm-3.0-dev
 
 script: 
-	- make
-	- ./volleyball test
+  - make
+  - ./volleyball test
