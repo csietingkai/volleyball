@@ -5,8 +5,10 @@ language: cpp
 compiler:
 	- gcc
 
-os: linux
-dist: xenial
+matrix:
+  include:
+    - os: linux
+      dist: xenial
 
 branchs:
 	only:
@@ -15,8 +17,7 @@ branchs:
 notifications:
   email:
     recipients:
-      - tingkai@csie.io
-      - qaz8899921@gmail.com
+      - tingkai@csie.io 
     on_success: never
     on_failure: always
 
