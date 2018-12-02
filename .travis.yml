@@ -24,4 +24,4 @@ before_install:
 
 script: 
   - make
-  - ./volleyball test
+  - ./volleyball.exe test
