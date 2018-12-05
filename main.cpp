@@ -31,6 +31,5 @@ int main(int argc, char* argv[])
 
 		return app->run(window);
 	}*/
-	std::cout << voba::SqlCommandBuilder::build(voba::SqlCommand::select, {"A", "b", "c"}) << std::endl;
 	return 0;
 }
