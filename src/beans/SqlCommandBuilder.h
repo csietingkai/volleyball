@@ -8,6 +8,8 @@
 #include <random>
 #include <iostream>
 
+#include "../utils/Utils.h"
+
 namespace voba
 {
 	enum class SqlCommand
@@ -24,6 +26,17 @@ namespace voba
 			const static std::string build(const SqlCommand command, const std::list<std::string> strs);
 		
 		private:
+			const static std::string SELECT_NODE;
+			const static std::string INSERT_NODE;
+			const static std::string UPDATE_NODE;
+			const static std::string REMOVE_NODE;
+			
+			const static std::string TABLE_NAME_TAG;
+			const static std::string CONDITIONS_TAG;
+			const static std::string COLUMN_NAME_TAG;
+			const static std::string COLUMN_VALUE_TAG;
+			const static std::string VALUES_TAG;
+			
 			const static std::map<SqlCommand, std::string> COMMANDS;
 			
 			const static std::map<SqlCommand, std::string> init_map();
