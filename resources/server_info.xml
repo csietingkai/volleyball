@@ -1,44 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <connection>
-	<server>
-		mysql.cs.ccu.edu.tw
-	</server>
-	<account>
-		htk103u
-	</account>
-	<pwd>
-		htkkoeoh
-	</pwd>
-	<schema>
-		htk103u_volleyball
-	</schema>
+	<server value="mysql.cs.ccu.edu.tw" />
+	<account value="htk103u" />
+	<pwd value="htkkoeoh" />
+	<schema value="htk103u_volleyball" />
 	<tables>
 		<table name="persons" class_name="Person">
-			<columns>
-				<column name="id" type="sha1"/>
-				<column name="name" type="string"/>
-				<column name="age" type="int"/>
-				<column name="gender" type="boolean"/>
-				<column name="phonenumber" type="string"/>
-				<column name="is_active" type="boolean"/>
-			</columns>
+			<column name="id" type="sha1"/>
+			<column name="name" type="string"/>
+			<column name="age" type="int"/>
+			<column name="gender" type="boolean"/>
+			<column name="phonenumber" type="string"/>
+			<column name="is_active" type="boolean"/>
 		</table>
 		<table name="teams" class_name="Team">
-			<columns>
-				<column name="id" type="sha1"/>
-				<column name="name" type="string"/>
-				<column name="member_id" type="sha1"/>
-				<column name="prefer_week" type="string"/>
-				<column name="perfer_time" type="string"/>
-			</columns>
+			<column name="id" type="sha1"/>
+			<column name="name" type="string"/>
+			<column name="member_id" type="sha1"/>
+			<column name="prefer_week" type="string"/>
+			<column name="perfer_time" type="string"/>
 		</table>
 		<table name="games" class_name="Game">
-			<columns>
-				<column name="id" type="sha1"/>
-				<column name="team_1_id" type="sha1"/>
-				<column name="team_2_id" type="sha1"/>
-				<column name="datetime" type="datetime" nullable="true"/>
-			</columns>
+			<column name="id" type="sha1"/>
+			<column name="team_1_id" type="sha1"/>
+			<column name="team_2_id" type="sha1"/>
+			<column name="datetime" type="datetime" nullable="true"/>
 		</table>
 	</tables>
 </connection>
