@@ -11,25 +11,27 @@
 #include "src/Time.h"
 #include "src/Logger.h" 
 #include "test/test.h"*/
-#include "src/beans/SqlCommandBuilder.h"
+#include "src/beans/DateTime.h"
+#include "src/utils/SqlCommandBuilder.h"
 #include "src/utils/ServerInfo.h"
 #include "src/utils/Utils.h"
+#include "test/test.h"
 
 int main(int argc, char* argv[])
 {
-	/*if (argc > 1 && strcmp(argv[1], "test") == 0)
+	if (argc > 1 && strcmp(argv[1], "test") == 0)
 	{
-		test_main();
+		voba::test_main();
 		return 0;
 	}
 	else
 	{
 		// TODO need to test manually
-		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+		/*Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
 
 		MainWindowView window;
 
-		return app->run(window);
-	}*/
-	return 0;
+		return app->run(window);*/
+		return 0;
+	}
 }
