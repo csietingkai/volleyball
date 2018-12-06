@@ -8,7 +8,7 @@
 #include <random>
 #include <iostream>
 
-#include "../utils/Utils.h"
+#include "Utils.h"
 
 namespace voba
 {
