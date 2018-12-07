@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "src/common.h"
+/*#include "src/common.h"
 #include "src/Datee.h"
 #include "src/DateeTime.h"
 #include "src/MainWindowView.h"
@@ -10,24 +10,28 @@
 #include "src/Team.h"
 #include "src/Time.h"
 #include "src/Logger.h" 
+#include "test/test.h"*/
+#include "src/beans/DateTime.h"
+#include "src/tools/SqlCommandBuilder.h"
+#include "src/utils/ServerInfo.h"
+#include "src/utils/Utils.h"
 #include "test/test.h"
-
-using namespace std;
 
 int main(int argc, char* argv[])
 {
 	if (argc > 1 && strcmp(argv[1], "test") == 0)
 	{
-		test_main();
+		voba::test_main();
 		return 0;
 	}
 	else
 	{
 		// TODO need to test manually
-		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+		/*Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
 
 		MainWindowView window;
 
-		return app->run(window);
+		return app->run(window);*/
+		return 0;
 	}
 }

@@ -1,7 +1,8 @@
 #include "Time.h"
 
-// constructors
-Time::Time(const int hour, const int minute, const int second)
+// constructor
+voba::Time::Time(const int hour, const int minute, const int second)
+	: logger(voba::Time::CLASS_NAME)
 {
 	this->hour = hour;
 	this->minute = minute;
@@ -9,59 +10,25 @@ Time::Time(const int hour, const int minute, const int second)
 	this->check_member_vars();
 }
 
-Time::Time(const Time& other)
+voba::Time::Time(const Time& other)
+	: logger(voba::Time::CLASS_NAME)
 {
 	this->operator=(other);
 }
 
-// setters
-void Time::set_hour(const int hour)
+// public function
+const std::string voba::Time::to_string() const
 {
-	this->hour = hour;
-	this->check_member_vars();
-}
-
-void Time::set_minute(const int minute)
-{
-	this->minute = minute;
-	this->check_member_vars();
-}
-
-void Time::set_second(const int second)
-{
-	this->second = second;
-	this->check_member_vars();
-}
-
-// getters
-const int Time::get_hour() const
-{
-	return this->hour;
-}
-
-const int Time::get_minute() const
-{
-	return this->minute;
-}
-
-const int Time::get_second() const
-{
-	return this->second;
-}
-
-const string Time::to_string() const
-{
-	string re = "";
+	std::string re = "";
 	
-	re += (get_hour()<10?"0":"")+std::to_string(get_hour())+":";
-	re += (get_minute()<10?"0":"")+std::to_string(get_minute())+":";
-	re += (get_second()<10?"0":"")+std::to_string(get_second());
+	re += (this->get_hour()<10?"0":"")+std::to_string(this->get_hour())+":";
+	re += (this->get_minute()<10?"0":"")+std::to_string(this->get_minute())+":";
+	re += (this->get_second()<10?"0":"")+std::to_string(this->get_second());
 	
 	return re;
 }
-
-// static
-const Time Time::Now()
+		
+const voba::Time voba::Time::Now()
 {
 	time_t t = time(0);
 	tm* tt = localtime(&t);
@@ -69,12 +36,11 @@ const Time Time::Now()
 	int minute = tt->tm_min;
 	int second = tt->tm_sec;
 	
-	Time now(hour, minute, second);
+	voba::Time now(hour, minute, second);
 	return now;
 }
 
-// other functions
-const Time Time::next_hour() const
+const voba::Time voba::Time::next_hour() const
 {
 	int hour = this->get_hour()+1;
 	int minute = this->get_minute();
@@ -83,11 +49,11 @@ const Time Time::next_hour() const
 	{
 		hour -= HOUR_PER_DAY;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	return ret;
 }
 
-const Time Time::previous_hour() const
+const voba::Time voba::Time::previous_hour() const
 {
 	int hour = this->get_hour()-1;
 	int minute = this->get_minute();
@@ -96,11 +62,11 @@ const Time Time::previous_hour() const
 	{
 		hour += HOUR_PER_DAY;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	return ret;
 }
 
-const Time Time::next_minute() const
+const voba::Time voba::Time::next_minute() const
 {
 	bool carry = false;
 	
@@ -112,7 +78,7 @@ const Time Time::next_minute() const
 		minute -= MINUTE_PER_HOUR;
 		carry = true;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	if (carry)
 	{
 		ret = ret.next_hour();
@@ -120,7 +86,7 @@ const Time Time::next_minute() const
 	return ret;
 }
 
-const Time Time::previous_minute() const
+const voba::Time voba::Time::previous_minute() const
 {
 	bool carry = false;
 	
@@ -132,7 +98,7 @@ const Time Time::previous_minute() const
 		minute += MINUTE_PER_HOUR;
 		carry = true;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	if (carry)
 	{
 		ret = ret.previous_hour();
@@ -140,7 +106,7 @@ const Time Time::previous_minute() const
 	return ret;
 }
 
-const Time Time::next_second() const
+const voba::Time voba::Time::next_second() const
 {
 	bool carry = false;
 	
@@ -152,7 +118,7 @@ const Time Time::next_second() const
 		second -= SECOND_PER_MINUTE;
 		carry = true;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	if (carry)
 	{
 		ret = ret.next_minute();
@@ -160,7 +126,7 @@ const Time Time::next_second() const
 	return ret;
 }
 
-const Time Time::previous_second() const
+const voba::Time voba::Time::previous_second() const
 {
 	bool carry = false;
 	
@@ -172,7 +138,7 @@ const Time Time::previous_second() const
 		second += SECOND_PER_MINUTE;
 		carry = true;
 	}
-	Time ret(hour, minute, second);
+	voba::Time ret(hour, minute, second);
 	if (carry)
 	{
 		ret = ret.previous_minute();
@@ -180,8 +146,7 @@ const Time Time::previous_second() const
 	return ret;
 }
 
-// operators
-const Time& Time::operator =(const Time& other)
+const voba::Time& voba::Time::operator =(const Time& other)
 {
 	this->hour = other.get_hour();
 	this->minute = other.get_minute();
@@ -190,7 +155,7 @@ const Time& Time::operator =(const Time& other)
 	return *this;
 }
 
-const bool Time::operator ==(const Time& other) const
+const bool voba::Time::operator ==(const Time& other) const
 {
 	bool ret = true;
 	ret = ret && (this->hour == other.get_hour());
@@ -199,12 +164,7 @@ const bool Time::operator ==(const Time& other) const
 	return ret;
 }
 
-const bool Time::operator !=(const Time& other) const
-{
-	return !this->operator==(other);
-}
-
-const bool Time::operator <(const Time& other) const
+const bool voba::Time::operator <(const Time& other) const
 {
 	bool ret = this->get_hour() < other.get_hour();
 	if(this->get_hour() == other.get_hour())
@@ -218,38 +178,13 @@ const bool Time::operator <(const Time& other) const
 	return ret;
 }
 
-const bool Time::operator >(const Time& other) const
-{
-	return other.operator<(*this);
-}
+// private function
+const std::string voba::Time::CLASS_NAME = "Time";
 
-const bool Time::operator <=(const Time& other) const
-{
-	return !this->operator>(other);
-}
-
-const bool Time::operator >=(const Time& other) const
-{
-	return !this->operator<(other);
-}
-
-ostream& operator <<(ostream& strm, const Time& other)
-{
-	strm << other.to_string();
-	return strm;
-}
-
-// private
-void Time::check_member_vars()
+void voba::Time::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?
 	assert(this->hour < HOUR_PER_DAY && this->hour >= 0);
 	assert(this->minute < MINUTE_PER_HOUR && this->minute >= 0);
 	assert(this->second < SECOND_PER_MINUTE && this->second >= 0);
 }
-
-// specific game time section
-const Time GAME_TIME::FIRST_SECTION(19, 0, 0);
-const Time GAME_TIME::SECOND_SECTION(20, 30, 0);
-const Time GAME_TIME::THIRD_SECTION(22, 0, 0);
-const Time GAME_TIME::FORTH_SECTION(23, 0, 0);

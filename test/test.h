@@ -4,25 +4,16 @@
 #include <assert.h>
 #include <iostream>
 
-#include "../src/common.h"
-#include "../src/Datee.h"
-#include "../src/DateeTime.h"
-#include "../src/MySQLConnector.h"
-#include "../src/Person.h"
-#include "../src/Team.h"
-#include "../src/Time.h"
-#include "../src/Logger.h"
+#include "../src/beans/DateTime.h"
+#include "../src/models/Person.h"
+#include "../src/tools/MySQLConnector.h"
 
-using namespace std;
-
-void test_common();
-void test_datee();
-void test_dateetime();
-void test_logger();
-void test_mysql();
-void test_person();
-void test_team();
-void test_time();
-void test_main();
+namespace voba
+{
+	void test_main();
+	
+	void test_tools();
+	void test_connector();
+}
 
 #endif // TEST_H_

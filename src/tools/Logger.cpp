@@ -12,7 +12,7 @@ using namespace logging::trivial;
 int init_cnt = 0; //Just Initialize Once
 
 // constructors
-Logger::Logger(const string class_name)
+voba::Logger::Logger(const std::string class_name)
 {
     this->class_name = class_name;
     logging::add_common_attributes();
@@ -25,38 +25,38 @@ Logger::Logger(const string class_name)
 }
 
 // public functions
-void Logger::trace(const string message)
+void voba::Logger::trace(const std::string message)
 {
     BOOST_LOG_TRIVIAL(trace) << message;
 }
 
-void Logger::debug(const string message)
+void voba::Logger::debug(const std::string message)
 {
     BOOST_LOG_TRIVIAL(debug) << message;
 }
 
-void Logger::info(const string message)
+void voba::Logger::info(const std::string message)
 {
     BOOST_LOG_TRIVIAL(info) << message;
 }
 
-void Logger::warning(const string message)
+void voba::Logger::warning(const std::string message)
 {
     BOOST_LOG_TRIVIAL(warning) << message;
 }
 
-void Logger::error(const string message)
+void voba::Logger::error(const std::string message)
 {
     BOOST_LOG_TRIVIAL(error) << message;
 }
 
-void Logger::fatal(const string message)
+void voba::Logger::fatal(const std::string message)
 {
     BOOST_LOG_TRIVIAL(fatal) << message;
 }
 
 // private functions
-void Logger::init_logterm()
+void voba::Logger::init_logterm()
 {    
     // Construct the sink
     boost::shared_ptr< logging::core > core = logging::core::get();
@@ -84,13 +84,13 @@ void Logger::init_logterm()
     core->add_sink(sink);
 }
 
-void Logger::init_logfile()
+void voba::Logger::init_logfile()
 {  
     boost::shared_ptr< logging::core > core = logging::core::get();
     
     boost::shared_ptr< sinks::text_file_backend > backend =
         boost::make_shared< sinks::text_file_backend >(
-            keywords::file_name = "logs/%Y-%m-%d_"+random_string(6)+".log",                                          
+            keywords::file_name = "logs/%Y-%m-%d_"+Utils::random_string()+".log",                                          
             keywords::rotation_size = 5 * 1024 * 1024,                                     
             keywords::time_based_rotation = sinks::file::rotation_at_time_point(12, 0, 0)
         );
