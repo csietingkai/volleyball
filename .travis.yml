@@ -5,6 +5,9 @@ language: cpp
 compiler:
   - gcc
 
+os: linux
+dist: xenial
+
 matrix:
   include:
     # works on Precise and Trusty
@@ -51,9 +54,6 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
-before_install:
-    - eval "${MATRIX_EVAL}"
-
 branchs:
   only:
     - master
@@ -67,6 +67,7 @@ notifications:
   on_failure: always
 
 before_install:
+  - eval "${MATRIX_EVAL}"
   - sudo apt-get install libboost-all-dev
   - sudo apt-get install libmysqlcppconn-dev
   - sudo apt-get install libgtkmm-3.0-dev
