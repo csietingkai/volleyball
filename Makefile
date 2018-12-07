@@ -11,7 +11,7 @@ TESTDIR := ./test
 OBJDIR := ./obj
 SRCS := $(wildcard $(SRCDIR)/**/*.cpp)
 TESTS := $(wildcard $(SRCDIR)/*.cpp)
-OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test.o $(OBJDIR)/main.o
+OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test/test.o $(OBJDIR)/main.o
 
 all: $(EXE)
 
@@ -22,7 +22,7 @@ $(OBJDIR)/main.o: ./main.cpp
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 
-$(OBJDIR)/test.o: $(TESTDIR)/test.cpp
+$(OBJDIR)/test/test.o: $(TESTDIR)/test.cpp
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 
