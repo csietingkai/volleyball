@@ -23,6 +23,8 @@
 #include <iostream>
 #include <string>
 
+#include "../utils/Utils.h"
+
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 namespace sinks = boost::log::sinks;

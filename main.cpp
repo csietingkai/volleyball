@@ -12,7 +12,7 @@
 #include "src/Logger.h" 
 #include "test/test.h"*/
 #include "src/beans/DateTime.h"
-#include "src/utils/SqlCommandBuilder.h"
+#include "src/tools/SqlCommandBuilder.h"
 #include "src/utils/ServerInfo.h"
 #include "src/utils/Utils.h"
 #include "test/test.h"
