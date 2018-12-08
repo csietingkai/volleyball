@@ -1,7 +1,9 @@
-#ifndef PERSOM_H_
-#define PERSOM_H_
+#ifndef PERSON_H_
+#define PERSON_H_
 
 #include <iostream>
+
+#include "../tools/MySQLConnector.h"
 
 namespace voba
 {
@@ -20,6 +22,9 @@ namespace voba
 	class Person
 	{
 		public:
+			const static std::string CLASS_NAME;
+			
+			// constructor
 			Person();
 		
 		private:
@@ -29,7 +34,10 @@ namespace voba
 			Gender gender; // true <= male, false <= female
 			std::string phonenumber;
 			ActiveStatus status; // true <= active, false <= inactive
+			
+			MySQLConnector connector;
+			Logger logger;
 	};
 }
 
-#endif // PERSOM_H_
+#endif // PERSON_H_

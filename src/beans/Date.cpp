@@ -1,5 +1,7 @@
 #include "Date.h"
 
+const std::string voba::Date::CLASS_NAME = "Date";
+
 // constructor
 voba::Date::Date(const int year, const int month, const int day)
 	: logger(voba::Date::CLASS_NAME)
@@ -182,7 +184,6 @@ const voba::Date voba::Date::previous_day() const
 }
 
 // private function
-const std::string voba::Date::CLASS_NAME = "Date";
 const int voba::Date::DAYS_PER_MONTH[] = 
 {
 	31,				// Dec,

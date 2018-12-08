@@ -1,5 +1,7 @@
 #include "Time.h"
 
+const std::string voba::Time::CLASS_NAME = "Time";
+
 // constructor
 voba::Time::Time(const int hour, const int minute, const int second)
 	: logger(voba::Time::CLASS_NAME)
@@ -179,8 +181,6 @@ const bool voba::Time::operator <(const Time& other) const
 }
 
 // private function
-const std::string voba::Time::CLASS_NAME = "Time";
-
 void voba::Time::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?

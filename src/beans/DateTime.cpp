@@ -6,6 +6,8 @@ const voba::Time voba::GAME_TIME::SECOND_SECTION(20, 30, 0);
 const voba::Time voba::GAME_TIME::THIRD_SECTION(22, 0, 0);
 const voba::Time voba::GAME_TIME::FORTH_SECTION(23, 0, 0);
 
+const std::string voba::DateTime::CLASS_NAME = "DateTime";
+
 // constructors
 voba::DateTime::DateTime(const voba::Date date, const voba::Time time)
 	: logger(voba::DateTime::CLASS_NAME)
@@ -127,4 +129,3 @@ const bool voba::DateTime::operator <(const voba::DateTime& other) const
 }
 
 // private function
-const std::string voba::DateTime::CLASS_NAME = "DateTime";

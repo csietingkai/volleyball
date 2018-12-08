@@ -8,30 +8,26 @@
 #include <mysql_connection.h>
 #include <type_traits>
 
-#include "../models/Game.h"
-#include "../models/Person.h"
-#include "../models/Team.h"
 #include "../utils/ServerInfo.h"
 #include "../utils/Utils.h"
 #include "Logger.h"
 
 namespace voba
 {
-	template <typename T>
 	class MySQLConnector
 	{
 		public:
+			const static std::string CLASS_NAME;
+			
 			// constructors
-			MySQLConnector<T>();
-			~MySQLConnector<T>();
+			MySQLConnector(const std::string target_class_name);
+			~MySQLConnector();
 			
 			// basic functions
-			/*sql::ResultSet* select(const std::string column_name);
-			sql::ResultSet* select(const std::string column_name, const std::string condition);
-			const bool insert(const std::string values);
-			const int update(const std::string column_name, const std::string column_value, const std::string conditions);
-			const int remove(const std::string codition);*/
-			const int removeAll();
+			sql::ResultSet* select();
+			const bool insert();
+			const int update();
+			const int remove();
 		
 		private:
 			sql::Driver *driver;
@@ -39,16 +35,14 @@ namespace voba
 			sql::Statement *statement;
 			
 			ServerInfo info;
+			std::string table_name;
 			
 			Logger logger;
-			const static std::string CLASS_NAME;
 			
 			const static std::string SERVER_INFO_FILE_PATH;
 			
 			void print_sql_exception(const sql::SQLException e);
 	};
-	
-	template class MySQLConnector<Person>;
 }
 
 #endif // MYSQL_CONNECTOR_H_

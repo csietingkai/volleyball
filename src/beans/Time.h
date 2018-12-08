@@ -11,6 +11,8 @@ namespace voba
 	class Time
 	{
 		public:
+			const static std::string CLASS_NAME;
+			
 			// constructors
 			Time(const int hour = 0, const int minute = 0, const int second = 0);
 			Time(const Time& other);
@@ -57,8 +59,6 @@ namespace voba
 			const static int HOUR_PER_DAY = 24;
 			const static int MINUTE_PER_HOUR = 60;
 			const static int SECOND_PER_MINUTE = 60;
-			
-			const static std::string CLASS_NAME;
 			
 			// check hour range in 0~23, check minute & second range 0~59
 			void check_member_vars();

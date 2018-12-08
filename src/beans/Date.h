@@ -42,6 +42,8 @@ namespace voba
 	class Date
 	{
 		public:
+			const static std::string CLASS_NAME;
+			
 			// constructors
 			Date(const int year = 1900, const int month = 1, const int day = 1);
 			Date(const Date& other);
@@ -87,7 +89,6 @@ namespace voba
 			bool is_leap;
 			
 			Logger logger;
-			const static std::string CLASS_NAME;
 			
 			const static int YEAR_UPPER_LIMIT = 9999;
 			const static int YEAR_LOWER_LIMIT = 1900;

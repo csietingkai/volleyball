@@ -22,6 +22,8 @@ namespace voba
 	class DateTime
 	{
 		public:
+			const static std::string CLASS_NAME;
+
 			// constructors
 			DateTime() : logger(DateTime::CLASS_NAME) {};
 			DateTime(const Date date, const Time time);
@@ -60,7 +62,6 @@ namespace voba
 			Time time;
 			
 			Logger logger;
-			const static std::string CLASS_NAME;
 	};
 }
 
