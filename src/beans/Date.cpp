@@ -4,7 +4,7 @@ const std::string voba::Date::CLASS_NAME = "Date";
 
 // constructor
 voba::Date::Date(const int year, const int month, const int day)
-	: logger(voba::Date::CLASS_NAME)
+	: Logable(voba::Date::CLASS_NAME)
 {
 	this->year = year;
 	this->month = month;
@@ -14,7 +14,7 @@ voba::Date::Date(const int year, const int month, const int day)
 }
 
 voba::Date::Date(const voba::Date& other)
-	: logger(voba::Date::CLASS_NAME)
+	: Logable(voba::Date::CLASS_NAME)
 {
 	this->operator=(other);
 }

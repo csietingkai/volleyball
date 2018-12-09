@@ -21,15 +21,18 @@ namespace voba
 			
 			void set_name(std::string name) { this->name = name; };
 			void set_type(std::string type) { this->type = type; };
+			void set_value(std::string value) { this->value = value; };
 			void set_nullable(bool nullable) { this->nullable = nullable; };
 			
 			const std::string get_name() const { return this->name; };
 			const std::string get_type() const { return this->type; };
+			const std::string get_value() const { return this->value; };
 			const bool get_nullable() const { return this->nullable; };
 		
 		private:
 			std::string name;
 			std::string type;
+			std::string value;
 			bool nullable;
 	};
 	
@@ -41,8 +44,8 @@ namespace voba
 			
 			void set_name(std::string name) { this->name = name; };
 			void set_class_name(std::string class_name) { this->class_name = class_name; };
-			void insert_back(voba::Column column) { columns.push_back(column); };
-			void delete_back(voba::Column column) { columns.erase(columns.begin()+columns.size()-2); };
+			void push_back(Column column) { columns.push_back(column); };
+			void pop_back() { columns.pop_back(); };
 			
 			const std::string get_name() const { return this->name; };
 			const std::string get_class_name() const { return this->class_name; };

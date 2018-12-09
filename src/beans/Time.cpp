@@ -4,7 +4,7 @@ const std::string voba::Time::CLASS_NAME = "Time";
 
 // constructor
 voba::Time::Time(const int hour, const int minute, const int second)
-	: logger(voba::Time::CLASS_NAME)
+	: Logable(voba::Time::CLASS_NAME)
 {
 	this->hour = hour;
 	this->minute = minute;
@@ -13,7 +13,7 @@ voba::Time::Time(const int hour, const int minute, const int second)
 }
 
 voba::Time::Time(const Time& other)
-	: logger(voba::Time::CLASS_NAME)
+	: Logable(voba::Time::CLASS_NAME)
 {
 	this->operator=(other);
 }

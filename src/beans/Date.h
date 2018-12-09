@@ -39,7 +39,7 @@ namespace voba
 		SATURDAY = 6
 	};
 
-	class Date
+	class Date : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
@@ -87,8 +87,6 @@ namespace voba
 			int day;
 			Week week;
 			bool is_leap;
-			
-			Logger logger;
 			
 			const static int YEAR_UPPER_LIMIT = 9999;
 			const static int YEAR_LOWER_LIMIT = 1900;

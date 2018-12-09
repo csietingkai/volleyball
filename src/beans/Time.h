@@ -8,7 +8,7 @@
 
 namespace voba
 {
-	class Time
+	class Time : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
@@ -53,8 +53,6 @@ namespace voba
 			int hour;
 			int minute;
 			int second;
-			
-			Logger logger;
 			
 			const static int HOUR_PER_DAY = 24;
 			const static int MINUTE_PER_HOUR = 60;

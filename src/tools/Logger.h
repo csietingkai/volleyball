@@ -53,7 +53,15 @@ namespace voba
 			
 			void init_logterm();
 			void init_logfile();
+	};
+	
+	class Logable
+	{
+		public:
+			Logable(const std::string class_name) : logger(class_name) {};
 			
+		protected:
+			Logger logger;
 	};
 }
 

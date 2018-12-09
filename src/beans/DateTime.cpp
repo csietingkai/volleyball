@@ -10,14 +10,14 @@ const std::string voba::DateTime::CLASS_NAME = "DateTime";
 
 // constructors
 voba::DateTime::DateTime(const voba::Date date, const voba::Time time)
-	: logger(voba::DateTime::CLASS_NAME)
+	: Logable(voba::DateTime::CLASS_NAME)
 {
 	this->date = date;
 	this->time = time;
 }
 
 voba::DateTime::DateTime(const voba::DateTime& datetime)
-	: logger(voba::DateTime::CLASS_NAME)
+	: Logable(voba::DateTime::CLASS_NAME)
 {
 	this->operator=(datetime);
 }

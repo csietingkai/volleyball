@@ -4,10 +4,9 @@ const std::string voba::MySQLConnector::CLASS_NAME = "MySQLConnector";
 
 // constructor
 voba::MySQLConnector::MySQLConnector(const std::string target_class_name)
-	: info(voba::MySQLConnector::SERVER_INFO_FILE_PATH)
-	, logger(voba::MySQLConnector::CLASS_NAME)
+	: Logable(voba::MySQLConnector::CLASS_NAME)
+	, info(voba::MySQLConnector::SERVER_INFO_FILE_PATH)
 {
-	
 	this->table_name = info.get_table_name(target_class_name);
 }
 
@@ -19,7 +18,7 @@ voba::MySQLConnector::~MySQLConnector()
 // public function
 const int voba::MySQLConnector::remove()
 {
-	
+	return 0;
 }
 
 // private function

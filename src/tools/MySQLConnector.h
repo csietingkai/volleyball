@@ -14,7 +14,7 @@
 
 namespace voba
 {
-	class MySQLConnector
+	class MySQLConnector : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
@@ -36,8 +36,6 @@ namespace voba
 			
 			ServerInfo info;
 			std::string table_name;
-			
-			Logger logger;
 			
 			const static std::string SERVER_INFO_FILE_PATH;
 			

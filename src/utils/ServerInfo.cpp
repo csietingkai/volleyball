@@ -26,7 +26,7 @@ voba::ServerInfo::ServerInfo(std::string xml_path)
 				std::string column_type = column.second.get<std::string>("<xmlattr>.type");
 				bool nullable = column.second.get<bool>("<xmlattr>.nullable", false);
 				Column c(column_name, column_type, nullable);
-				t.insert_back(c);
+				t.push_back(c);
     		}
     	}
     	this->tables.push_back(t);

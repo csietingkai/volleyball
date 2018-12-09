@@ -19,13 +19,13 @@ namespace voba
 			const static Time FORTH_SECTION;
 	};
 	
-	class DateTime
+	class DateTime : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
 
 			// constructors
-			DateTime() : logger(DateTime::CLASS_NAME) {};
+			DateTime() : Logable(DateTime::CLASS_NAME) {};
 			DateTime(const Date date, const Time time);
 			DateTime(const DateTime& datetime);
 			
@@ -60,8 +60,6 @@ namespace voba
 		private:
 			Date date;
 			Time time;
-			
-			Logger logger;
 	};
 }
 
