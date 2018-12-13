@@ -9,8 +9,7 @@ EXE = volleyball.exe
 SRCDIR := ./src
 TESTDIR := ./test
 OBJDIR := ./obj
-SRCS := $(wildcard $(SRCDIR)/**/*.cpp)
-TESTS := $(wildcard $(SRCDIR)/*.cpp)
+SRCS := $(wildcard $(SRCDIR)/**/*.cpp) $(wildcard $(SRCDIR)/*.cpp) 
 OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test/test.o $(OBJDIR)/main.o
 
 all: $(EXE)
