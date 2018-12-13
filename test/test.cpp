@@ -43,7 +43,8 @@ void voba::test_game()
 
 void voba::test_person()
 {
-	Person person("test1", 21, voba::Gender::male, "0987654321", voba::ActiveStatus::active);
+	voba::Person person = voba::PersonFactory::create();
+	std::cout << person << std::endl;
 }
 
 void voba::test_team()
