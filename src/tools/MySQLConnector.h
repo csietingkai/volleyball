@@ -8,23 +8,27 @@
 #include <mysql_connection.h>
 #include <type_traits>
 
+#include "../models/Game.h"
+#include "../models/Person.h"
+#include "../models/Team.h"
 #include "../utils/ServerInfo.h"
 #include "../utils/Utils.h"
 #include "Logger.h"
 
 namespace voba
 {
+	template <class T>
 	class MySQLConnector : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
 			// constructors
-			MySQLConnector(const std::string target_class_name);
+			MySQLConnector();
 			~MySQLConnector();
 			
 			// basic functions
-			sql::ResultSet* select();
+			const T select();
 			const bool insert();
 			const int update();
 			const int remove();
@@ -37,10 +41,10 @@ namespace voba
 			ServerInfo info;
 			std::string table_name;
 			
-			const static std::string SERVER_INFO_FILE_PATH;
-			
 			void print_sql_exception(const sql::SQLException e);
 	};
+	
+	template class MySQLConnector<Person>;
 }
 
 #endif // MYSQL_CONNECTOR_H_

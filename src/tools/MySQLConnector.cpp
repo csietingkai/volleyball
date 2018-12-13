@@ -1,30 +1,54 @@
 #include "MySQLConnector.h"
 
-const std::string voba::MySQLConnector::CLASS_NAME = "MySQLConnector";
+template <class T>
+const std::string voba::MySQLConnector<T>::CLASS_NAME = "MySQLConnector";
 
 // constructor
-voba::MySQLConnector::MySQLConnector(const std::string target_class_name)
-	: Logable(voba::MySQLConnector::CLASS_NAME)
-	, info(voba::MySQLConnector::SERVER_INFO_FILE_PATH)
+template <class T>
+voba::MySQLConnector<T>::MySQLConnector()
+	: Logable(voba::MySQLConnector<T>::CLASS_NAME)
 {
-	this->table_name = info.get_table_name(target_class_name);
+	this->table_name = info.get_table_name(T::CLASS_NAME);
+	if (std::is_same<T, voba::Person>::value)
+	{
+		std::cout << "is Person" << std::endl;
+	}
 }
 
-voba::MySQLConnector::~MySQLConnector()
+template <class T>
+voba::MySQLConnector<T>::~MySQLConnector()
 {
 	
 }
 
 // public function
-const int voba::MySQLConnector::remove()
+template <class T>
+const T voba::MySQLConnector<T>::select()
+{
+	
+}
+
+template <class T>
+const bool voba::MySQLConnector<T>::insert()
+{
+	return 0;
+}
+
+template <class T>
+const int voba::MySQLConnector<T>::update()
+{
+	return 0;
+}
+
+template <class T>
+const int voba::MySQLConnector<T>::remove()
 {
 	return 0;
 }
 
 // private function
-const std::string voba::MySQLConnector::SERVER_INFO_FILE_PATH = "resources/server_info.xml";
-
-void voba::MySQLConnector::print_sql_exception(const sql::SQLException e)
+template <class T>
+void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 {
 	std::cout << "# ERR: SQLException in " << __FILE__;
 	std::cout << "(" << __FUNCTION__ << ") on line " << __LINE__ << std::endl;

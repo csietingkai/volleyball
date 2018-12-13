@@ -59,7 +59,8 @@ namespace voba
 	class ServerInfo
 	{
 		public:
-			ServerInfo(std::string xml_path);
+			ServerInfo();
+			ServerInfo(const std::string xml_path);
 			
 			const std::string get_server() const { return this->server; };
 			const std::string get_account() const { return this->account; };
@@ -86,6 +87,8 @@ namespace voba
 			const static std::string ATTR_CLASS_NAME;
 			const static std::string ATTR_TYPE;
 			const static std::string ATTR_NULLABLE;
+			
+			void init(const std::string xml_path);
 	};
 }
 
