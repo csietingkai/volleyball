@@ -1,7 +1,7 @@
 #include "MySQLConnector.h"
 
 template <class T>
-const std::string voba::MySQLConnector<T>::CLASS_NAME = "MySQLConnector";
+const std::string voba::MySQLConnector<T>::CLASS_NAME = "MySQLConnector."+T::CLASS_NAME;
 
 // constructor
 template <class T>
