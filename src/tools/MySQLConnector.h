@@ -44,12 +44,24 @@ namespace voba
 			void print_sql_exception(const sql::SQLException e);
 	};
 	
-	//template class MySQLConnector<Game>;
+	template<> 
+	class MySQLConnector<Game>
+	{
+		public:
+			const Game& select(const std::string id);
+			const bool insert(const Game p);
+			const int update(const Game p);
+			const int remove(const Game p);
+	};
+	
 	template<> 
 	class MySQLConnector<Person>
 	{
 		public:
 			const Person& select(const std::string id);
+			const bool insert(const Person p);
+			const int update(const Person p);
+			const int remove(const Person p);
 	};
 	
 	template<> 
@@ -57,6 +69,9 @@ namespace voba
 	{
 		public:
 			const Team& select(const std::string id);
+			const bool insert(const Team p);
+			const int update(const Team p);
+			const int remove(const Team p);
 	};
 }
 

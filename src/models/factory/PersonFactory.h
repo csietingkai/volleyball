@@ -4,8 +4,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Person.h"
-#include "../tools/MySQLConnector.h"
+#include "../Person.h"
+#include "../../tools/MySQLConnector.h"
 
 namespace voba
 {
