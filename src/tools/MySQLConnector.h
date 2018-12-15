@@ -28,10 +28,10 @@ namespace voba
 			~MySQLConnector();
 			
 			// basic functions
-			const T select();
-			const bool insert();
-			const int update();
-			const int remove();
+			const T& select(const std::string id);
+			const bool insert(const T t);
+			const int update(const T t);
+			const int remove(const T t);
 		
 		private:
 			sql::Driver *driver;
@@ -44,7 +44,20 @@ namespace voba
 			void print_sql_exception(const sql::SQLException e);
 	};
 	
-	template class MySQLConnector<Person>;
+	//template class MySQLConnector<Game>;
+	template<> 
+	class MySQLConnector<Person>
+	{
+		public:
+			const Person& select(const std::string id);
+	};
+	
+	template<> 
+	class MySQLConnector<Team>
+	{
+		public:
+			const Team& select(const std::string id);
+	};
 }
 
 #endif // MYSQL_CONNECTOR_H_

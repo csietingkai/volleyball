@@ -2,6 +2,7 @@
 #define PERSON_FACTORY_H_
 
 #include <iostream>
+#include <vector>
 
 #include "Person.h"
 #include "../tools/MySQLConnector.h"
@@ -12,6 +13,8 @@ namespace voba
 	{
 		public:
 			const static Person& create();
+			const static bool update(const Person new_person);
+			const static bool remove(const Person preson);
 		
 		private:
 			static MySQLConnector<Person> connector;

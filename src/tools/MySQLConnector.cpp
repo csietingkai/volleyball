@@ -9,10 +9,6 @@ voba::MySQLConnector<T>::MySQLConnector()
 	: Logable(voba::MySQLConnector<T>::CLASS_NAME)
 {
 	this->table_name = info.get_table_name(T::CLASS_NAME);
-	if (std::is_same<T, voba::Person>::value)
-	{
-		std::cout << "is Person" << std::endl;
-	}
 }
 
 template <class T>
@@ -23,25 +19,26 @@ voba::MySQLConnector<T>::~MySQLConnector()
 
 // public function
 template <class T>
-const T voba::MySQLConnector<T>::select()
+const T& voba::MySQLConnector<T>::select(const std::string id)
 {
-	
+	T *t = new T(id);
+	return *t;
 }
 
 template <class T>
-const bool voba::MySQLConnector<T>::insert()
+const bool voba::MySQLConnector<T>::insert(const T t)
+{
+	return false;
+}
+
+template <class T>
+const int voba::MySQLConnector<T>::update(const T t)
 {
 	return 0;
 }
 
 template <class T>
-const int voba::MySQLConnector<T>::update()
-{
-	return 0;
-}
-
-template <class T>
-const int voba::MySQLConnector<T>::remove()
+const int voba::MySQLConnector<T>::remove(const T t)
 {
 	return 0;
 }
@@ -55,4 +52,18 @@ void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 	std::cout << "# ERR: " << e.what();
 	std::cout << " (MySQL error code: " << e.getErrorCode();
 	std::cout << ", SQLState: " << e.getSQLState() << " )" << std::endl;
+}
+
+// Person specialization
+const voba::Person& voba::MySQLConnector<voba::Person>::select(const std::string id)
+{
+	Person *p = new Person("test1", 21, voba::Gender::male, "0987654321", voba::ActiveStatus::active);
+	return *p;
+}
+
+// Team specialization
+const voba::Team& voba::MySQLConnector<voba::Team>::select(const std::string id)
+{
+	Team *t = new Team(id);
+	return *t;
 }

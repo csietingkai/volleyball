@@ -8,10 +8,12 @@ namespace voba
 	class Team
 	{
 		public:
+			const static std::string CLASS_NAME;
 			
+			Team();
+			Team(const std::string id);
 		
 		private:
-			
 	};
 }
 

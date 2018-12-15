@@ -8,7 +8,9 @@ namespace voba
 	class Game
 	{
 		public:
+			const static std::string CLASS_NAME;
 			
+			Game();
 		
 		private:
 			
