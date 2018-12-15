@@ -14,6 +14,7 @@
 #include "../utils/ServerInfo.h"
 #include "../utils/Utils.h"
 #include "Logger.h"
+#include "SqlCommandBuilder.h"
 
 namespace voba
 {
@@ -27,11 +28,11 @@ namespace voba
 			MySQLConnector();
 			~MySQLConnector();
 			
-			// basic functions
-			const T& select(const std::string id);
-			const bool insert(const T t);
-			const int update(const T t);
-			const int remove(const T t);
+			// basic functions, MUST specialization
+			sql::ResultSet* select(const std::string id) { return NULL; };
+			const bool insert(const T t) { return false; };
+			const int update(const T t) { return 0; };
+			const int remove(const T t) { return 0; };
 		
 		private:
 			sql::Driver *driver;
@@ -44,35 +45,12 @@ namespace voba
 			void print_sql_exception(const sql::SQLException e);
 	};
 	
-	template<> 
-	class MySQLConnector<Game>
-	{
-		public:
-			const Game& select(const std::string id);
-			const bool insert(const Game p);
-			const int update(const Game p);
-			const int remove(const Game p);
-	};
+	template<> sql::ResultSet* MySQLConnector<Person>::select(const std::string id);
+	template<> const bool MySQLConnector<Person>::insert(const Person p);
+	template<> const int MySQLConnector<Person>::update(const Person p);
+	template<> const int MySQLConnector<Person>::remove(const Person p);
 	
-	template<> 
-	class MySQLConnector<Person>
-	{
-		public:
-			const Person& select(const std::string id);
-			const bool insert(const Person p);
-			const int update(const Person p);
-			const int remove(const Person p);
-	};
-	
-	template<> 
-	class MySQLConnector<Team>
-	{
-		public:
-			const Team& select(const std::string id);
-			const bool insert(const Team p);
-			const int update(const Team p);
-			const int remove(const Team p);
-	};
+	template class MySQLConnector<Person>;
 }
 
 #endif // MYSQL_CONNECTOR_H_

@@ -30,10 +30,10 @@ const std::string voba::ServerInfo::get_table_name(const std::string class_name)
 void voba::ServerInfo::init(const std::string xml_path)
 {
 	const std::string ROOT_NAME = "connection";
-	const std::string SERVER_NODE_NAME = ROOT_NAME+".server";
-	const std::string ACCOUNT_NODE_NAME = ROOT_NAME+".account";
-	const std::string PWD_NODE_NAME = ROOT_NAME+".pwd";
-	const std::string SCHEMA_NODE_NAME = ROOT_NAME+".schema";
+	const std::string SERVER_NODE_NAME = ROOT_NAME+".server.<xmlattr>.value";
+	const std::string ACCOUNT_NODE_NAME = ROOT_NAME+".account.<xmlattr>.value";
+	const std::string PWD_NODE_NAME = ROOT_NAME+".pwd.<xmlattr>.value";
+	const std::string SCHEMA_NODE_NAME = ROOT_NAME+".schema.<xmlattr>.value";
 	const std::string TABLES_NODE_NAME = ROOT_NAME+".tables";
 	const std::string TABLE_NODE_NAME = "table";
 	const std::string COLUMN_NODE_NAME = "column";
