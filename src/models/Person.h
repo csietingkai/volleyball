@@ -60,7 +60,7 @@ namespace voba
 			std::string phonenumber;
 			ActiveStatus status; // true <= active, false <= inactive
 			
-			void update_id() { this->id = voba::Utils::generate_sha1(this->to_string()); };
+			void update_id() { this->id = Utils::generate_sha1(this->to_string()); };
 	};
 }
 

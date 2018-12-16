@@ -12,12 +12,14 @@ namespace voba
 	class PersonFactory
 	{
 		public:
-			const static Person& create();
+			const static Person& select_by_id(const std::string id);
+			const static Person& create(std::string name, int age, Gender gender, std::string phonenumber, ActiveStatus status);
 			const static bool update(const Person new_person);
 			const static bool remove(const Person preson);
 		
 		private:
-			static MySQLConnector<Person> connector;
+			static MySQLConnector<Person> p_connector;
+			static MySQLConnector<Team> t_connector;
 	};
 }
 

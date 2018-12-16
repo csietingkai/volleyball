@@ -1,20 +1,42 @@
 #include "PersonFactory.h"
 
-voba::MySQLConnector<voba::Person> voba::PersonFactory::connector;
+voba::MySQLConnector<voba::Person> voba::PersonFactory::p_connector;
+voba::MySQLConnector<voba::Team> voba::PersonFactory::t_connector;
 
-const voba::Person& voba::PersonFactory::create()
+const voba::Person& voba::PersonFactory::select_by_id(const std::string id)
 {
-	sql::ResultSet* result_set = voba::PersonFactory::connector.select("353de133f85ff64454a58ff782c31f483854c8f5");
-	sql::ResultSetMetaData *res_meta = result_set->getMetaData();
-	int columns = res_meta->getColumnCount();
+	std::string name;
+	int age;
+	voba::Gender gender;
+	std::string phonenumber;
+	voba::ActiveStatus status;
+	
+	sql::ResultSet* result_set = voba::PersonFactory::p_connector.select(id);
+	//sql::ResultSetMetaData *res_meta = result_set->getMetaData();
+	//int columns = res_meta->getColumnCount();
 	while (result_set->next())
 	{
-		for (int i = 1; i <= columns; i++)
-		{
-			std::cout << result_set->getString(i) << "|" ;
-		}
-		std::cout << std::endl;
+		// 1 -> id
+		// 2 -> name
+		name = result_set->getString(2);
+		// 3 -> age
+		age = std::stoi(result_set->getString(3));
+		// 4 -> gender
+		gender = static_cast<voba::Gender>((std::stoi(result_set->getString(4)) != 0));
+		// 5 -> phonenumber
+		phonenumber = result_set->getString(5);
+		// 6 -> active status
+		status = static_cast<voba::ActiveStatus>((std::stoi(result_set->getString(6)) != 0));
 	}
-	Person *p = new Person("test1", 21, voba::Gender::male, "0987654321", voba::ActiveStatus::active);
+	
+	Person *p = new Person(name, age, gender, phonenumber, status);
+	return *p;
+}
+
+const voba::Person& voba::PersonFactory::create(std::string name, int age, voba::Gender gender, std::string phonenumber, voba::ActiveStatus status)
+{
+	Person *p = new Person(name, age, gender, phonenumber, status);
+	bool result = voba::PersonFactory::p_connector.insert(*p);
+	std::cout << result << std::endl;
 	return *p;
 }
