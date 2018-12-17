@@ -108,7 +108,7 @@ const std::string voba::SqlCommandBuilder::build_update(const std::list<std::str
 	std::string ret = voba::SqlCommandBuilder::COMMANDS.find(voba::SqlCommand::update)->second; 
 	ret = voba::Utils::trim(ret);
 	
-	if (strs.size() != 3)
+	if (strs.size() != 4)
 	{
 		return ret;
 	}

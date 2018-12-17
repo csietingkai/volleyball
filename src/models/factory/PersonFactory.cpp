@@ -40,3 +40,24 @@ const voba::Person& voba::PersonFactory::create(std::string name, int age, voba:
 	std::cout << result << std::endl;
 	return *p;
 }
+
+const bool voba::PersonFactory::update(Person& new_person)
+{
+	std::string old_id = new_person.get_id();
+	new_person.update_id();
+	
+	int result = voba::PersonFactory::p_connector.update(new_person, old_id);
+	if (result == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+const bool voba::PersonFactory::remove(Person& preson)
+{
+	return false;
+}

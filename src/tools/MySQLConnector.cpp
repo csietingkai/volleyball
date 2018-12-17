@@ -31,7 +31,7 @@ void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 	std::string error_msg = "# ERR: ";
 	error_msg += e.what();
 	error_msg += " (MySQL error code: ";
-	error_msg += e.getErrorCode();
+	error_msg += std::to_string(e.getErrorCode());
 	error_msg += ", SQLState: ";
 	error_msg += e.getSQLState();
 	error_msg += " )";
@@ -44,19 +44,19 @@ template<> sql::ResultSet* voba::MySQLConnector<voba::Game>::select(const std::s
 	
 }
 
-template<> const bool voba::MySQLConnector<voba::Game>::insert(const voba::Game p)
+template<> const bool voba::MySQLConnector<voba::Game>::insert(const voba::Game g)
 {
-	
+	return 0;
 }
 
-template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game p)
+template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g, const std::string old_id)
 {
-	
+	return 0;
 }
 
-template<> const int voba::MySQLConnector<voba::Game>::remove(const voba::Game p)
+template<> const int voba::MySQLConnector<voba::Game>::remove(const voba::Game g)
 {
-	
+	return 0;
 }
 
 // Person specialization
@@ -113,14 +113,47 @@ template<> const bool voba::MySQLConnector<voba::Person>::insert(const voba::Per
 	return ret;
 }
 
-template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p)
+template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p, const std::string old_id)
 {
+	int ret = 0;
+	std::vector<std::string> columns
+	{
+		"name", "'"+p.get_name()+"'",
+		"age", std::to_string(p.get_age()),
+		"gender", std::to_string(static_cast<bool>(p.get_gender())),
+		"phone_number", "'"+p.get_phonenumber()+"'",
+		"is_active", std::to_string(static_cast<bool>(p.get_active_status())),
+		"id", "'"+p.get_id()+"'"
+	};
 	
+	for (int i = 0; i < columns.size(); i+=2)
+	{
+		std::list<std::string> query_list = {};
+		query_list.push_back(this->table_name);
+		query_list.push_back(columns[i]);
+		query_list.push_back(columns[i+1]);
+		query_list.push_back("ID='"+old_id+"'");
+		
+		std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::update, query_list);
+		
+		this->logger.debug(query);
+		
+		try
+		{
+			ret = this->statement->execute(query);
+		}
+		catch (sql::SQLException e)
+		{
+			this->logger.error("SQL Exception happened !!");
+			this->print_sql_exception(e);
+		}
+	}
+	return ret;
 }
 
 template<> const int voba::MySQLConnector<voba::Person>::remove(const voba::Person p)
 {
-	
+	return 0;
 }
 
 // Team specialization
@@ -129,18 +162,18 @@ template<> sql::ResultSet* voba::MySQLConnector<voba::Team>::select(const std::s
 	
 }
 
-template<> const bool voba::MySQLConnector<voba::Team>::insert(const voba::Team p)
+template<> const bool voba::MySQLConnector<voba::Team>::insert(const voba::Team t)
 {
-	
+	return 0;
 }
 
-template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team p)
+template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team t, const std::string old_id)
 {
-	
+	return 0;
 }
 
-template<> const int voba::MySQLConnector<voba::Team>::remove(const voba::Team p)
+template<> const int voba::MySQLConnector<voba::Team>::remove(const voba::Team t)
 {
-	
+	return 0;
 }
 
