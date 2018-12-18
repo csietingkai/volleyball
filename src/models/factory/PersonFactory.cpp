@@ -57,7 +57,17 @@ const bool voba::PersonFactory::update(Person& new_person)
 	}
 }
 
-const bool voba::PersonFactory::remove(Person& preson)
+const bool voba::PersonFactory::remove(Person& person)
 {
-	return false;
+	person.update_id();
+	
+	int result = voba::PersonFactory::p_connector.remove(person);
+	if (result == 1)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }

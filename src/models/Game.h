@@ -11,9 +11,11 @@ namespace voba
 			const static std::string CLASS_NAME;
 			
 			Game();
+			
+			const std::string get_id() const { return this->id; };
 		
 		private:
-			
+			std::string id;
 	};
 }
 

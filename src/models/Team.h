@@ -12,8 +12,11 @@ namespace voba
 			
 			Team();
 			Team(const std::string id);
+			
+			const std::string get_id() const { return this->id; };
 		
 		private:
+			std::string id;
 	};
 }
 

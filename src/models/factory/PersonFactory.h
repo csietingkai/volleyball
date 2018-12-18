@@ -15,7 +15,7 @@ namespace voba
 			const static Person& select_by_id(const std::string id);
 			const static Person& create(std::string name, int age, Gender gender, std::string phonenumber, ActiveStatus status);
 			const static bool update(Person& new_person);
-			const static bool remove(Person& preson);
+			const static bool remove(Person& person);
 		
 		private:
 			static MySQLConnector<Person> p_connector;
