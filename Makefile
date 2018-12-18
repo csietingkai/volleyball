@@ -9,6 +9,7 @@ EXE = volleyball.exe
 SRCDIR := ./src
 TESTDIR := ./test
 OBJDIR := ./obj
+LOGDIR := ./logs
 SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp) $(wildcard $(SRCDIR)/**/**/*.cpp)
 OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test/test.o $(OBJDIR)/main.o
 
@@ -29,5 +30,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) -o $@ $< $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 
+clear:
+	rm -rf $(OBJDIR)/* $(EXE) 
+
 clean:
-	rm -rf $(OBJDIR)/* $(EXE)
+	rm -rf $(OBJDIR)/* $(LOGDIR)/*.log $(EXE) 
