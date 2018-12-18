@@ -25,11 +25,12 @@ namespace voba
 	void test_tools();
 	void test_logger();
 	void test_connector();
-	void tset_sqlcommandbuilder();
+	void test_sqlcommandbuilder();
 	
 	void test_utils();
 	void test_serverinfo();
 	void test_util();
+	void test_uuid();
 }
 
 #endif // TEST_H_

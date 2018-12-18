@@ -3,20 +3,25 @@
 
 #include <iostream>
 
+#include "Person.h"
+
 namespace voba
 {
-	class Team
+	class Team : Logable, IModel
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			Team();
-			Team(const std::string id);
+			Team(const std::string name);
+			//Team(const std::string id);
 			
-			const std::string get_id() const { return this->id; };
+			const std::string get_id() const override { return IModel::get_id(); };
+			const std::string to_string() const { return ""; };
+			
+			void update_id() override { this->id = Utils::generate_sha1(this->to_string()); };
 		
 		private:
-			std::string id;
+			std::string name;
 	};
 }
 

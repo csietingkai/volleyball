@@ -48,6 +48,7 @@ void voba::test_person()
 	person.set_name("haha");
 	voba::PersonFactory::update(person);
 	std::cout << person.get_id() << " " << person << std::endl;
+	voba::PersonFactory::remove(person);
 }
 
 void voba::test_team()
@@ -57,10 +58,45 @@ void voba::test_team()
 
 void voba::test_tools()
 {
+	voba::test_logger();
 	voba::test_connector();
+	voba::test_sqlcommandbuilder();
+}
+
+void voba::test_logger()
+{
+	
 }
 
 void voba::test_connector()
 {
 	
 }
+
+void voba::test_sqlcommandbuilder()
+{
+	
+}
+
+void voba::test_utils()
+{
+	voba::test_serverinfo();
+	voba::test_util();
+	voba::test_uuid();
+}
+
+void voba::test_serverinfo()
+{
+	
+}
+
+void voba::test_util()
+{
+	
+}
+
+void voba::test_uuid()
+{
+	
+}
+

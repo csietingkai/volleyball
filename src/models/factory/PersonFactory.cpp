@@ -35,6 +35,7 @@ const voba::Person& voba::PersonFactory::select_by_id(const std::string id)
 
 const voba::Person& voba::PersonFactory::create(std::string name, int age, voba::Gender gender, std::string phonenumber, voba::ActiveStatus status)
 {
+	// maybe cause duplicate exception
 	Person *p = new Person(name, age, gender, phonenumber, status);
 	bool result = voba::PersonFactory::p_connector.insert(*p);
 	std::cout << result << std::endl;
