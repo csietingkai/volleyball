@@ -34,5 +34,9 @@ sudo apt-get install libgtkmm-3.0-dev
 + create data in database for testing
 + test unit in test.cpp
 
+## Fail TODO List
+
++ duplicate class name condition
+
 ## Usage
 
