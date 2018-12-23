@@ -5,6 +5,12 @@
 	<pwd value="htkkoeoh" />
 	<schema value="htk103u_volleyball" />
 	<tables>
+		<table name="auth" class_name="Auth">
+			<column name="id" type="uuid"/>
+			<column name="account" type="string"/>
+			<column name="pwd" type="string"/>
+			<column name="role" type="int"/>
+		</table>
 		<table name="persons" class_name="Person">
 			<column name="id" type="sha1"/>
 			<column name="name" type="string"/>
