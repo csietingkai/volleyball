@@ -29,11 +29,14 @@ namespace voba
 		public:
 			const static std::string CLASS_NAME;
 			
-			Auth(const std::string account, const std::string pwd, const Role role);
+			Auth(const std::string account, const std::string pwd);
+			~Auth();
 			
 			const bool create();
+			const bool create(const Role role);
 			const bool edit(const Role role);
 			const bool verify();
+			const Role get_role();
 			
 		private:
 			std::string id;
@@ -42,6 +45,10 @@ namespace voba
 			Role role;
 			
 			ServerInfo info;
+			
+			sql::Driver *driver;
+			sql::Connection *connection;
+			sql::Statement *statement;
 	};
 }
 

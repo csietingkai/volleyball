@@ -5,6 +5,7 @@
 #include "src/utils/ServerInfo.h"
 #include "src/utils/Utils.h"
 #include "src/views/MainWindowView.h"
+#include "src/auth.h"
 #include "test/test.h"
 
 int main(int argc, char* argv[])
