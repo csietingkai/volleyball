@@ -30,7 +30,6 @@ namespace voba
 	void test_utils();
 	void test_serverinfo();
 	void test_util();
-	void test_uuid();
 }
 
 #endif // TEST_H_

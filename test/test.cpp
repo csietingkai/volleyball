@@ -44,10 +44,10 @@ void voba::test_game()
 void voba::test_person()
 {
 	voba::Person person = voba::PersonFactory::create("aaa", 11, voba::Gender::female, "0912345678", voba::ActiveStatus::inactive);
-	std::cout << person.get_id() << " " << person << std::endl;
+	//std::cout << person.get_id() << " " << person << std::endl;
 	person.set_name("haha");
 	voba::PersonFactory::update(person);
-	std::cout << person.get_id() << " " << person << std::endl;
+	//std::cout << person.get_id() << " " << person << std::endl;
 	voba::PersonFactory::remove(person);
 }
 
@@ -82,7 +82,6 @@ void voba::test_utils()
 {
 	voba::test_serverinfo();
 	voba::test_util();
-	voba::test_uuid();
 }
 
 void voba::test_serverinfo()
@@ -91,11 +90,6 @@ void voba::test_serverinfo()
 }
 
 void voba::test_util()
-{
-	
-}
-
-void voba::test_uuid()
 {
 	
 }

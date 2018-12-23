@@ -8,7 +8,7 @@ template <class T>
 voba::MySQLConnector<T>::MySQLConnector()
 	: Logable(voba::MySQLConnector<T>::CLASS_NAME)
 {
-	this->table_name = info.get_table_name(T::CLASS_NAME);
+	this->table_name = this->info.get_table_name(T::CLASS_NAME);
 	
 	this->driver = get_driver_instance();
 	this->connection = this->driver->connect(info.get_server(), info.get_account(), info.get_pwd());
@@ -157,7 +157,7 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 		
 		try
 		{
-			ret = this->statement->execute(query);
+			ret = this->statement->executeUpdate(query);
 		}
 		catch (sql::SQLException e)
 		{

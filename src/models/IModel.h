@@ -19,4 +19,4 @@ namespace voba
 	};
 }
 
-#endif // GAME_H_
+#endif // I_MODEL_H_

@@ -25,7 +25,7 @@ namespace voba
 		public:
 			const static std::string build(const SqlCommand command, const std::list<std::string> strs);
 		
-		private:
+		protected:
 			const static std::string SELECT_NODE;
 			const static std::string INSERT_NODE;
 			const static std::string UPDATE_NODE;
