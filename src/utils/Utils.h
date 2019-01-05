@@ -7,6 +7,8 @@
 #include <boost/uuid/uuid_io.hpp>
 #include <iostream>
 #include <random>
+#include <sstream>
+#include <vector>
 
 namespace voba
 {
@@ -17,6 +19,7 @@ namespace voba
 			const static std::string generate_sha1(const std::string str);
 			const static bool replace(std::string& str, const std::string& from, const std::string& to);
 			const static std::string trim(const std::string str);
+			const static std::vector<std::string> split(const std::string str, const char separator);
 			const static std::string random_string();
 			const static std::string random_string(const int length);
 	};

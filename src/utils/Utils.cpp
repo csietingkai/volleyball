@@ -52,6 +52,21 @@ const std::string voba::Utils::trim(const std::string str)
     return ret.substr(first, (last - first + 1));
 }
 
+const std::vector<std::string> voba::Utils::split(const std::string str, const char separator)
+{
+	std::stringstream ss(str);
+	std::vector<std::string> result;
+
+	while(ss.good())
+	{
+		std::string substr;
+		getline(ss, substr, separator);
+		result.push_back(substr);
+	}
+	
+	return result;
+}
+
 const std::string voba::Utils::random_string()
 {
 	return voba::Utils::random_string(6);
