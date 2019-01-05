@@ -27,12 +27,12 @@ sudo apt-get install libgtkmm-3.0-dev
 
 ## TODO List
 
-+ [ ] set team conditions
-+ implement of class 'Game' & 'Schedule'
-+ frontend view
-+ algorithm for scheduling games
-+ create data in database for testing
-+ test unit in test.cpp
++ [x] set team conditions
++ [ ] implement of class 'Game' & 'Schedule'
++ [ ] frontend view
++ [ ] algorithm for scheduling games
++ [ ] create data in database for testing
++ [ ] test unit in test.cpp
 
 ## Fail TODO List
 
