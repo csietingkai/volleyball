@@ -53,7 +53,14 @@ void voba::test_person()
 
 void voba::test_team()
 {
-	
+	Person p("aaa", 11, voba::Gender::female, "0912345678", voba::ActiveStatus::inactive);
+	Team test("test");
+	//std::cout << test.get_prefer_week() << std::endl;
+	//std::cout << test.get_prefer_time() << std::endl;
+	Team test1("test1");
+	test1.add_member(p);
+	test = test1;
+	std::cout << test << std::endl;
 }
 
 void voba::test_tools()

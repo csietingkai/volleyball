@@ -57,7 +57,7 @@ const voba::Person& voba::Person::operator =(const voba::Person& other)
 	return *this;
 }
 
-const bool voba::Person::operator ==(const voba::Person& other) const
+const bool voba::Person::operator ==(const voba::Person& other)
 {
 	bool re = true;
 	re = re && (this->get_name().compare(other.get_name()) == 0);

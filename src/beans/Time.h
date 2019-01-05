@@ -47,7 +47,7 @@ namespace voba
 			const bool operator >(const Time& other) const { return other.operator<(*this); };
 			const bool operator <=(const Time& other) const { return !this->operator>(other); };
 			const bool operator >=(const Time& other) const { return !this->operator<(other); };
-			friend std::ostream& operator <<(std::ostream& strm, const Time& other);
+			friend std::ostream& operator <<(std::ostream& strm, const Time& other) { strm << other.to_string(); return strm; };
 		
 		private:
 			int hour;

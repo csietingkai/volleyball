@@ -49,8 +49,8 @@ namespace voba
 				
 			// operators
 			const Person& operator =(const Person& other);
-			const bool operator ==(const Person& other) const;
-			const bool operator !=(const Person& other) const { return !this->operator==(other); };
+			const bool operator ==(const Person& other);
+			const bool operator !=(const Person& other) { return !this->operator==(other); };
 			friend std::ostream& operator <<(std::ostream& strm, const Person& other) { strm << other.to_string(); return strm; };
 			
 			// NOT RECOMMEND to use mannually
