@@ -60,7 +60,7 @@ void voba::test_team()
 	Team test1("test1");
 	test1.add_member(p);
 	test = test1;
-	std::cout << test << std::endl;
+	//std::cout << test << std::endl;
 }
 
 void voba::test_tools()

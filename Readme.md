@@ -31,6 +31,7 @@ sudo apt-get install libgtkmm-3.0-dev
 + [ ] implement of class 'Game' & 'Schedule'
 + [ ] frontend view
 + [ ] algorithm for scheduling games
++ [ ] add code coverage test
 + [ ] create data in database for testing
 + [ ] test unit in test.cpp
 
