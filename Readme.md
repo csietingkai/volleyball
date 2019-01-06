@@ -37,7 +37,13 @@ sudo apt-get install libgtkmm-3.0-dev
 
 ## Fail TODO List
 
-+ duplicate class name condition
++ duplicate class name condition in log file
+
+## Maybe can Do it List
+
++ factory use Column as parameter
++ MySQLConnector use IModel as parameter
++ Logger add static member function
 
 ## Usage
 
