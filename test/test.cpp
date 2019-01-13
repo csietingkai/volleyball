@@ -5,6 +5,7 @@ void voba::test_main()
 	voba::test_beans();
 	voba::test_models();
 	voba::test_tools();
+	voba::test_utils();
 }
 
 void voba::test_beans()
@@ -43,24 +44,12 @@ void voba::test_game()
 
 void voba::test_person()
 {
-	voba::Person person = voba::PersonFactory::create("aaa", 11, voba::Gender::female, "0912345678", voba::ActiveStatus::inactive);
-	//std::cout << person.get_id() << " " << person << std::endl;
-	person.set_name("haha");
-	voba::PersonFactory::update(person);
-	//std::cout << person.get_id() << " " << person << std::endl;
-	voba::PersonFactory::remove(person);
+	
 }
 
 void voba::test_team()
 {
-	Person p("aaa", 11, voba::Gender::female, "0912345678", voba::ActiveStatus::inactive);
-	Team test("test");
-	//std::cout << test.get_prefer_week() << std::endl;
-	//std::cout << test.get_prefer_time() << std::endl;
-	Team test1("test1");
-	test1.add_member(p);
-	test = test1;
-	//std::cout << test << std::endl;
+	
 }
 
 void voba::test_tools()
