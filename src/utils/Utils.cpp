@@ -26,6 +26,43 @@ const std::string voba::Utils::generate_sha1(const std::string str)
 	return ret;
 }
 
+const std::string voba::Utils::to_upper_case(const std::string str)
+{
+	std::string ret = "";
+	
+	for (unsigned int i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) >= 'a' && str.at(i) <= 'z')
+		{
+			ret += (char)(str.at(i)) - 'a' + 'A';
+		}
+		else
+		{
+			ret += str.at(i);
+		}
+	}
+	
+	return ret;
+}
+
+const std::string voba::Utils::to_lower_case(const std::string str)
+{
+	std::string ret = "";
+	
+	for (unsigned int i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) >= 'A' && str.at(i) <= 'Z')
+		{
+			ret += (char)(str.at(i)) - 'A' + 'a';
+		}
+		else
+		{
+			ret += str.at(i);
+		}
+	}
+	return ret;
+}
+
 const bool voba::Utils::replace(std::string& str, const std::string& from, const std::string& to)
 {
 	size_t start_pos = str.find(from);

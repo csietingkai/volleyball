@@ -5,8 +5,6 @@
 #include <iostream>
 
 #include "../src/beans/DateTime.h"
-#include "../src/models/factory/PersonFactory.h"
-#include "../src/tools/MySQLConnector.h"
 
 namespace voba
 {
