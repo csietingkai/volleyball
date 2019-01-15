@@ -10,7 +10,6 @@ const std::string voba::Utils::generate_uuid()
 
 const std::string voba::Utils::generate_sha1(const std::string str)
 {
-	// generate sha1 from <boost/uuid/sha1.hpp> library
 	// stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c
 	boost::uuids::detail::sha1 sha1;
 	sha1.process_bytes(str.data(), str.size());

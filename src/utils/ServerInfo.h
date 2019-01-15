@@ -16,6 +16,7 @@ namespace voba
 	{
 		public:
 			Column() {};
+			Column(std::string name): name(name), type("string"), nullable(false) {};
 			Column(std::string name, std::string type): name(name), type(type), nullable(false) {};
 			Column(std::string name, std::string type, bool nullable): name(name), type(type), nullable(nullable) {};
 			
@@ -59,6 +60,9 @@ namespace voba
 	class ServerInfo
 	{
 		public:
+			// read the 'server_info.xml' as server configuration
+			// <table> <--> class Table
+			// <column> <--> class Column
 			ServerInfo();
 			ServerInfo(const std::string xml_path);
 			
