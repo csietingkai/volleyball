@@ -8,43 +8,57 @@
 #include <random>
 #include <iostream>
 
+#include "../utils/ServerInfo.h"
 #include "../utils/Utils.h"
 
 namespace voba
 {
-	enum class SqlCommand
-	{
-		select,
-		insert,
-		update,
-		remove
-	};
-	
 	class SqlCommandBuilder
 	{
 		public:
-			const static std::string build(const SqlCommand command, const std::list<std::string> strs);
+			SqlCommandBuilder();
+			
+			SqlCommandBuilder& select();
+			SqlCommandBuilder& select(const Column column);
+			SqlCommandBuilder& select(const std::list<Column> columns);
+			
+			SqlCommandBuilder& insert(const Table table);
+			
+			SqlCommandBuilder& update(const Table table);
+			
+			SqlCommandBuilder& remove();
+			
+			SqlCommandBuilder& from(const Table table);
+			
+			SqlCommandBuilder& where(const Column column);
+			SqlCommandBuilder& where(const std::list<Column> columns);
+			
+			SqlCommandBuilder& values(const std::list<Column> columns);
+			
+			SqlCommandBuilder& set(const Column column);
+			SqlCommandBuilder& set(const std::list<Column> columns);
+			
+			const std::string to_string();
 		
-		protected:
-			const static std::string SELECT_NODE;
-			const static std::string INSERT_NODE;
-			const static std::string UPDATE_NODE;
-			const static std::string REMOVE_NODE;
+		private:
+			const static std::string SELECT;
+			const static std::string INSERT;
+			const static std::string UPDATE;
+			const static std::string REMOVE;
+			const static std::string FROM;
+			const static std::string WHERE;
+			const static std::string VALUES;
+			const static std::string SET;
+			const static std::string SPACE;
+			const static std::string COMMA;
+			const static std::string EQUAL;
+			const static std::string AND;
+			const static std::string LEFT_PARENTHESIS;
+			const static std::string RIGHT_PARENTHESIS;
 			
-			const static std::string TABLE_NAME_TAG;
-			const static std::string CONDITIONS_TAG;
-			const static std::string COLUMN_NAME_TAG;
-			const static std::string COLUMN_VALUE_TAG;
-			const static std::string VALUES_TAG;
+			std::string store;
 			
-			const static std::map<SqlCommand, std::string> COMMANDS;
-			
-			const static std::map<SqlCommand, std::string> init_map();
-			
-			const static std::string build_select(const std::list<std::string> strs);
-			const static std::string build_insert(const std::list<std::string> strs);
-			const static std::string build_update(const std::list<std::string> strs);
-			const static std::string build_remove(const std::list<std::string> strs);
+			const std::string handle_column(const Column column);
 	};
 }
 
