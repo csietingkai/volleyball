@@ -1,5 +1,38 @@
 #include "ServerInfo.h"
 
+const voba::Column& voba::Column::operator =(const voba::Column& other)
+{
+	if (this == &other)
+	{
+		return *this;
+	}
+	
+	this->set_name(other.get_name());
+	this->set_type(other.get_type());
+	this->set_value(other.get_value());
+	this->set_nullable(other.get_nullable());
+	
+	return *this;
+}
+
+const voba::Table& voba::Table::operator =(const voba::Table& other)
+{
+	if (this == &other)
+	{
+		return *this;
+	}
+	
+	this->set_name(other.get_name());
+	this->set_class_name(other.get_class_name());
+	
+	for (unsigned int i = 0; i < other.size(); i++)
+	{
+		this->push_back(other.get_column(i));
+	}
+	
+	return *this;
+}
+
 // constructor
 voba::ServerInfo::ServerInfo()
 {
@@ -20,6 +53,20 @@ const std::string voba::ServerInfo::get_table_name(const std::string class_name)
 		if (class_name == table.get_class_name())
 		{
 			ret = table.get_name();
+			break;
+		}
+	}
+	return ret;
+}
+
+const voba::Table voba::ServerInfo::get_table(const std::string class_name) const
+{
+	voba::Table ret;
+	for (Table table : this->tables)
+	{
+		if (class_name == table.get_class_name())
+		{
+			ret = table;
 			break;
 		}
 	}

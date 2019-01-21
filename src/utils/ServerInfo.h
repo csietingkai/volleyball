@@ -16,19 +16,22 @@ namespace voba
 	{
 		public:
 			Column() {};
-			Column(std::string name): name(name), type("string"), nullable(false) {};
-			Column(std::string name, std::string type): name(name), type(type), nullable(false) {};
-			Column(std::string name, std::string type, bool nullable): name(name), type(type), nullable(nullable) {};
+			Column(const std::string name): name(name), type("string"), nullable(false) {};
+			Column(const std::string name, const std::string type): name(name), type(type), nullable(false) {};
+			Column(const std::string name, const std::string type, const bool nullable): name(name), type(type), nullable(nullable) {};
+			Column(const Column& other) { this->operator=(other); };
 			
-			void set_name(std::string name) { this->name = name; };
-			void set_type(std::string type) { this->type = type; };
-			void set_value(std::string value) { this->value = value; };
-			void set_nullable(bool nullable) { this->nullable = nullable; };
+			void set_name(const std::string name) { this->name = name; };
+			void set_type(const std::string type) { this->type = type; };
+			void set_value(const std::string value) { this->value = value; };
+			void set_nullable(const bool nullable) { this->nullable = nullable; };
 			
 			const std::string get_name() const { return this->name; };
 			const std::string get_type() const { return this->type; };
 			const std::string get_value() const { return this->value; };
 			const bool get_nullable() const { return this->nullable; };
+			
+			const Column& operator =(const Column& other);
 		
 		private:
 			std::string name;
@@ -41,15 +44,20 @@ namespace voba
 	{
 		public:
 			Table() {};
-			Table(std::string name, std::string class_name): name(name), class_name(class_name) {};
+			Table(const std::string name, const std::string class_name): name(name), class_name(class_name) {};
+			Table(const Table& other) { this->operator=(other); }
 			
 			void set_name(std::string name) { this->name = name; };
 			void set_class_name(std::string class_name) { this->class_name = class_name; };
-			void push_back(Column column) { columns.push_back(column); };
-			void pop_back() { columns.pop_back(); };
+			void push_back(Column column) { this->columns.push_back(column); };
+			void pop_back() { this->columns.pop_back(); };
+			const unsigned int size() const { return this->columns.size(); };
+			const Column get_column(unsigned int index) const { return this->columns[index]; };
 			
 			const std::string get_name() const { return this->name; };
 			const std::string get_class_name() const { return this->class_name; };
+			
+			const Table& operator =(const Table& other);
 		
 		private:
 			std::string name;
@@ -71,6 +79,7 @@ namespace voba
 			const std::string get_pwd() const { return this->pwd; };
 			const std::string get_schema() const { return this->schema; };
 			const std::string get_table_name(const std::string class_name) const;
+			const Table get_table(const std::string class_name) const;
 			
 		private:
 			std::string server;

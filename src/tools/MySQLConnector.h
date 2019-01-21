@@ -29,9 +29,11 @@ namespace voba
 			~MySQLConnector();
 			
 			sql::ResultSet* select(const std::string id);
+			sql::ResultSet* select(const std::list<Column> where_conditions);
 			const bool insert(const T t) { return false; }; // need specialization
 			const int update(const T t, const std::string old_id) { return 0; }; // need specialization
 			const int remove(const T t);
+			const int remove(const std::list<Column> where_conditions);
 		
 		private:
 			sql::Driver *driver;
@@ -39,7 +41,7 @@ namespace voba
 			sql::Statement *statement;
 			
 			ServerInfo info;
-			std::string table_name;
+			Table table;
 			
 			void print_sql_exception(const sql::SQLException e);
 	};

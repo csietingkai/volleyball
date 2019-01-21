@@ -8,7 +8,7 @@ template <class T>
 voba::MySQLConnector<T>::MySQLConnector()
 	: Logable(voba::MySQLConnector<T>::CLASS_NAME)
 {
-	this->table_name = this->info.get_table_name(T::CLASS_NAME);
+	this->table = this->info.get_table(T::CLASS_NAME);
 	
 	this->driver = get_driver_instance();
 	this->connection = this->driver->connect(info.get_server(), info.get_account(), info.get_pwd());
@@ -27,12 +27,20 @@ voba::MySQLConnector<T>::~MySQLConnector()
 template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const std::string id)
 {
+	voba::Column cid("id");
+	cid.set_value(id);
+	std::list<voba::Column> columns;
+	columns.push_back(cid);
+	return this->select(columns);
+}
+
+template <class T>
+sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_conditions)
+{
 	sql::ResultSet *result_set;
-	std::list<std::string> query_list = {};
-	query_list.push_back("*");
-	query_list.push_back(this->table_name);
-	query_list.push_back("ID = '"+id+"'");
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::select, query_list);
+	SqlCommandBuilder builder;
+	
+	std::string query = builder.select().from(this->table).where(where_conditions).to_string();
 	
 	this->logger.debug(query);
 	
@@ -51,13 +59,20 @@ sql::ResultSet* voba::MySQLConnector<T>::select(const std::string id)
 template <class T>
 const int voba::MySQLConnector<T>::remove(const T t)
 {
+	Column tid("id");
+	tid.set_value(t.get_id());
+	std::list<voba::Column> columns;
+	columns.push_back(tid);
+	return this->remove(columns);
+}
+
+template <class T>
+const int voba::MySQLConnector<T>::remove(const std::list<Column> where_conditions)
+{
 	int ret = 0;
 	
-	std::list<std::string> query_list = {};
-	query_list.push_back(this->table_name);
-	query_list.push_back("ID='"+t.get_id()+"'");
-	
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::remove, query_list);
+	SqlCommandBuilder builder;
+	std::string query = builder.remove().from(this->table).where(where_conditions).to_string();
 	
 	this->logger.debug(query);
 	
