@@ -1,117 +1,48 @@
 #include "auth.h"
 
-const std::string voba::Auth::CLASS_NAME = "Auth";
-
-voba::Auth::Auth(const std::string account, const std::string pwd)
+const voba::User voba::auth(const std::string account, const std::string pwd)
 {
-	this->id = voba::Utils::generate_uuid();
-	this->account = account;
-	this->pwd = pwd;
+	const static int ID_AT = 1;
+	const static int ACCOUNT_AT = 2;
+	const static int PWD_AT = 3;
+	const static int ROLE_AT = 4;
 	
-	this->driver = get_driver_instance();
-	this->connection = this->driver->connect(info.get_server(), info.get_account(), info.get_pwd());
-	this->connection->setSchema(info.get_schema());
-
-	this->statement = this->connection->createStatement();
-}
-
-voba::Auth::~Auth()
-{
-	delete connection;
-	delete statement;
-}
-
-const bool voba::Auth::create()
-{
-	return this->create(Role::USER);
-}
-		
-const bool voba::Auth::create(const Role role)
-{
-	this->role = role;
-	std::string table_name = this->info.get_table_name(voba::Auth::CLASS_NAME);
+	voba::User user;
+	user.id = "";
+	user.account = account;
+	user.pwd = pwd;
+	user.role = voba::Role::NONE;
 	
-	std::list<std::string> strs;
-	strs.push_back(table_name);
-	std::string val = "'"+this->id+"',";
-	val += "'"+this->account+"',";
-	val += "'"+this->pwd+"',";
-	val += std::to_string(static_cast<int>(role));
-	strs.push_back(val);
+	voba::ServerInfo info;
+	voba::Table table = info.get_table("Auth");
+	sql::Driver *driver = get_driver_instance();
+	sql::Connection *connection = driver->connect(info.get_server(), info.get_account(), info.get_pwd());
+	connection->setSchema(info.get_schema());
+	sql::Statement *statement = connection->createStatement();
 	
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::insert, strs);
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.select().from(table).to_string();
+	sql::ResultSet *result_set = statement->executeQuery(query);
 	
-	return this->statement->execute(query);
-}
-
-const bool voba::Auth::edit(const Role role)
-{
-	if (this->verify() == false)
-	{
-		return false;
-	}
-	
-	this->role = role;
-	std::string table_name = this->info.get_table_name(voba::Auth::CLASS_NAME);
-	
-	std::list<std::string> strs;
-	strs.push_back(table_name);
-	strs.push_back("ROLE");
-	strs.push_back(std::to_string(static_cast<int>(this->role)));
-	strs.push_back("ACCOUNT='"+this->account+"'");
-	
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::update, strs);
-	
-	return (this->statement->executeUpdate(query) == 1);
-}
-
-const bool voba::Auth::verify()
-{
-	std::string table_name = this->info.get_table_name(voba::Auth::CLASS_NAME);
-	
-	std::list<std::string> strs;
-	strs.push_back("PWD");
-	strs.push_back(table_name);
-	strs.push_back("ACCOUNT='"+this->account+"'");
-	
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::select, strs);
-	
-	sql::ResultSet* result_set = this->statement->executeQuery(query);
-	if (result_set->next())
-	{
-		//std::cout << result_set->getString(1) << std::endl;
-		
-		if (this->pwd.compare(result_set->getString(1)) == 0)
+	while (result_set->next()) {
+		if (result_set->getString(ACCOUNT_AT).compare(user.account) != 0)
 		{
-			return true;
+			continue;
+		}
+		else
+		{
+			if (result_set->getString(PWD_AT).compare(user.pwd) != 0)
+			{
+				break;
+			}
+			else
+			{
+				user.id = result_set->getString(ID_AT);
+				user.role = static_cast<voba::Role>(std::stoi(result_set->getString(ROLE_AT)));
+			}
 		}
 	}
-	
-	return false;
-}
 
-const voba::Role voba::Auth::get_role()
-{
-	if (this->verify() == false)
-	{
-		return Role::NONE;
-	}
-	
-	std::string table_name = this->info.get_table_name(voba::Auth::CLASS_NAME);
-	
-	std::list<std::string> strs;
-	strs.push_back("ROLE");
-	strs.push_back(table_name);
-	strs.push_back("ACCOUNT='"+this->account+"'");
-	
-	std::string query = voba::SqlCommandBuilder::build(voba::SqlCommand::select, strs);
-	
-	sql::ResultSet* result_set = this->statement->executeQuery(query);
-	if (result_set->next())
-	{
-		return static_cast<voba::Role>(std::stoi(result_set->getString(1)));
-	}
-	
-	return Role::NONE;
+	return user;
 }
 

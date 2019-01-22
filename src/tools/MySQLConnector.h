@@ -28,6 +28,7 @@ namespace voba
 			MySQLConnector();
 			~MySQLConnector();
 			
+			sql::ResultSet* select();
 			sql::ResultSet* select(const std::string id);
 			sql::ResultSet* select(const std::list<Column> where_conditions);
 			const bool insert(const T t) { return false; }; // need specialization

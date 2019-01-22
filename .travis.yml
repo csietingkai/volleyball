@@ -63,4 +63,4 @@ before_install:
 
 script: 
   - make
-  - ./volleyball.exe test
+  - ./volleyball.exe test < resources/auth.test

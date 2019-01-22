@@ -25,6 +25,28 @@ voba::MySQLConnector<T>::~MySQLConnector()
 }
 
 template <class T>
+sql::ResultSet* voba::MySQLConnector<T>::select()
+{
+	sql::ResultSet *result_set;
+	SqlCommandBuilder builder;
+	
+	std::string query = builder.select().from(this->table).to_string();
+	
+	this->logger.debug(query);
+	
+	try
+	{
+		result_set = this->statement->executeQuery(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	return result_set;
+}
+
+template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const std::string id)
 {
 	voba::Column cid("id");
@@ -118,7 +140,7 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 template<> const bool voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
 	bool ret;
-	std::list<std::string> query_list = {};
+	/*std::list<std::string> query_list = {};
 	query_list.push_back(this->table_name);
 	
 	std::string values = "'"+p.get_id()+"',";
@@ -141,14 +163,14 @@ template<> const bool voba::MySQLConnector<voba::Person>::insert(const voba::Per
 	{
 		this->logger.error("SQL Exception happened !!");
 		this->print_sql_exception(e);
-	}
+	}*/
 	return ret;
 }
 
 template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p, const std::string old_id)
 {
 	int ret = 0;
-	std::vector<std::string> columns
+	/*std::vector<std::string> columns
 	{
 		"name", "'"+p.get_name()+"'",
 		"age", std::to_string(p.get_age()),
@@ -179,7 +201,7 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 			this->logger.error("SQL Exception happened !!");
 			this->print_sql_exception(e);
 		}
-	}
+	}*/
 	return ret;
 }
 
