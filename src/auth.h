@@ -5,7 +5,6 @@
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
 #include <cppconn/statement.h>
-#include <list>
 #include <mysql_connection.h>
 #include <iostream>
 
@@ -15,6 +14,12 @@
 
 namespace voba
 {
+	/**
+	 * role for controll if this user can do this action or not
+	 * 
+	 * @auther tingkai
+	 * @date 2019.01.23
+	 */
 	enum class Role : int
 	{
 		OWNER = 1,
@@ -24,6 +29,14 @@ namespace voba
 		NONE = 16
 	};
 	
+	/**
+	 * correspond data structure in database 'Auth' table
+	 *  
+	 * @see auth.h: enum Role, type int
+	 * 
+	 * @auther tingkai
+	 * @date 2019.01.23
+	 */
 	struct User
 	{
 		std::string id;
@@ -32,6 +45,16 @@ namespace voba
 		Role role;
 	};
 	
+	/**
+	 * connect to mysql and see is this pair of account and password is exist in database
+	 * if exist, return user with id and role
+	 * if not, return user with role 'NONE'
+	 * 
+	 * @see auth.h: struct User(string, string, string, Role)
+	 * 
+	 * @auther tingkai
+	 * @date 2019.01.23
+	 */
 	const User auth(const std::string account, const std::string pwd);
 }
 
