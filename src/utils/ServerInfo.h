@@ -65,12 +65,15 @@ namespace voba
 			std::vector<voba::Column> columns;
 	};
 	
+	/**
+	 * get the configuration of MySQL database
+	 * 
+	 * @auther tingkai
+	 * @date 2019.01.27
+	 */
 	class ServerInfo
 	{
 		public:
-			// read the 'server_info.xml' as server configuration
-			// <table> <--> class Table
-			// <column> <--> class Column
 			ServerInfo();
 			ServerInfo(const std::string xml_path);
 			
@@ -101,6 +104,14 @@ namespace voba
 			const static std::string ATTR_TYPE;
 			const static std::string ATTR_NULLABLE;
 			
+			/**
+			 * read the 'server_info.xml' as server configuration <br/>
+			 * &lt;table&gt; &lt;--&gt; class Table
+			 * &lt;column&gt; &lt;--&gt; class Column
+			 * 
+			 * @auther tingkai
+			 * @date 2019.01.27
+			 */
 			void init(const std::string xml_path);
 	};
 }
