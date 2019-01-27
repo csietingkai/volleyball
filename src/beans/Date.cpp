@@ -34,39 +34,6 @@ const std::string voba::Date::to_string() const
 	return re;
 }
 
-const voba::Date& voba::Date::operator =(const voba::Date& other)
-{
-	this->year = other.get_year();
-	this->month = other.get_month();
-	this->day = other.get_day();
-	this->check_member_vars();
-	this->week = this->calculate_week();
-	return *this;
-}
-
-const bool voba::Date::operator ==(const voba::Date& other) const
-{
-	bool ret = true;
-	ret = ret && (this->get_year() == other.get_year());
-	ret = ret && (this->get_month() == other.get_month());
-	ret = ret && (this->get_day() == other.get_day());
-	return ret;
-}
-
-const bool voba::Date::operator <(const voba::Date& other) const
-{
-	bool ret = this->get_year() < other.get_year();
-	if(this->get_year() == other.get_year())
-	{
-		ret = this->get_month() < other.get_month();
-		if(this->get_month() == other.get_month())
-		{
-			ret = this->get_day() < other.get_day();
-		}
-	}
-	return ret;
-}
-
 std::ostream& operator <<(std::ostream& strm, const voba::Date& other)
 {
 	strm << other.to_string();
@@ -179,6 +146,39 @@ const voba::Date voba::Date::previous_day() const
 	if (carry)
 	{
 		ret = ret.previous_month();
+	}
+	return ret;
+}
+
+const voba::Date& voba::Date::operator =(const voba::Date& other)
+{
+	this->year = other.get_year();
+	this->month = other.get_month();
+	this->day = other.get_day();
+	this->check_member_vars();
+	this->week = this->calculate_week();
+	return *this;
+}
+
+const bool voba::Date::operator ==(const voba::Date& other) const
+{
+	bool ret = true;
+	ret = ret && (this->get_year() == other.get_year());
+	ret = ret && (this->get_month() == other.get_month());
+	ret = ret && (this->get_day() == other.get_day());
+	return ret;
+}
+
+const bool voba::Date::operator <(const voba::Date& other) const
+{
+	bool ret = this->get_year() < other.get_year();
+	if(this->get_year() == other.get_year())
+	{
+		ret = this->get_month() < other.get_month();
+		if(this->get_month() == other.get_month())
+		{
+			ret = this->get_day() < other.get_day();
+		}
 	}
 	return ret;
 }
