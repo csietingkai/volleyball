@@ -4,7 +4,9 @@
 #include <assert.h>
 #include <iostream>
 
-#include "../src/beans/DateTime.h"
+#include "../beans/DateTime.h"
+#include "../models/Person.h"
+#include "../tools/MySQLConnector.h"
 
 namespace voba
 {

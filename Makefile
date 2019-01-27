@@ -7,11 +7,10 @@ BOOST_LOG_FLAG = -lboost_log -lboost_system -lboost_thread -lboost_log_setup
 
 EXE = volleyball.exe
 SRCDIR := ./src
-TESTDIR := ./test
 OBJDIR := ./obj
 LOGDIR := ./logs
 SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp) $(wildcard $(SRCDIR)/**/**/*.cpp)
-OBJS := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS)) $(OBJDIR)/test/test.o $(OBJDIR)/main.o
+OBJS := $(OBJDIR)/main.o $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 all: $(EXE)
 
@@ -19,10 +18,6 @@ $(EXE): $(OBJS)
 	$(CPP) $(LDFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 	
 $(OBJDIR)/main.o: ./main.cpp
-	@mkdir -p $(@D)
-	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
-
-$(OBJDIR)/test/test.o: $(TESTDIR)/test.cpp
 	@mkdir -p $(@D)
 	$(CPP) $(CPPFLAGS) -o $@ $^ $(MYSQL_FLAG) $(GTKMM_FLAG) $(BOOST_LOG_FLAG)
 
