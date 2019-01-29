@@ -14,6 +14,11 @@ voba::LoginPage::~LoginPage()
 {
 }
 
+void voba::LoginPage::set_callback(void (*f)(void))
+{
+	this->callback = f;
+}
+
 // protected
 void voba::LoginPage::set_position()
 {
@@ -54,9 +59,9 @@ void voba::LoginPage::set_signal_handler()
 	});
 }
 
-
 // private
 void voba::LoginPage::on_btn_login_clicked()
 {
 	std::cout << "login" << std::endl;
+	this->callback();
 }

@@ -2,11 +2,9 @@
 #define LOGIN_H_
 
 #include <gtkmm.h>
-#include <map>
-#include <unistd.h>
-#include <vector>
 
-#include "../../tools/Logger.h"
+#include "../../auth.h"
+#include "page_enum.h"
 
 namespace voba
 {
@@ -16,9 +14,12 @@ namespace voba
 			const static std::string CLASS_NAME;
 			const static int WINDOW_WIDTH = 250;
 			const static int WINDOW_HEIGHT = 100;
+			const static Page type = Page::LOGIN_PAGE;
 			
 			LoginPage();
 			virtual ~LoginPage();
+			
+			void set_callback(void (*f)(void));
 			
 		protected:
 			Gtk::Box vbox_center;
@@ -37,9 +38,10 @@ namespace voba
 			void set_signal_handler();
 			
 		private:
+			void (*callback)();
+			
 			void on_btn_login_clicked();
 	};
-
 }
 
 #endif // LOGIN_H_

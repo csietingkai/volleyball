@@ -2,14 +2,17 @@
 #define MAIN_WINDOW_H_
 
 #include <gtkmm.h>
-#include <unistd.h>
-#include <vector>
 
 #include "../tools/Logger.h"
+#include "pages/app.h"
 #include "pages/login.h"
 
 namespace voba
 {
+	Page current_page;
+	void callback();
+	void switch_page();
+	
 	class MainWindow : public Gtk::Window, Logable
 	{
 		public:
@@ -17,20 +20,22 @@ namespace voba
 			
 			MainWindow();
 			virtual ~MainWindow();
+			
+			friend void switch_page();
 		
 		protected:
-			
-			
-		private:
 			const static std::string WINDOW_TITLE;
 			const static int CONTAINER_BORDER_SIZE = 20;
 			const static int SPACING_BORDER_SIZE = 10;
 			const static int BUTTON_SPACING_SIZE = 5;
 			
+		private:
+			User user;
+			
 			LoginPage login_page;
+			AppPage app_page;
 			
 			void init();
-			void setting_login_page();
 	};
 }
 

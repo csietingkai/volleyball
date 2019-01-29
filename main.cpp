@@ -10,35 +10,34 @@
 
 int main(int argc, char* argv[])
 {
-	std::cout << "account: ";
-	std::string account;
-	std::cin >> account;
-	std::cout << "password: ";
-	std::string pwd;
-	std::cin >> pwd;
-	
-	voba::User user = voba::auth(account, pwd);
-	if (user.role <= voba::Role::USER)
+	if (argc > 1 && strcmp(argv[1], "test") == 0)
 	{
-		if (argc > 1 && strcmp(argv[1], "test") == 0)
+		std::cout << "account: ";
+		std::string account;
+		std::cin >> account;
+		std::cout << "password: ";
+		std::string pwd;
+		std::cin >> pwd;
+		
+		voba::User user = voba::auth(account, pwd);
+		if (user.role <= voba::Role::USER) 
 		{
 			voba::test_main();
-			return 0;
 		}
 		else
 		{
-			// TODO need to test manually
-			Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
-
-			voba::MainWindow window;
-			
-			return app->run(window);
+			std::cout << "Auth Failed" << std::endl;
+			return 1;
 		}
+		return 0;
 	}
 	else
 	{
-		std::cout << "Auth Failed" << std::endl;
+		// TODO need to test manually
+		Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+
+		voba::MainWindow window;
+		
+		return app->run(window);
 	}
-	
-	return 1;
 }
