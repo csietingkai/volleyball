@@ -3,7 +3,8 @@
 const std::string voba::MainWindow::LoginPage::CLASS_NAME = "LoginPage";
 
 // constructors
-voba::MainWindow::LoginPage::LoginPage()
+voba::MainWindow::LoginPage::LoginPage(voba::MainWindow& parent)
+	: parent(parent)
 {
 	this->set_position();
 	this->set_attribute();
@@ -57,5 +58,8 @@ void voba::MainWindow::LoginPage::set_signal_handler()
 // private
 void voba::MainWindow::LoginPage::on_btn_login_clicked()
 {
-	std::cout << "login" << std::endl;
+	std::string account = this->entry_username.get_text();
+	std::string pwd = this->entry_password.get_text();
+	voba::User user = voba::auth(account, pwd);
+	this->parent.login_callback(user);
 }

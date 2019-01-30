@@ -17,7 +17,7 @@ namespace voba
 			MainWindow();
 			virtual ~MainWindow();
 			
-			friend void switch_page();
+			void login_callback(const User user);
 		
 		protected:
 			const static std::string WINDOW_TITLE;
@@ -28,15 +28,16 @@ namespace voba
 		private:
 			User user;
 			
+			Gtk::Box box_all;
 			class LoginPage : public Gtk::Box
 			{
 				public:
 					const static std::string CLASS_NAME;
 					const static int WINDOW_WIDTH = 250;
 					const static int WINDOW_HEIGHT = 100;
-					const static Page type = Page::LOGIN_PAGE;
+					const static Page TYPE = Page::LOGIN_PAGE;
 					
-					LoginPage();
+					LoginPage(MainWindow& parent);
 					virtual ~LoginPage();
 					
 				protected:
@@ -56,18 +57,21 @@ namespace voba
 					void set_signal_handler();
 					
 				private:
+					MainWindow& parent;
 					
 					void on_btn_login_clicked();
 			}; 
 			LoginPage login_page;
+			
 			class AppPage : public Gtk::Box
 			{
 				public:
 					const static std::string CLASS_NAME;
 					const static int WINDOW_WIDTH = 250;
 					const static int WINDOW_HEIGHT = 100;
+					const static Page TYPE = Page::APP_PAGE;
 					
-					AppPage();
+					AppPage(MainWindow& parent);
 					virtual ~AppPage();
 					
 				protected:
@@ -75,7 +79,10 @@ namespace voba
 					void set_attribute();
 					void set_signal_handler();
 					
+					Gtk::Button btn_a;
+					
 				private:
+					MainWindow& parent;
 			};
 			AppPage app_page;
 			
