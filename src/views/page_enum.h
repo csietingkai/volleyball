@@ -3,8 +3,6 @@
 
 #include <gtkmm.h>
 
-#include "../../auth.h"
-
 namespace voba
 {
 	enum Page : int

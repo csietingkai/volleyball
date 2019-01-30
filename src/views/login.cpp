@@ -1,26 +1,21 @@
-#include "login.h"
+#include "MainWindow.h"
 
-const std::string voba::LoginPage::CLASS_NAME = "LoginPage";
+const std::string voba::MainWindow::LoginPage::CLASS_NAME = "LoginPage";
 
 // constructors
-voba::LoginPage::LoginPage()
+voba::MainWindow::LoginPage::LoginPage()
 {
 	this->set_position();
 	this->set_attribute();
 	this->set_signal_handler();
 }
 
-voba::LoginPage::~LoginPage()
+voba::MainWindow::LoginPage::~LoginPage()
 {
-}
-
-void voba::LoginPage::set_callback(void (*f)(void))
-{
-	this->callback = f;
 }
 
 // protected
-void voba::LoginPage::set_position()
+void voba::MainWindow::LoginPage::set_position()
 {
 	pack_start(this->vbox_center);
 		this->vbox_center.pack_start(this->hbox_username_input);
@@ -34,7 +29,7 @@ void voba::LoginPage::set_position()
 				this->btnbox_login.pack_start(this->btn_login);
 }
 
-void voba::LoginPage::set_attribute()
+void voba::MainWindow::LoginPage::set_attribute()
 {
 	this->vbox_center.set_orientation(Gtk::ORIENTATION_VERTICAL);
 	this->vbox_center.set_border_width(150);
@@ -51,7 +46,7 @@ void voba::LoginPage::set_attribute()
 	this->btn_login.set_label("login");
 }
 
-void voba::LoginPage::set_signal_handler()
+void voba::MainWindow::LoginPage::set_signal_handler()
 {
 	this->btn_login.signal_clicked().connect([&]()
 	{
@@ -60,8 +55,7 @@ void voba::LoginPage::set_signal_handler()
 }
 
 // private
-void voba::LoginPage::on_btn_login_clicked()
+void voba::MainWindow::LoginPage::on_btn_login_clicked()
 {
 	std::cout << "login" << std::endl;
-	this->callback();
 }
