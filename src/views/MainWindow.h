@@ -1,7 +1,9 @@
 #ifndef MAIN_WINDOW_H_
 #define MAIN_WINDOW_H_
 
+#include <chrono>
 #include <gtkmm.h>
+#include <thread>
 
 #include "../tools/Logger.h"
 #include "../auth.h" 
@@ -42,6 +44,8 @@ namespace voba
 					
 				protected:
 					Gtk::Box vbox_center;
+						Gtk::Box hbox_login_msg;
+							Gtk::Label label_login_msg;
 						Gtk::Box hbox_username_input;
 							Gtk::Label label_username;
 							Gtk::Entry entry_username;
@@ -52,6 +56,7 @@ namespace voba
 							Gtk::ButtonBox btnbox_login;
 								Gtk::Button btn_login;
 					
+					void init();
 					void set_position();
 					void set_attribute();
 					void set_signal_handler();
@@ -75,6 +80,7 @@ namespace voba
 					virtual ~AppPage();
 					
 				protected:
+					void init();
 					void set_position();
 					void set_attribute();
 					void set_signal_handler();

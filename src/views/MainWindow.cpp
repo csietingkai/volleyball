@@ -17,16 +17,9 @@ voba::MainWindow::~MainWindow()
 
 void voba::MainWindow::login_callback(const voba::User user)
 {
-	std::cout << user.id << std::endl;
-	std::cout << user.account << std::endl;
-	std::cout << user.pwd << std::endl;
-	std::cout << static_cast<int>(user.role) << std::endl;
 	this->user = user;
-	if (static_cast<int>(user.role) < 16)
-	{
-		this->login_page.hide();
-		this->app_page.show();
-	}
+	this->login_page.hide();
+	this->app_page.show();
 }
 
 // protected

@@ -17,6 +17,11 @@ voba::MainWindow::AppPage::~AppPage()
 }
 
 // protected
+void voba::MainWindow::AppPage::init()
+{
+	
+}
+
 void voba::MainWindow::AppPage::set_position()
 {
 	pack_start(this->btn_a);
