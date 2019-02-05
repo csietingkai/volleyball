@@ -6,10 +6,7 @@ const std::string voba::MainWindow::AppPage::CLASS_NAME = "AppPage";
 voba::MainWindow::AppPage::AppPage(MainWindow& parent)
 	: parent(parent)
 {
-	this->set_position();
-	this->set_attribute();
-	this->set_signal_handler();
-	show_all_children();
+	this->init();
 }
 
 voba::MainWindow::AppPage::~AppPage()
@@ -19,17 +16,20 @@ voba::MainWindow::AppPage::~AppPage()
 // protected
 void voba::MainWindow::AppPage::init()
 {
-	
+	show_all_children();
+	this->set_position();
+	this->set_attribute();
+	this->set_signal_handler();
 }
 
 void voba::MainWindow::AppPage::set_position()
 {
-	pack_start(this->btn_a);
+	pack_start(this->vbox_center);
 }
 
 void voba::MainWindow::AppPage::set_attribute()
 {
-	this->btn_a.set_label("a");
+	
 }
 
 void voba::MainWindow::AppPage::set_signal_handler()

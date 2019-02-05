@@ -20,6 +20,7 @@ void voba::MainWindow::login_callback(const voba::User user)
 	this->user = user;
 	this->login_page.hide();
 	this->app_page.show();
+	resize(voba::MainWindow::AppPage::WINDOW_WIDTH, voba::MainWindow::AppPage::WINDOW_HEIGHT);
 }
 
 // protected

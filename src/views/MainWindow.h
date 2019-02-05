@@ -72,20 +72,23 @@ namespace voba
 			{
 				public:
 					const static std::string CLASS_NAME;
-					const static int WINDOW_WIDTH = 250;
-					const static int WINDOW_HEIGHT = 100;
+					const static int WINDOW_WIDTH = 1000;
+					const static int WINDOW_HEIGHT = 650;
 					const static Page TYPE = Page::APP_PAGE;
 					
 					AppPage(MainWindow& parent);
 					virtual ~AppPage();
 					
 				protected:
+					Gtk::Box vbox_center;
+						Gtk::StackSidebar sidebar;
+						Gtk::Separator separator;
+						Gtk::Stack stack;
+					
 					void init();
 					void set_position();
 					void set_attribute();
 					void set_signal_handler();
-					
-					Gtk::Button btn_a;
 					
 				private:
 					MainWindow& parent;
