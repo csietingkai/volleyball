@@ -132,7 +132,7 @@ voba::SqlCommandBuilder& voba::SqlCommandBuilder::set(const std::list<Column> co
 	for (auto it = columns.begin(); it != columns.end(); it++)
 	{
 		this->store += this->handle_column(*it);
-		this->store += voba::SqlCommandBuilder::SPACE;
+		this->store += voba::SqlCommandBuilder::COMMA;
 	}
 	this->store = this->store.substr(0, this->store.length()-1);
 	return *this;
