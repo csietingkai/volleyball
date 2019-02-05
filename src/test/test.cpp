@@ -66,18 +66,7 @@ void voba::test_logger()
 
 void voba::test_connector()
 {
-	voba::MySQLConnector<voba::Person> p_connector;
-	sql::ResultSet* res = p_connector.select("353de133f85ff64454a58ff782c31f483854c8f5");
-	sql::ResultSetMetaData *res_meta = res -> getMetaData();
-	int columns = res_meta -> getColumnCount();
-	while (res->next())
-	{
-		for (int i = 1; i <= columns; i++)
-		{
-			std::cout << res->getString(i) << "|" ;
-		}
-		std::cout << std::endl;
-	}
+	
 }
 
 void voba::test_sqlcommandbuilder()
