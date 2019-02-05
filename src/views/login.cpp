@@ -78,11 +78,8 @@ void voba::MainWindow::LoginPage::on_btn_login_clicked()
 	std::cout << user.account << std::endl;
 	std::cout << user.pwd << std::endl;
 	std::cout << static_cast<int>(user.role) << std::endl;
-	if (static_cast<int>(user.role) < 16)
+	if (user.role > voba::Role::NONE)
 	{
-		this->hbox_login_msg.override_color(Gdk::RGBA("green"), Gtk::STATE_FLAG_NORMAL);
-		this->label_login_msg.set_text("login successful!!");
-		//std::this_thread::sleep_until(std::chrono::system_clock::now() + std::chrono::seconds(1));
 		this->parent.login_callback(user);
 	}
 	else

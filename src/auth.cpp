@@ -1,5 +1,37 @@
 #include "auth.h"
 
+std::ostream& voba::operator <<(std::ostream& strm, const voba::Role& role)
+{
+	switch (role)
+	{
+		case voba::Role::ROOT:
+			strm << "root";
+			break;
+		
+		case voba::Role::ADMIN:
+			strm << "admin";
+			break;
+		
+		case voba::Role::LEADER:
+			strm << "leader";
+			break;
+		
+		case voba::Role::USER:
+			strm << "user";
+			break;
+		
+		case voba::Role::NONE:
+			strm << "none";
+			break;
+		
+		default:
+			std::cerr << "invalid role" << std::endl;
+			break;
+	}
+	
+	return strm;
+}
+
 const voba::User voba::auth(const std::string account, const std::string pwd)
 {
 	// constant for each column and its index
@@ -40,3 +72,83 @@ const voba::User voba::auth(const std::string account, const std::string pwd)
 	return user;
 }
 
+std::ostream& voba::operator <<(std::ostream& strm, const voba::AuthState& state)
+{
+	switch (state)
+	{
+		case voba::AuthState::SUCCESS:
+			strm << "success";
+			break;
+		
+		case voba::AuthState::DUPLICATE_ACCOUNT_NAME:
+			strm << "duplicate account name";
+			break;
+		
+		case voba::AuthState::AUTH_NOT_ENOUGH:
+			strm << "auth level not enough";
+			break;
+		
+		case voba::AuthState::FAIL:
+			strm << "unknown fail";
+		
+		default:
+			std::cerr << "invalid state" << std::endl;
+			break;
+	}
+	
+	return strm;
+}
+
+const voba::AuthState voba::create_auth(const voba::User current_user, const voba::User new_user)
+{
+	voba::AuthState result = voba::AuthState::FAIL;
+	if (current_user.role > new_user.role)
+	{
+		voba::ServerInfo info;
+		voba::Table table = info.get_table("Auth");
+		sql::Driver *driver = get_driver_instance();
+		sql::Connection *connection = driver->connect(info.get_server(), info.get_account(), info.get_pwd());
+		connection->setSchema(info.get_schema());
+		sql::Statement *statement = connection->createStatement();
+		
+		Column id("id", "string");
+		id.set_value(voba::Utils::generate_uuid());
+		Column account("account", "string");
+		account.set_value(new_user.account);
+		Column pwd("pwd", "string");
+		pwd.set_value(new_user.pwd);
+		Column role("role", "int");
+		role.set_value(std::to_string(static_cast<int>(new_user.role)));
+		std::list<voba::Column> values = { id, account, pwd, role };
+		
+		voba::SqlCommandBuilder builder;
+		std::string query = builder.insert(table).values(values).to_string();
+		int ret = 0;
+		try
+		{
+			ret = statement->execute(query);
+			result = voba::AuthState::SUCCESS;
+		}
+		catch (sql::SQLException e)
+		{
+			std::string error_msg = "# ERR: ";
+			error_msg += e.what();
+			error_msg += " (MySQL error code: ";
+			error_msg += std::to_string(e.getErrorCode());
+			error_msg += ", SQLState: ";
+			error_msg += e.getSQLState();
+			error_msg += " )";
+			std::cout << error_msg << std::endl;
+			if (e.getErrorCode() == 1062)
+			{
+				result = voba::AuthState::DUPLICATE_ACCOUNT_NAME;
+			}
+		}
+	}
+	else 
+	{
+		result = voba::AuthState::AUTH_NOT_ENOUGH;
+	}
+	
+	return result;
+}
