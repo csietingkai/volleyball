@@ -24,14 +24,6 @@ namespace voba
 			const static std::string generate_uuid();
 			
 			/**
-			 * use boost library to generate a sha1 string
-			 * 
-			 * @auther tingkai
-			 * @date 2019.01.27
-			 */
-			const static std::string generate_sha1(const std::string str);
-			
-			/**
 			 * return a upper case string
 			 * 
 			 * @auther tingkai
@@ -79,7 +71,6 @@ namespace voba
 			 * @auther tingkai
 			 * @date 2019.01.27
 			 */
-			// 
 			const static std::string random_string();
 			/**
 			 * generate random string

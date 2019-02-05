@@ -54,7 +54,7 @@ namespace voba
 			friend std::ostream& operator <<(std::ostream& strm, const Person& other) { strm << other.to_string(); return strm; };
 			
 			// NOT RECOMMEND to use mannually
-			void update_id() override { this->id = Utils::generate_sha1(this->to_string()); };
+			void update_id(const std::string id) override { this->id = id; };
 		
 		private:
 			std::string name;

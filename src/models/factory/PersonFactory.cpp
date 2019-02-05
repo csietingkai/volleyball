@@ -45,7 +45,6 @@ const voba::Person& voba::PersonFactory::create(std::string name, int age, voba:
 const bool voba::PersonFactory::update(Person& new_person)
 {
 	std::string old_id = new_person.get_id();
-	new_person.update_id();
 	
 	int result = voba::PersonFactory::p_connector.update(new_person, old_id);
 	if (result == 1)
@@ -60,8 +59,6 @@ const bool voba::PersonFactory::update(Person& new_person)
 
 const bool voba::PersonFactory::remove(Person& person)
 {
-	person.update_id();
-	
 	int result = voba::PersonFactory::p_connector.remove(person);
 	if (result == 1)
 	{

@@ -12,7 +12,7 @@ namespace voba
 			
 			virtual const std::string get_id() const { return this->id; };
 			
-			virtual void update_id() = 0;
+			virtual void update_id(const std::string id) = 0;
 		
 		protected:
 			std::string id;

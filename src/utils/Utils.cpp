@@ -8,7 +8,7 @@ const std::string voba::Utils::generate_uuid()
 	return boost::uuids::to_string(uuid);
 }
 
-const std::string voba::Utils::generate_sha1(const std::string str)
+/*const std::string voba::Utils::generate_sha1(const std::string str)
 {
 	// stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c
 	boost::uuids::detail::sha1 sha1;
@@ -23,7 +23,7 @@ const std::string voba::Utils::generate_sha1(const std::string str)
 
 	std::string ret(buf);
 	return ret;
-}
+}*/
 
 const std::string voba::Utils::to_upper_case(const std::string str)
 {

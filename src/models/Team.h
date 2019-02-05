@@ -46,7 +46,7 @@ namespace voba
 			const Person& operator [](const unsigned int index) { return this->get_member(index); };
 			friend std::ostream& operator <<(std::ostream& strm, const Team& other) { strm << other.to_string(); return strm; };
 			
-			void update_id() override { this->id = Utils::generate_sha1(this->get_name()); };
+			void update_id(const std::string id) override { this->id = id; };
 		
 		private:
 			std::string name;

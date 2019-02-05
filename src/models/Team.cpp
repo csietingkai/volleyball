@@ -6,11 +6,11 @@ const std::string voba::Team::CLASS_NAME = "Team";
 voba::Team::Team(const std::string name)
 	: Logable(voba::Team::CLASS_NAME)
 {
+	this->id = voba::Utils::generate_uuid();
 	this->name = name;
 	this->personset.clear();
 	this->init_prefer_week();
 	this->init_prefer_time();
-	this->update_id();
 }
 
 voba::Team::Team(const Team& other)
@@ -137,7 +137,6 @@ const voba::Team& voba::Team::operator =(const voba::Team& other)
 		this->add_prefer_time(static_cast<voba::Time>(time));
 	}
 	
-	this->update_id();
 	return *this;
 }
 

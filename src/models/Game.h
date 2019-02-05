@@ -3,19 +3,45 @@
 
 #include <iostream>
 
+#include "IModel.h"
+#include "Team.h"
+#include "../beans/DateTime.h"
+#include "../tools/Logger.h"
+#include "../utils/Utils.h"
+
 namespace voba
 {
-	class Game
+	class Game : Logable, IModel
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			Game();
+			Game(const Team team1, const Team team2);
+			Game(const Team team1, const Team team2, const DateTime game_time);
 			
-			const std::string get_id() const { return this->id; };
-		
+			void set_team1(Team team1);
+			void set_team2(Team team2);
+			void set_judge(Person judge);
+			void set_game_time(DateTime game_time);
+			
+			const std::string get_id() const override { return IModel::get_id(); };
+			const Team get_team1() const;
+			const Team get_team2() const;
+			const Person get_judge() const;
+			const DateTime get_game_time() const;
+			const std::string to_string() const;
+			
+			const Game& operator =(const Game& other);
+			const bool operator ==(const Game& other);
+			const bool operator !=(const Game& other) { return !this->operator==(other); };
+			friend std::ostream& operator <<(std::ostream& strm, const Game& other) { strm << other.to_string(); return strm; };
+			
+			void update_id(const std::string id) override { this->id = id; };
+			
 		private:
-			std::string id;
+			Team team1;
+			Team team2;
+			DateTime game_time;
 	};
 }
 
