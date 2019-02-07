@@ -1,5 +1,45 @@
 #include "Date.h"
 
+std::ostream& voba::operator <<(std::ostream& strm, const Week& week)
+{
+	switch (week)
+	{
+		case voba::Role::SUNDAY:
+			strm << "Sunday";
+			break;
+		
+		case voba::Role::MONDAY:
+			strm << "Monday";
+			break;
+		
+		case voba::Role::TUESDAY:
+			strm << "Tuesdy";
+			break;
+		
+		case voba::Role::WEDNESDAY:
+			strm << "Wednesday";
+			break;
+		
+		case voba::Role::THURSDAY:
+			strm << "Thursday";
+			break;
+		
+		case voba::Role::FRIDAY:
+			strm << "Friday";
+			break;
+		
+		case voba::Role::SATURDAY:
+			strm << "Saturday";
+			break;
+		
+		default:
+			std::cerr << "invalid week" << std::endl;
+			break;
+	}
+	
+	return strm;
+}
+
 const std::string voba::Date::CLASS_NAME = "Date";
 
 // constructor

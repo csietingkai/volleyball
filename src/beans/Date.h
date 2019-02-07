@@ -8,26 +8,6 @@
 
 namespace voba
 {
-	const std::string MONTHS[] = 
-	{
-		"December", 
-		"Junary", "Feburary", "March", 
-		"April", "May", "June", 
-		"July", "August", "September", 
-		"October", "November", "December"
-	};
-
-	const std::string DAY_OF_WEEK[] = 
-	{
-		"Sunday",
-		"Monday",
-		"Tuesdy",
-		"Wednesday", 
-		"Thursday", 
-		"Friday", 
-		"Saturday" 
-	};
-
 	/**
 	 * enum Week, from Sunday to Saturday
 	 * 
@@ -44,6 +24,8 @@ namespace voba
 		FRIDAY = 5,
 		SATURDAY = 6
 	};
+	
+	std::ostream& operator <<(std::ostream& strm, const Week& weel);
 
 	/**
 	 * class Date
