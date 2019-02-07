@@ -8,6 +8,17 @@
 
 namespace voba
 {
+	const std::string DAY_OF_WEEK[] = 
+	{
+		"Sunday",
+		"Monday",
+		"Tuesdy",
+		"Wednesday", 
+		"Thursday", 
+		"Friday", 
+		"Saturday" 
+	};
+
 	/**
 	 * enum Week, from Sunday to Saturday
 	 * 

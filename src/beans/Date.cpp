@@ -4,31 +4,31 @@ std::ostream& voba::operator <<(std::ostream& strm, const Week& week)
 {
 	switch (week)
 	{
-		case voba::Role::SUNDAY:
+		case voba::Week::SUNDAY:
 			strm << "Sunday";
 			break;
 		
-		case voba::Role::MONDAY:
+		case voba::Week::MONDAY:
 			strm << "Monday";
 			break;
 		
-		case voba::Role::TUESDAY:
+		case voba::Week::TUESDAY:
 			strm << "Tuesdy";
 			break;
 		
-		case voba::Role::WEDNESDAY:
+		case voba::Week::WEDNESDAY:
 			strm << "Wednesday";
 			break;
 		
-		case voba::Role::THURSDAY:
+		case voba::Week::THURSDAY:
 			strm << "Thursday";
 			break;
 		
-		case voba::Role::FRIDAY:
+		case voba::Week::FRIDAY:
 			strm << "Friday";
 			break;
 		
-		case voba::Role::SATURDAY:
+		case voba::Week::SATURDAY:
 			strm << "Saturday";
 			break;
 		
