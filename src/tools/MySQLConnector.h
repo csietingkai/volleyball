@@ -29,10 +29,10 @@ namespace voba
 			~MySQLConnector();
 			
 			sql::ResultSet* select();
-			sql::ResultSet* select(const std::string id);
+			sql::ResultSet* select(const UUID id);
 			sql::ResultSet* select(const std::list<Column> where_conditions);
-			const bool insert(const T t) { return false; }; // need specialization
-			const int update(const T t, const std::string old_id) { return 0; }; // need specialization
+			const int insert(const T t) { return 0; }; // need specialization
+			const int update(const T t) { return 0; }; // need specialization
 			const int remove(const T t);
 			const int remove(const std::list<Column> where_conditions);
 		
@@ -47,14 +47,14 @@ namespace voba
 			void print_sql_exception(const sql::SQLException e);
 	};
 	
-	template<> const bool MySQLConnector<Game>::insert(const Game g);
-	template<> const int MySQLConnector<Game>::update(const Game g, const std::string old_id);
+	template<> const int MySQLConnector<Game>::insert(const Game g);
+	template<> const int MySQLConnector<Game>::update(const Game g);
 	
-	template<> const bool MySQLConnector<Person>::insert(const Person p);
-	template<> const int MySQLConnector<Person>::update(const Person p, const std::string old_id);
+	template<> const int MySQLConnector<Person>::insert(const Person p);
+	template<> const int MySQLConnector<Person>::update(const Person p);
 	
-	template<> const bool MySQLConnector<Team>::insert(const Team t);
-	template<> const int MySQLConnector<Team>::update(const Team t, const std::string old_id);
+	template<> const int MySQLConnector<Team>::insert(const Team t);
+	template<> const int MySQLConnector<Team>::update(const Team t);
 	
 	template class MySQLConnector<Game>;
 	template class MySQLConnector<Person>;

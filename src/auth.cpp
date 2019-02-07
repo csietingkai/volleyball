@@ -112,7 +112,8 @@ const voba::AuthState voba::create_auth(const voba::User current_user, const vob
 		sql::Statement *statement = connection->createStatement();
 		
 		Column id("id", "string");
-		id.set_value(voba::Utils::generate_uuid());
+		
+		id.set_value(voba::UUID::random_uuid().to_string());
 		Column account("account", "string");
 		account.set_value(new_user.account);
 		Column pwd("pwd", "string");
@@ -123,10 +124,9 @@ const voba::AuthState voba::create_auth(const voba::User current_user, const vob
 		
 		voba::SqlCommandBuilder builder;
 		std::string query = builder.insert(table).values(values).to_string();
-		int ret = 0;
 		try
 		{
-			ret = statement->execute(query);
+			statement->execute(query);
 			result = voba::AuthState::SUCCESS;
 		}
 		catch (sql::SQLException e)

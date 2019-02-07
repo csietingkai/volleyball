@@ -6,7 +6,6 @@ const std::string voba::Team::CLASS_NAME = "Team";
 voba::Team::Team(const std::string name)
 	: Logable(voba::Team::CLASS_NAME)
 {
-	this->id = voba::Utils::generate_uuid();
 	this->name = name;
 	this->personset.clear();
 	this->init_prefer_week();

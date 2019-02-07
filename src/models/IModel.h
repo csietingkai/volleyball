@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "../beans/UUID.h"
+
 namespace voba
 {
 	class IModel
@@ -10,12 +12,12 @@ namespace voba
 		public:
 			IModel() {};
 			
-			virtual const std::string get_id() const { return this->id; };
+			virtual const UUID get_id() const { return this->id; };
 			
-			virtual void update_id(const std::string id) = 0;
+			virtual void update_id(const UUID id) = 0;
 		
 		protected:
-			std::string id;
+			UUID id;
 	};
 }
 

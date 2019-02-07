@@ -27,8 +27,8 @@ namespace voba
 			const static std::string CLASS_NAME;
 			
 			// constructor
+			Person();
 			Person(const std::string name, const unsigned int age, const Gender gender, const std::string phonenumber, const ActiveStatus status);
-			Person(const std::string id);
 			Person(const Person& other);
 			
 			// setters
@@ -39,7 +39,7 @@ namespace voba
 			void set_active_status(const ActiveStatus status) { this->status = status; };
 			
 			// getters
-			const std::string get_id() const override { return IModel::get_id(); };
+			const UUID get_id() const override { return IModel::get_id(); };
 			const std::string get_name() const { return this->name; };
 			const int get_age() const { return this->age; };
 			const Gender get_gender() const { return this->gender; };
@@ -54,7 +54,7 @@ namespace voba
 			friend std::ostream& operator <<(std::ostream& strm, const Person& other) { strm << other.to_string(); return strm; };
 			
 			// NOT RECOMMEND to use mannually
-			void update_id(const std::string id) override { this->id = id; };
+			void update_id(const UUID id) override { this->id = id; };
 		
 		private:
 			std::string name;

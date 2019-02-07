@@ -23,7 +23,7 @@ namespace voba
 			void set_name(const std::string name) { this->name = name; };
 			
 			// getters
-			const std::string get_id() const override { return IModel::get_id(); };
+			const UUID get_id() const override { return IModel::get_id(); };
 			const std::string get_name() const { return this->name; };
 			const Person& get_member(const unsigned int index) const;
 			const std::string get_prefer_week() const;
@@ -46,7 +46,7 @@ namespace voba
 			const Person& operator [](const unsigned int index) { return this->get_member(index); };
 			friend std::ostream& operator <<(std::ostream& strm, const Team& other) { strm << other.to_string(); return strm; };
 			
-			void update_id(const std::string id) override { this->id = id; };
+			void update_id(const UUID id) override { this->id = id; };
 		
 		private:
 			std::string name;

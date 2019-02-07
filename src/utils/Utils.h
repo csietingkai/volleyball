@@ -16,14 +16,6 @@ namespace voba
 	{
 		public:
 			/**
-			 * use boost library to generate a uuid string
-			 * 
-			 * @auther tingkai
-			 * @date 2019.01.27
-			 */
-			const static std::string generate_uuid();
-			
-			/**
 			 * return a upper case string
 			 * 
 			 * @auther tingkai

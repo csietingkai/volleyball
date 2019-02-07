@@ -1,30 +1,6 @@
 #include "Utils.h"
 
 // public function
-const std::string voba::Utils::generate_uuid()
-{
-	boost::uuids::random_generator generator;
-	boost::uuids::uuid uuid = generator();
-	return boost::uuids::to_string(uuid);
-}
-
-/*const std::string voba::Utils::generate_sha1(const std::string str)
-{
-	// stackoverflow.com/questions/28489153/how-to-portably-compute-a-sha1-hash-in-c
-	boost::uuids::detail::sha1 sha1;
-	sha1.process_bytes(str.data(), str.size());
-	unsigned hash[5] = {0};
-	sha1.get_digest(hash);
-	char buf[41] = {0};
-	for (int i = 0; i < 5; i++)
-	{
-		std::sprintf(buf + (i << 3), "%08x", hash[i]);
-	}
-
-	std::string ret(buf);
-	return ret;
-}*/
-
 const std::string voba::Utils::to_upper_case(const std::string str)
 {
 	std::string ret = "";

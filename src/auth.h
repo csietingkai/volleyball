@@ -8,6 +8,7 @@
 #include <mysql_connection.h>
 #include <iostream>
 
+#include "beans/UUID.h"
 #include "tools/SqlCommandBuilder.h"
 #include "utils/ServerInfo.h"
 #include "utils/Utils.h"

@@ -13,6 +13,8 @@ namespace voba
 	{
 		public:
 			const static Team& create();
+			const static Team& insert_member(Team& team, const Person& member);
+			const static Team& delete_member(Team& team, const Person& member);
 			const static bool update(const Team new_team);
 			const static bool remove(const Team team);
 		

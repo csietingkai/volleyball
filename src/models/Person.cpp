@@ -3,21 +3,20 @@
 const std::string voba::Person::CLASS_NAME = "Person";
 
 // constructor
+voba::Person::Person()
+	: voba::Logable(voba::Person::CLASS_NAME)
+{
+	
+}
+
 voba::Person::Person(const std::string name, const unsigned int age, const Gender gender, const std::string phonenumber, const ActiveStatus status)
 	: voba::Logable(voba::Person::CLASS_NAME)
 {
-	this->id = voba::Utils::generate_uuid();
 	this->name = name;
 	this->gender = gender;
 	this->age = age;
 	this->phonenumber = phonenumber;
 	this->status = status;
-}
-
-voba::Person::Person(const std::string id)
-	: voba::Logable(voba::Person::CLASS_NAME)
-{
-	this->id = id;
 }
 
 voba::Person::Person(const voba::Person& other)

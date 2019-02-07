@@ -12,7 +12,7 @@
 			<column name="role" type="int"/>
 		</table>
 		<table name="persons" class_name="Person">
-			<column name="id" type="sha1"/>
+			<column name="id" type="uuid"/>
 			<column name="name" type="string"/>
 			<column name="age" type="int"/>
 			<column name="gender" type="boolean"/>
@@ -20,16 +20,17 @@
 			<column name="is_active" type="boolean"/>
 		</table>
 		<table name="teams" class_name="Team">
-			<column name="id" type="sha1"/>
+			<column name="id" type="uuid"/>
 			<column name="name" type="string"/>
 			<column name="member_id" type="sha1"/>
 			<column name="prefer_week" type="string"/>
 			<column name="perfer_time" type="string"/>
 		</table>
 		<table name="games" class_name="Game">
-			<column name="id" type="sha1"/>
-			<column name="team_1_id" type="sha1"/>
-			<column name="team_2_id" type="sha1"/>
+			<column name="id" type="uuid"/>
+			<column name="team_1_id" type="uuid"/>
+			<column name="team_2_id" type="uuid"/>
+			<column name="judge_id" type="uuid" nullable="true"/>
 			<column name="datetime" type="datetime" nullable="true"/>
 		</table>
 	</tables>
