@@ -16,24 +16,28 @@ namespace voba
 		public:
 			const static std::string CLASS_NAME;
 			
+			// constructors
 			Game(const Team team1, const Team team2);
 			Game(const Team team1, const Team team2, const Person judge);
 			Game(const Team team1, const Team team2, const DateTime game_time);
 			Game(const Team team1, const Team team2, const Person judge, const DateTime game_time);
 			Game(const Game& other);
 			
+			// setters
 			void set_team1(const Team team1) { this->team1 = team1; };
 			void set_team2(const Team team2) { this->team2 = team2; };
 			void set_judge(const Person judge) { this->judge = judge; };
 			void set_game_time(const DateTime game_time) { this->game_time = game_time; };
 			
+			// getters
 			const UUID get_id() const override { return IModel::get_id(); };
-			const Team get_team1() const;
-			const Team get_team2() const;
-			const Person get_judge() const;
-			const DateTime get_game_time() const;
+			const Team get_team1() const { return this->team1; };
+			const Team get_team2() const { return this->team2; };
+			const Person get_judge() const { return this->judge; };
+			const DateTime get_game_time() const { return this->game_time; };
 			const std::string to_string() const;
 			
+			// operators
 			const Game& operator =(const Game& other);
 			const bool operator ==(const Game& other);
 			const bool operator !=(const Game& other) { return !this->operator==(other); };
