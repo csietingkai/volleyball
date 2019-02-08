@@ -49,7 +49,7 @@ sql::ResultSet* voba::MySQLConnector<T>::select()
 template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const voba::UUID id)
 {
-	voba::Column cid("id");
+	voba::Column cid("id", "uuid");
 	cid.set_value(id.to_string());
 	std::list<voba::Column> columns;
 	columns.push_back(cid);
@@ -139,12 +139,73 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 // Person specialization
 template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
-	return 0;
+	voba::Column id("id", "string");
+	id.set_value(p.get_id().to_string());
+	voba::Column name("name", "string");
+	name.set_value(p.get_name());
+	voba::Column age("age", "int");
+	age.set_value(std::to_string(p.get_age()));
+	voba::Column gender("gender", "bool");
+	gender.set_value(std::to_string(static_cast<bool>(p.get_gender())));
+	voba::Column phonenumber("phone_number", "string");
+	phonenumber.set_value(p.get_phonenumber());
+	voba::Column status("is_active", "bool");
+	status.set_value(std::to_string(static_cast<bool>(p.get_active_status())));
+	
+	std::list<voba::Column> values = { id, name, age, gender, phonenumber, status };
+		
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.insert(this->table).values(values).to_string();
+	
+	int ret = 0;
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	
+	return ret;
 }
 
 template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p)
 {
-	return 0;
+	voba::Column name("name", "string");
+	name.set_value(p.get_name());
+	voba::Column age("age", "int");
+	age.set_value(std::to_string(p.get_age()));
+	voba::Column gender("gender", "bool");
+	gender.set_value(std::to_string(static_cast<bool>(p.get_gender())));
+	voba::Column phonenumber("phone_number", "string");
+	phonenumber.set_value(p.get_phonenumber());
+	voba::Column status("is_active", "bool");
+	status.set_value(std::to_string(static_cast<bool>(p.get_active_status())));;
+	std::list<voba::Column> sets = { name, age, gender, phonenumber, status };
+	
+	voba::Column id("id", "string");
+	id.set_value(p.get_id().to_string());
+	std::list<voba::Column> where_conditions;
+	where_conditions.push_back(id);
+	
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	
+	std::cout << query << std::endl;
+	
+	int ret = 0;
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	return ret;
 }
 
 // Team specialization
