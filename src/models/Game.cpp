@@ -73,6 +73,7 @@ const voba::Game& voba::Game::operator =(const voba::Game& other)
 	this->team2 = other.get_team2();
 	this->judge = other.get_judge();
 	this->game_time = other.get_game_time();
+	this->update_id(other.get_id());
 	
 	return *this;
 }

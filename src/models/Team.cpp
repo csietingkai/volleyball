@@ -135,6 +135,7 @@ const voba::Team& voba::Team::operator =(const voba::Team& other)
 		voba::Time time(h, m, s);
 		this->add_prefer_time(static_cast<voba::Time>(time));
 	}
+	this->update_id(other.get_id());
 	
 	return *this;
 }

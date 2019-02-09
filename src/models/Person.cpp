@@ -51,6 +51,7 @@ const voba::Person& voba::Person::operator =(const voba::Person& other)
 	this->gender = other.get_gender();
 	this->phonenumber = other.get_phonenumber();
 	this->status = other.get_active_status();
+	this->update_id(other.get_id());
 	
 	return *this;
 }
