@@ -39,11 +39,19 @@ sudo apt-get install libgtkmm-3.0-dev
 
 + duplicate class name condition in log file
 
-## Maybe can Do it List
-
-+ factory use Column as parameter
-+ MySQLConnector use IModel as parameter
-+ Logger add static member function
-
 ## Usage
 
++ clone the whole project
+```
+$ git clone git@github.com:csietingkai/volleyball.git
+```
+
++ generate executable file
+```
+$ make
+```
+
++ execute the exe file
+```
+$ ./volleyball.exe
+```
