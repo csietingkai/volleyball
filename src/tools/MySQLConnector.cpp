@@ -128,18 +128,75 @@ void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 // Game specialization
 template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g)
 {
-	return 0;
+	voba::Column id("id", "uuid");
+	id.set_value(g.get_id().to_string());
+	voba::Column team1_id("team_1_id", "uuid");
+	team1_id.set_value(g.get_team1().get_id().to_string());
+	voba::Column team2_id("team_2_id", "uuid");
+	team2_id.set_value(g.get_team2().get_id().to_string());
+	voba::Column judge_id("judge_id", "uuid");
+	judge_id.set_value(g.get_judge().get_id().to_string());
+	voba::Column game_time("game_time", "datetime");
+	game_time.set_value(g.get_game_time().to_string());
+	std::list<voba::Column> values = { id, team1_id, team2_id, judge_id, game_time };
+		
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.insert(this->table).values(values).to_string();
+	
+	int ret = 0;
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	
+	return ret;
 }
 
 template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g)
 {
-	return 0;
+	voba::Column team1_id("team_1_id", "uuid");
+	team1_id.set_value(g.get_team1().get_id().to_string());
+	voba::Column team2_id("team_2_id", "uuid");
+	team2_id.set_value(g.get_team2().get_id().to_string());
+	voba::Column judge_id("judge_id", "uuid");
+	judge_id.set_value(g.get_judge().get_id().to_string());
+	voba::Column game_time("game_time", "datetime");
+	game_time.set_value(g.get_game_time().to_string());
+	std::list<voba::Column> sets = { team1_id, team2_id, judge_id, game_time };
+	
+	voba::Column id("id", "uuid");
+	id.set_value(g.get_id().to_string());
+	std::list<voba::Column> where_conditions;
+	where_conditions.push_back(id);
+		
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	
+	std::cout << query << std::endl;
+	
+	int ret = 0;
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	
+	return ret;
 }
 
 // Person specialization
 template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
-	voba::Column id("id", "string");
+	voba::Column id("id", "uuid");
 	id.set_value(p.get_id().to_string());
 	voba::Column name("name", "string");
 	name.set_value(p.get_name());
@@ -185,15 +242,13 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 	status.set_value(std::to_string(static_cast<bool>(p.get_active_status())));;
 	std::list<voba::Column> sets = { name, age, gender, phonenumber, status };
 	
-	voba::Column id("id", "string");
+	voba::Column id("id", "uuid");
 	id.set_value(p.get_id().to_string());
 	std::list<voba::Column> where_conditions;
 	where_conditions.push_back(id);
 	
 	voba::SqlCommandBuilder builder;
 	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
-	
-	std::cout << query << std::endl;
 	
 	int ret = 0;
 	try
@@ -211,11 +266,66 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 // Team specialization
 template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t)
 {
-	return 0;
+	voba::Column id("id", "uuid");
+	id.set_value(t.get_id().to_string());
+	voba::Column name("name", "string");
+	name.set_value(t.get_name());
+	Column prefer_week("prefer_week", "string");
+	prefer_week.set_value(t.get_prefer_week());
+	Column prefer_time("prefer_time", "string");
+	prefer_time.set_value(t.get_prefer_time());
+		
+	voba::SqlCommandBuilder builder;
+	
+	int ret = 0;
+	for (unsigned int i = 0; i < t.size(); i++)
+	{
+		Column member_id("member_id", "uuid");
+		member_id.set_value(t.get_member(i).get_id().to_string());
+		std::list<voba::Column> values = { id, name, member_id, prefer_week, prefer_time };
+		std::string query = builder.insert(this->table).values(values).to_string();
+		try
+		{
+			ret += this->statement->execute(query);
+		}
+		catch (sql::SQLException e)
+		{
+			this->logger.error("SQL Exception happened !!");
+			this->print_sql_exception(e);
+		}
+	}
+	
+	return ret;
 }
 
 template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team t)
 {
-	return 0;
+	voba::Column name("name", "string");
+	name.set_value(t.get_name());
+	Column prefer_week("prefer_week", "string");
+	prefer_week.set_value(t.get_prefer_week());
+	Column prefer_time("prefer_time", "string");
+	prefer_time.set_value(t.get_prefer_time());
+	std::list<voba::Column> sets = { name, prefer_week, prefer_time };
+		
+	voba::Column id("id", "uuid");
+	id.set_value(t.get_id().to_string());
+	std::list<voba::Column> where_conditions;
+	where_conditions.push_back(id);
+	
+	voba::SqlCommandBuilder builder;
+	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	
+	int ret = 0;
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	return ret;
 }
 
