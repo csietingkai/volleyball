@@ -74,10 +74,10 @@ void voba::MainWindow::LoginPage::on_btn_login_clicked()
 	std::string account = this->entry_username.get_text();
 	std::string pwd = this->entry_password.get_text();
 	voba::User user = voba::auth(account, pwd);
-	std::cout << user.id << std::endl;
+	/*std::cout << user.id << std::endl;
 	std::cout << user.account << std::endl;
 	std::cout << user.pwd << std::endl;
-	std::cout << static_cast<int>(user.role) << std::endl;
+	std::cout << user.role << std::endl;*/
 	if (user.role > voba::Role::NONE)
 	{
 		this->parent.login_callback(user);
