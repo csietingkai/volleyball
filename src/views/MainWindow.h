@@ -5,7 +5,9 @@
 #include <gtkmm.h>
 #include <thread>
 
+#include "../models/Team.h"
 #include "../tools/Logger.h"
+#include "../tools/MySQLConnector.h"
 #include "../auth.h" 
 #include "page_enum.h"
 
@@ -81,9 +83,10 @@ namespace voba
 					
 				protected:
 					Gtk::Box vbox_center;
-						Gtk::StackSidebar sidebar;
-						Gtk::Separator separator;
-						Gtk::Stack stack;
+						Gtk::Box vbox_sidebar;
+							Gtk::StackSidebar sidebar;
+							Gtk::Separator separator;
+							Gtk::Stack stack;
 					
 					void init();
 					void set_position();
@@ -92,6 +95,12 @@ namespace voba
 					
 				private:
 					MainWindow& parent;
+					
+					void init_stack_contents();
+					void init_register_user_page();
+					void init_team_list_page();
+					void init_modify_team_page();
+					void init_schedule_page();
 			};
 			AppPage app_page;
 			
