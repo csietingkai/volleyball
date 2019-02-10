@@ -19,6 +19,7 @@ namespace voba
 			const std::string to_string() const { return this->id; };
 			
 			const static UUID& random_uuid();
+			const static UUID& from_string(const std::string str);
 			
 			const UUID& operator =(const UUID& other);
 			friend std::ostream& operator <<(std::ostream& strm, const UUID& other) { strm << other.to_string(); return strm; };

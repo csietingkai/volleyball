@@ -22,6 +22,12 @@ const voba::UUID& voba::UUID::random_uuid()
 	return *uuid;
 }
 
+const voba::UUID& voba::UUID::from_string(const std::string str)
+{
+	UUID *uuid = new UUID(str);
+	return *uuid;
+}
+
 const voba::UUID& voba::UUID::operator =(const voba::UUID& other) 
 { 
 	this->id = other.to_string();
