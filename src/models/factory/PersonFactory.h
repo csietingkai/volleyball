@@ -12,7 +12,10 @@ namespace voba
 	class PersonFactory
 	{
 		public:
-			const static Person& select_by_id(const std::string id);
+			const static std::string CLASS_NAME;
+			
+			const static std::vector<Person> select_all();
+			const static Person& select_by_id(const UUID id);
 			const static Person& create(std::string name, int age, Gender gender, std::string phonenumber, ActiveStatus status);
 			const static bool update(Person& new_person);
 			const static bool remove(Person& person);
@@ -20,6 +23,7 @@ namespace voba
 		private:
 			static MySQLConnector<Person> p_connector;
 			static MySQLConnector<Team> t_connector;
+			static Logger logger;
 	};
 }
 

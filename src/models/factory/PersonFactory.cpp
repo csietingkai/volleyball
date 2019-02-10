@@ -1,10 +1,52 @@
 #include "PersonFactory.h"
 
+const std::string voba::PersonFactory::CLASS_NAME = "PersonFactory";
 voba::MySQLConnector<voba::Person> voba::PersonFactory::p_connector;
 voba::MySQLConnector<voba::Team> voba::PersonFactory::t_connector;
+voba::Logger voba::PersonFactory::logger(voba::PersonFactory::CLASS_NAME);
 
-const voba::Person& voba::PersonFactory::select_by_id(const std::string id)
+const std::vector<voba::Person> voba::PersonFactory::select_all()
 {
+	voba::PersonFactory::logger.debug("selecting all person from database");
+	
+	std::vector<voba::Person> all;
+	
+	voba::UUID id;
+	std::string name;
+	int age;
+	voba::Gender gender;
+	std::string phonenumber;
+	voba::ActiveStatus status;
+	
+	sql::ResultSet* result_set = voba::PersonFactory::p_connector.select();
+	while (result_set->next())
+	{
+		// 1 -> id
+		id = voba::UUID::from_string(result_set->getString(1));
+		// 2 -> name
+		name = result_set->getString(2);
+		// 3 -> age
+		age = std::stoi(result_set->getString(3));
+		// 4 -> gender
+		gender = static_cast<voba::Gender>((std::stoi(result_set->getString(4)) != 0));
+		// 5 -> phonenumber
+		phonenumber = result_set->getString(5);
+		// 6 -> active status
+		status = static_cast<voba::ActiveStatus>((std::stoi(result_set->getString(6)) != 0));
+		
+		voba::Person p(name, age, gender, phonenumber, status);
+		p.update_id(id);
+		
+		all.push_back(p);
+	}
+	
+	return all;
+}
+
+const voba::Person& voba::PersonFactory::select_by_id(const UUID id)
+{
+	voba::PersonFactory::logger.debug("selecting person from database with id:'" + id.to_string() + "'");
+	
 	std::string name;
 	int age;
 	voba::Gender gender;
@@ -29,22 +71,24 @@ const voba::Person& voba::PersonFactory::select_by_id(const std::string id)
 		status = static_cast<voba::ActiveStatus>((std::stoi(result_set->getString(6)) != 0));
 	}
 	
-	Person *p = new Person(name, age, gender, phonenumber, status);
+	voba::Person *p = new voba::Person(name, age, gender, phonenumber, status);
+	p->update_id(id);
 	return *p;
 }
 
 const voba::Person& voba::PersonFactory::create(std::string name, int age, voba::Gender gender, std::string phonenumber, voba::ActiveStatus status)
 {
-	// maybe cause duplicate exception
-	Person *p = new Person(name, age, gender, phonenumber, status);
-	bool result = (voba::PersonFactory::p_connector.insert(*p) == 0);
-	//std::cout << result << std::endl;
+	voba::PersonFactory::logger.debug("creating person in database");
+	
+	voba::Person *p = new voba::Person(name, age, gender, phonenumber, status);
+	p->update_id(voba::UUID::random_uuid());
+	voba::PersonFactory::p_connector.insert(*p);
 	return *p;
 }
 
 const bool voba::PersonFactory::update(Person& new_person)
 {
-	std::string old_id = new_person.get_id().to_string();
+	voba::PersonFactory::logger.debug("updating person in database");
 	
 	int result = voba::PersonFactory::p_connector.update(new_person);
 	if (result == 1)
@@ -59,6 +103,8 @@ const bool voba::PersonFactory::update(Person& new_person)
 
 const bool voba::PersonFactory::remove(Person& person)
 {
+	voba::PersonFactory::logger.debug("deleting person in database");
+	
 	int result = voba::PersonFactory::p_connector.remove(person);
 	if (result == 1)
 	{
