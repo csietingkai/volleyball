@@ -20,7 +20,7 @@ int main(int argc, char* argv[])
 		std::cin >> pwd;
 		
 		voba::User user = voba::auth(account, pwd);
-		if (user.role >= voba::Role::ADMIN)
+		if (user.role >= voba::Role::USER)
 		{
 			voba::test_main();
 		}

@@ -60,7 +60,8 @@ const voba::User voba::auth(const std::string account, const std::string pwd)
 	std::string query = builder.select().from(table).where(where_condition).to_string();
 	sql::ResultSet *result_set = statement->executeQuery(query);
 	
-	while (result_set->next()) {
+	while (result_set->next())
+	{
 		if (result_set->getString(PWD_AT).compare(user.pwd) == 0)
 		{
 			user.id = result_set->getString(ID_AT);

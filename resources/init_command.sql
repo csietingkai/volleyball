@@ -47,4 +47,4 @@ CREATE TABLE IF NOT EXISTS games
 );
 
 INSERT INTO auth
-VALUES ('c888cf04-16d4-4f69-bed7-6669409dd6bf', 'htk103u', 'htkkoeoh', 64);
+VALUES ('dc14be8c-2f99-11e9-9e1c-002522e7ae9a', 'testAcc', 'testPass', 8);
