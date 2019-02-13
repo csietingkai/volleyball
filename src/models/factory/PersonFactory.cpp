@@ -43,7 +43,7 @@ const std::vector<voba::Person> voba::PersonFactory::select_all()
 	return all;
 }
 
-const voba::Person& voba::PersonFactory::select_by_id(const UUID id)
+const voba::Person& voba::PersonFactory::select_by_id(const voba::UUID id)
 {
 	voba::PersonFactory::logger.debug("selecting person from database with id:'" + id.to_string() + "'");
 	
@@ -86,7 +86,7 @@ const voba::Person& voba::PersonFactory::create(std::string name, int age, voba:
 	return *p;
 }
 
-const bool voba::PersonFactory::update(Person& new_person)
+const bool voba::PersonFactory::update(voba::Person& new_person)
 {
 	voba::PersonFactory::logger.debug("updating person in database");
 	
@@ -101,12 +101,18 @@ const bool voba::PersonFactory::update(Person& new_person)
 	}
 }
 
-const bool voba::PersonFactory::remove(Person& person)
+const bool voba::PersonFactory::remove(voba::Person& person)
 {
 	voba::PersonFactory::logger.debug("deleting person in database");
 	
-	int result = voba::PersonFactory::p_connector.remove(person);
-	if (result == 1)
+	int result = 0;
+	result += voba::PersonFactory::p_connector.remove(person);
+	
+	voba::Column member_id("member_id", "uuid");
+	member_id.set_value(person.get_id().to_string());
+	result += voba::PersonFactory::t_connector.remove(member_id);
+	
+	if (result >= 1)
 	{
 		return true;
 	}
