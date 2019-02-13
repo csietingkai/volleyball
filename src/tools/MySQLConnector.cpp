@@ -28,9 +28,8 @@ template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select()
 {
 	sql::ResultSet *result_set;
-	SqlCommandBuilder builder;
 	
-	std::string query = builder.select().from(this->table).to_string();
+	std::string query = this->builder.select().from(this->table).to_string();
 	
 	this->logger.debug(query);
 	
@@ -60,9 +59,8 @@ template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_conditions)
 {
 	sql::ResultSet *result_set;
-	SqlCommandBuilder builder;
 	
-	std::string query = builder.select().from(this->table).where(where_conditions).to_string();
+	std::string query = this->builder.select().from(this->table).where(where_conditions).to_string();
 	
 	this->logger.debug(query);
 	
@@ -89,12 +87,19 @@ const int voba::MySQLConnector<T>::remove(const T t)
 }
 
 template <class T>
-const int voba::MySQLConnector<T>::remove(const std::list<Column> where_conditions)
+const int voba::MySQLConnector<T>::remove(const voba::Column where_condition)
+{
+	std::list<voba::Column> columns;
+	columns.push_back(where_condition);
+	return this->remove(columns);
+}
+
+template <class T>
+const int voba::MySQLConnector<T>::remove(const std::list<voba::Column> where_conditions)
 {
 	int ret = 0;
 	
-	SqlCommandBuilder builder;
-	std::string query = builder.remove().from(this->table).where(where_conditions).to_string();
+	std::string query = this->builder.remove().from(this->table).where(where_conditions).to_string();
 	
 	this->logger.debug(query);
 	
@@ -140,8 +145,7 @@ template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g
 	game_time.set_value(g.get_game_time().to_string());
 	std::list<voba::Column> values = { id, team1_id, team2_id, judge_id, game_time };
 		
-	voba::SqlCommandBuilder builder;
-	std::string query = builder.insert(this->table).values(values).to_string();
+	std::string query = this->builder.insert(this->table).values(values).to_string();
 	
 	int ret = 0;
 	try
@@ -174,8 +178,7 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 	std::list<voba::Column> where_conditions;
 	where_conditions.push_back(id);
 		
-	voba::SqlCommandBuilder builder;
-	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	std::string query = this->builder.update(this->table).set(sets).where(where_conditions).to_string();
 	
 	std::cout << query << std::endl;
 	
@@ -211,8 +214,7 @@ template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Pers
 	
 	std::list<voba::Column> values = { id, name, age, gender, phonenumber, status };
 		
-	voba::SqlCommandBuilder builder;
-	std::string query = builder.insert(this->table).values(values).to_string();
+	std::string query = this->builder.insert(this->table).values(values).to_string();
 	
 	int ret = 0;
 	try
@@ -247,8 +249,7 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 	std::list<voba::Column> where_conditions;
 	where_conditions.push_back(id);
 	
-	voba::SqlCommandBuilder builder;
-	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	std::string query = this->builder.update(this->table).set(sets).where(where_conditions).to_string();
 	
 	int ret = 0;
 	try
@@ -275,15 +276,13 @@ template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t
 	Column prefer_time("prefer_time", "string");
 	prefer_time.set_value(t.get_prefer_time());
 		
-	voba::SqlCommandBuilder builder;
-	
 	int ret = 0;
 	for (unsigned int i = 0; i < t.size(); i++)
 	{
 		Column member_id("member_id", "uuid");
 		member_id.set_value(t.get_member(i).get_id().to_string());
 		std::list<voba::Column> values = { id, name, member_id, prefer_week, prefer_time };
-		std::string query = builder.insert(this->table).values(values).to_string();
+		std::string query = this->builder.insert(this->table).values(values).to_string();
 		try
 		{
 			ret += this->statement->execute(query);
@@ -313,8 +312,7 @@ template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team t
 	std::list<voba::Column> where_conditions;
 	where_conditions.push_back(id);
 	
-	voba::SqlCommandBuilder builder;
-	std::string query = builder.update(this->table).set(sets).where(where_conditions).to_string();
+	std::string query = this->builder.update(this->table).set(sets).where(where_conditions).to_string();
 	
 	int ret = 0;
 	try

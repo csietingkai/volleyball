@@ -34,6 +34,7 @@ namespace voba
 			const int insert(const T t) { return 0; }; // need specialization
 			const int update(const T t) { return 0; }; // need specialization
 			const int remove(const T t);
+			const int remove(const Column where_conditions);
 			const int remove(const std::list<Column> where_conditions);
 		
 		private:
@@ -43,6 +44,7 @@ namespace voba
 			
 			ServerInfo info;
 			Table table;
+			SqlCommandBuilder builder;
 			
 			void print_sql_exception(const sql::SQLException e);
 	};
