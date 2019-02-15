@@ -81,9 +81,7 @@ const int voba::MySQLConnector<T>::remove(const T t)
 {
 	Column tid("id");
 	tid.set_value(t.get_id().to_string());
-	std::list<voba::Column> columns;
-	columns.push_back(tid);
-	return this->remove(columns);
+	return this->remove(tid);
 }
 
 template <class T>

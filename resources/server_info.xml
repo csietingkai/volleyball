@@ -22,7 +22,7 @@
 		<table name="teams" class_name="Team">
 			<column name="id" type="uuid"/>
 			<column name="name" type="string"/>
-			<column name="member_id" type="sha1"/>
+			<column name="member_id" type="uuid"/>
 			<column name="prefer_week" type="string"/>
 			<column name="perfer_time" type="string"/>
 		</table>
