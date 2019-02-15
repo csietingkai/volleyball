@@ -114,6 +114,24 @@ const int voba::MySQLConnector<T>::remove(const std::list<voba::Column> where_co
 	return ret;
 }
 
+template <class T>
+const int voba::MySQLConnector<T>::execute(const std::string query)
+{
+	int ret = 0;
+	
+	try
+	{
+		ret = this->statement->execute(query);
+	}
+	catch (sql::SQLException e)
+	{
+		this->logger.error("SQL Exception happened !!");
+		this->print_sql_exception(e);
+	}
+	
+	return ret;
+}
+
 // private function
 template <class T>
 void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)

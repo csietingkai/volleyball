@@ -36,6 +36,8 @@ namespace voba
 			const int remove(const T t);
 			const int remove(const Column where_conditions);
 			const int remove(const std::list<Column> where_conditions);
+			
+			const int execute(const std::string query);
 		
 		private:
 			sql::Driver *driver;
