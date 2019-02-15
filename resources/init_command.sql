@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS auth
 	ID varchar(255) NOT NULL,
 	ACCOUNT varchar(255) NOT NULL, 
 	PWD varchar(255) NOT NULL,
-	ROLE varchar(255) NOT NULL,
+	ROLE integer NOT NULL,
 	PRIMARY KEY(ID),
 	UNIQUE(ACCOUNT)
 );
@@ -47,4 +47,4 @@ CREATE TABLE IF NOT EXISTS games
 );
 
 INSERT INTO auth
-VALUES ('dc14be8c-2f99-11e9-9e1c-002522e7ae9a', 'testAcc', 'testPass', 8);
+VALUES (UUID(), 'testAcc', 'testPass', 8);
