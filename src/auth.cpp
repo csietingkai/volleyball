@@ -1,5 +1,38 @@
 #include "auth.h"
 
+const voba::Role voba::int_to_role(const int value)
+{
+	voba::Role r = voba::Role::NONE;
+	switch (value)
+	{
+		case 64:
+			r = voba::Role::ROOT;
+			break;
+		
+		case 32:
+			r = voba::Role::ADMIN;
+			break;
+		
+		case 16:
+			r = voba::Role::LEADER;
+			break;
+		
+		case 8:
+			r = voba::Role::USER;
+			break;
+		
+		case 4:
+			r = voba::Role::NONE;
+			break;
+		
+		default:
+			std::cerr << "invalid value to role" << std::endl;
+			break;
+	}
+	
+	return r;
+}
+
 std::ostream& voba::operator <<(std::ostream& strm, const voba::Role& role)
 {
 	switch (role)
@@ -65,7 +98,7 @@ const voba::User voba::auth(const std::string account, const std::string pwd)
 		if (result_set->getString(PWD_AT).compare(user.pwd) == 0)
 		{
 			user.id = result_set->getString(ID_AT);
-			user.role = static_cast<voba::Role>(std::stoi(result_set->getString(ROLE_AT)));
+			user.role = voba::int_to_role(std::stoi(result_set->getString(ROLE_AT)));
 			break;
 		}
 	}

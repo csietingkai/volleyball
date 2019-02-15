@@ -30,6 +30,8 @@ namespace voba
 		NONE = 4
 	};
 	
+	const Role int_to_role(const int value);
+	
 	std::ostream& operator <<(std::ostream& strm, const Role& role);
 	
 	/**
