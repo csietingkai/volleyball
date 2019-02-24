@@ -4,7 +4,7 @@ If you want to join this project, E-mail [me](mailto:tingkai@csie.io) first
 
 ## Coding Style
 
-+ must add comment above classes and functions
++ <b>must add comment above classes and functions</b>
 + bracket at next line first
 + variables use underline to sperate
 + class name use capital letter to sperate
