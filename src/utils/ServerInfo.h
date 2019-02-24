@@ -8,26 +8,41 @@
 #include <iostream>
 #include <vector>
 
+#include "Utils.h"
+
 namespace pt = boost::property_tree;
 
 namespace voba
 {
+	enum class ColumnType : int
+	{
+		UUID,
+		String,
+		Integer, 
+		Boolean,
+		DateTime,
+		Unknown
+	};
+	
+	const ColumnType string_to_column_type(const std::string str);
+	std::ostream& operator <<(std::ostream& strm, const ColumnType& role);
+	
 	class Column
 	{
 		public:
 			Column() {};
-			Column(const std::string name): name(name), type("string"), nullable(false) {};
-			Column(const std::string name, const std::string type): name(name), type(type), nullable(false) {};
-			Column(const std::string name, const std::string type, const bool nullable): name(name), type(type), nullable(nullable) {};
+			Column(const std::string name): name(name), type(ColumnType::String), nullable(false) {};
+			Column(const std::string name, const ColumnType type): name(name), type(type), nullable(false) {};
+			Column(const std::string name, const ColumnType type, const bool nullable): name(name), type(type), nullable(nullable) {};
 			Column(const Column& other) { this->operator=(other); };
 			
 			void set_name(const std::string name) { this->name = name; };
-			void set_type(const std::string type) { this->type = type; };
+			void set_type(const ColumnType type) { this->type = type; };
 			void set_value(const std::string value) { this->value = value; };
 			void set_nullable(const bool nullable) { this->nullable = nullable; };
 			
 			const std::string get_name() const { return this->name; };
-			const std::string get_type() const { return this->type; };
+			const ColumnType get_type() const { return this->type; };
 			const std::string get_value() const { return this->value; };
 			const bool get_nullable() const { return this->nullable; };
 			
@@ -35,7 +50,7 @@ namespace voba
 		
 		private:
 			std::string name;
-			std::string type;
+			ColumnType type;
 			std::string value;
 			bool nullable;
 	};

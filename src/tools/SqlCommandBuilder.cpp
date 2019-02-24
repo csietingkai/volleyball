@@ -96,7 +96,7 @@ voba::SqlCommandBuilder& voba::SqlCommandBuilder::values(const std::list<Column>
 	this->store += voba::SqlCommandBuilder::LEFT_PARENTHESIS;
 	for (auto it = columns.begin(); it != columns.end(); it++)
 	{
-		bool is_string = (it->get_type().compare("boolean") != 0 && it->get_type().compare("int") != 0);
+		bool is_string = (it->get_type() != voba::ColumnType::Boolean && it->get_type() != voba::ColumnType::Integer);
 	
 		if (is_string)
 		{
@@ -163,7 +163,7 @@ const std::string voba::SqlCommandBuilder::RIGHT_PARENTHESIS = ")";
 
 const std::string voba::SqlCommandBuilder::handle_column(const voba::Column column)
 {
-	bool is_string = (column.get_type().compare("boolean") != 0 && column.get_type().compare("int") != 0);
+	bool is_string = (column.get_type() != voba::ColumnType::Boolean && column.get_type() != voba::ColumnType::Integer);
 	
 	std::string ret = "";
 	ret += column.get_name();

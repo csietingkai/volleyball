@@ -9,12 +9,12 @@
 			<column name="id" type="uuid"/>
 			<column name="account" type="string"/>
 			<column name="pwd" type="string"/>
-			<column name="role" type="int"/>
+			<column name="role" type="integer"/>
 		</table>
 		<table name="persons" class_name="Person">
 			<column name="id" type="uuid"/>
 			<column name="name" type="string"/>
-			<column name="age" type="int"/>
+			<column name="age" type="integer"/>
 			<column name="gender" type="boolean"/>
 			<column name="phonenumber" type="string"/>
 			<column name="is_active" type="boolean"/>

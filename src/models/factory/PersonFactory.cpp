@@ -108,7 +108,7 @@ const bool voba::PersonFactory::remove(voba::Person& person)
 	int result = 0;
 	result += voba::PersonFactory::p_connector.remove(person);
 	
-	voba::Column member_id("member_id", "uuid");
+	voba::Column member_id("member_id", voba::ColumnType::UUID);
 	member_id.set_value(person.get_id().to_string());
 	result += voba::PersonFactory::t_connector.remove(member_id);
 	

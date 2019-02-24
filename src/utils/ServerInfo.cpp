@@ -1,5 +1,69 @@
 #include "ServerInfo.h"
 
+const voba::ColumnType voba::string_to_column_type(const std::string str)
+{
+	voba::ColumnType type = voba::ColumnType::Unknown;
+	
+	if (str.compare(voba::Utils::to_lower_case("uuid")) == 0)
+	{
+		type = voba::ColumnType::UUID;
+	}
+	else if (str.compare(voba::Utils::to_lower_case("string")) == 0)
+	{
+		type = voba::ColumnType::String;
+	}
+	else if (str.compare(voba::Utils::to_lower_case("integer")) == 0)
+	{
+		type = voba::ColumnType::Integer;
+	}
+	else if (str.compare(voba::Utils::to_lower_case("boolean")) == 0)
+	{
+		type = voba::ColumnType::Boolean;
+	}
+	else if (str.compare(voba::Utils::to_lower_case("datetime")) == 0)
+	{
+		type = voba::ColumnType::DateTime;
+	}
+	else
+	{
+		std::cerr << "Unknown Column Type" << std::endl;
+	}
+	
+	return type;
+}
+
+std::ostream& voba::operator <<(std::ostream& strm, const voba::ColumnType& role)
+{
+	switch (role)
+	{
+		case voba::ColumnType::UUID:
+			strm << "UUID";
+			break;
+		
+		case voba::ColumnType::String:
+			strm << "String";
+			break;
+		
+		case voba::ColumnType::Integer:
+			strm << "Integer";
+			break;
+		
+		case voba::ColumnType::Boolean:
+			strm << "Boolean";
+			break;
+		
+		case voba::ColumnType::DateTime:
+			strm << "DateTime";
+			break;
+		
+		default:
+			std::cerr << "invalid column type" << std::endl;
+			break;
+	}
+	
+	return strm;
+}
+
 const voba::Column& voba::Column::operator =(const voba::Column& other)
 {
 	if (this == &other)
@@ -109,7 +173,7 @@ void voba::ServerInfo::init(const std::string xml_path)
 			{
 				//std::cout << "\t" << column.first << "\t" << column.second.get<std::string>("<xmlattr>.name") << " " << column.second.get<std::string>("<xmlattr>.type") << " " << column.second.get<bool>("<xmlattr>.nullable", false) << std::endl;
 				std::string column_name = column.second.get<std::string>("<xmlattr>.name");
-				std::string column_type = column.second.get<std::string>("<xmlattr>.type");
+				voba::ColumnType column_type = voba::string_to_column_type(column.second.get<std::string>("<xmlattr>.type"));
 				bool nullable = column.second.get<bool>("<xmlattr>.nullable", false);
 				Column c(column_name, column_type, nullable);
 				t.push_back(c);

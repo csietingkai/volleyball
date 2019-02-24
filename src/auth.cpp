@@ -88,7 +88,7 @@ const voba::User voba::auth(const std::string account, const std::string pwd)
 	sql::Statement *statement = connection->createStatement();
 	
 	voba::SqlCommandBuilder builder;
-	Column where_condition("account", "string");
+	voba::Column where_condition("account", voba::ColumnType::String);
 	where_condition.set_value(account);
 	std::string query = builder.select().from(table).where(where_condition).to_string();
 	sql::ResultSet *result_set = statement->executeQuery(query);
@@ -124,6 +124,7 @@ std::ostream& voba::operator <<(std::ostream& strm, const voba::AuthState& state
 		
 		case voba::AuthState::FAIL:
 			strm << "unknown fail";
+			break;
 		
 		default:
 			std::cerr << "invalid state" << std::endl;
@@ -145,14 +146,14 @@ const voba::AuthState voba::create_auth(const voba::User current_user, const vob
 		connection->setSchema(info.get_schema());
 		sql::Statement *statement = connection->createStatement();
 		
-		Column id("id", "string");
+		voba::Column id("id", voba::ColumnType::UUID);
 		
 		id.set_value(voba::UUID::random_uuid().to_string());
-		Column account("account", "string");
+		voba::Column account("account", voba::ColumnType::String);
 		account.set_value(new_user.account);
-		Column pwd("pwd", "string");
+		voba::Column pwd("pwd", voba::ColumnType::String);
 		pwd.set_value(new_user.pwd);
-		Column role("role", "int");
+		voba::Column role("role", voba::ColumnType::Integer);
 		role.set_value(std::to_string(static_cast<int>(new_user.role)));
 		std::list<voba::Column> values = { id, account, pwd, role };
 		
