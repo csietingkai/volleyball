@@ -2,6 +2,7 @@
 
 const voba::Role voba::int_to_role(const int value)
 {
+	// use switch to determine which role is
 	voba::Role r = voba::Role::NONE;
 	switch (value)
 	{
@@ -136,6 +137,8 @@ std::ostream& voba::operator <<(std::ostream& strm, const voba::AuthState& state
 
 const voba::AuthState voba::create_auth(const voba::User current_user, const voba::User new_user)
 {
+	// create new user by current user, current user's role must higher then new user
+	// connect to mysql and insert new user data 
 	voba::AuthState result = voba::AuthState::FAIL;
 	if (current_user.role > new_user.role)
 	{

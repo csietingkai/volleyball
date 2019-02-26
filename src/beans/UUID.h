@@ -10,15 +10,51 @@
 
 namespace voba
 {
+	/**
+	 * id object for model
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2019.02.07
+	 */
 	class UUID
 	{
 		public:
+			/**
+			 * constructor generate null UUID
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			UUID();
+			/**
+			 * constructor generate uuid from string
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			UUID(const std::string str);
 			
+			/**
+			 * return stored string value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			const std::string to_string() const { return this->id; };
 			
+			/**
+			 * generate random uuid object
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			const static UUID& random_uuid();
+			/**
+			 * generate uuid object from string
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			const static UUID& from_string(const std::string str);
 			
 			const UUID& operator =(const UUID& other);
@@ -26,6 +62,13 @@ namespace voba
 		
 		private:
 			std::string id;
+			
+			/**
+			 * check is a string valid uuid string
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.07
+			 */
 			const bool is_valid(const std::string str);
 	};
 }

@@ -1,5 +1,7 @@
 #include "Date.h"
 
+// ======= Enumeration Week ======= //
+
 std::ostream& voba::operator <<(std::ostream& strm, const Week& week)
 {
 	switch (week)
@@ -40,12 +42,17 @@ std::ostream& voba::operator <<(std::ostream& strm, const Week& week)
 	return strm;
 }
 
+// ======= Class Date ======= //
+
 const std::string voba::Date::CLASS_NAME = "Date";
 
 // constructor
 voba::Date::Date(const int year, const int month, const int day)
 	: Logable(voba::Date::CLASS_NAME)
 {
+	// set parameters as member variables
+	// check the member variables had set are legel
+	// then calculate week value by year, month, and day
 	this->year = year;
 	this->month = month;
 	this->day = day;
@@ -56,12 +63,68 @@ voba::Date::Date(const int year, const int month, const int day)
 voba::Date::Date(const voba::Date& other)
 	: Logable(voba::Date::CLASS_NAME)
 {
+	// call assign operator for copy constructor
 	this->operator=(other);
 }
 
-// public function
+// getters & setters
+void voba::Date::set_year(const int year) 
+{ 
+	// set year value
+	// check year value is legel
+	// then calculate week value by year, month, and day
+	this->year = year;
+	this->check_member_vars();
+	this->week = this->calculate_week();
+}
+
+void voba::Date::set_month(const int month)
+{
+	// set month value
+	// check month value is legel
+	// then calculate week value by year, month, and day
+	this->month = month;
+	this->check_member_vars();
+	this->week = this->calculate_week();
+}
+
+void voba::Date::set_day(const int day)
+{
+	// set day value
+	// check day value is legel
+	// then calculate week value by year, month, and day
+	this->day = day;
+	this->check_member_vars();
+	this->week = this->calculate_week();
+}
+
+const int voba::Date::get_year() const
+{
+	// return year value
+	return this->year;
+}
+
+const int voba::Date::get_month() const
+{
+	// return month value
+	return this->month;
+}
+
+const int voba::Date::get_day() const
+{
+	// return day value
+	return this->day;
+}
+
+const voba::Week voba::Date::get_week() const
+{
+	// return week value
+	return this->week;
+}
+
 const std::string voba::Date::to_string() const
 {
+	// transform member variables data into string
 	// format: yyyy-mm-dd, week
 	std::string re = "";
 	
@@ -74,14 +137,10 @@ const std::string voba::Date::to_string() const
 	return re;
 }
 
-std::ostream& operator <<(std::ostream& strm, const voba::Date& other)
-{
-	strm << other.to_string();
-	return strm;
-}
-
+// public functions
 const voba::Date voba::Date::Now()
 {
+	// use starndard c library to generate current date
 	time_t t = time(0);
 	tm* tt = localtime(&t);
 	int year = tt->tm_year+1900;
@@ -94,6 +153,7 @@ const voba::Date voba::Date::Now()
 
 const voba::Date voba::Date::next_year() const
 {
+	// year plus one then return a new instance
 	int year = this->get_year()+1;
 	int month = this->get_month();
 	int day = this->get_day();
@@ -103,6 +163,7 @@ const voba::Date voba::Date::next_year() const
 
 const voba::Date voba::Date::previous_year() const
 {
+	// year minus one then return a new instance
 	int year = this->get_year()-1;
 	int month = this->get_month();
 	int day = this->get_day();
@@ -112,7 +173,9 @@ const voba::Date voba::Date::previous_year() const
 
 const voba::Date voba::Date::next_month() const
 {
+	// month plus one, check if become next year, then return a new instance
 	bool carry = false;
+	
 	int year = this->get_year();
 	int month = this->get_month()+1;
 	int day = this->get_day();
@@ -131,6 +194,7 @@ const voba::Date voba::Date::next_month() const
 
 const voba::Date voba::Date::previous_month() const
 {
+	// month minus one, check if become previous year, then return a new instance
 	bool carry = false;
 	
 	int year = this->get_year();
@@ -150,6 +214,7 @@ const voba::Date voba::Date::previous_month() const
 
 const voba::Date voba::Date::next_day() const
 {
+	// day plus one, check if become next month, then return a new instance
 	bool carry = false;
 	
 	int year = this->get_year();
@@ -171,6 +236,7 @@ const voba::Date voba::Date::next_day() const
 
 const voba::Date voba::Date::previous_day() const
 {
+	// day minus one, check if become next month, then return a new instance
 	bool carry = false;
 	
 	int year = this->get_year();
@@ -209,6 +275,11 @@ const bool voba::Date::operator ==(const voba::Date& other) const
 	return ret;
 }
 
+const bool voba::Date::operator !=(const voba::Date& other) const 
+{
+	return !this->operator==(other);
+}
+
 const bool voba::Date::operator <(const voba::Date& other) const
 {
 	bool ret = this->get_year() < other.get_year();
@@ -221,6 +292,27 @@ const bool voba::Date::operator <(const voba::Date& other) const
 		}
 	}
 	return ret;
+}
+
+const bool voba::Date::operator >(const voba::Date& other) const
+{
+	return other.operator<(*this);
+}
+
+const bool voba::Date::operator <=(const voba::Date& other) const
+{
+	return !this->operator>(other);
+}
+
+const bool voba::Date::operator >=(const voba::Date& other) const
+{
+	return !this->operator<(other);
+}
+
+std::ostream& operator <<(std::ostream& strm, const voba::Date& other)
+{
+	strm << other.to_string();
+	return strm;
 }
 
 // private function
@@ -236,6 +328,10 @@ const int voba::Date::DAYS_PER_MONTH[] =
 void voba::Date::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?
+	// check 
+	// 1900 <= year <= 9999
+	// 1 <= month <= 12
+	// 1 <= day <= days_limit
 	assert(this->get_year() <= YEAR_UPPER_LIMIT && this->get_year() >= YEAR_LOWER_LIMIT);
 	assert(this->get_month() <= MONTHS_PER_YEAR && this->get_month() >= 1);
 	if(this->get_month() == 2 && this->is_leap == true)	// if leap year and Feb
@@ -250,7 +346,7 @@ void voba::Date::check_member_vars()
 
 const bool voba::Date::calculate_leap() const
 {
-	// return a boolean value of this year is leap year or not
+	// if year % 400 = 0 or yaer % 4 = 0, is leap year
 	int year = this->get_year();
 	if(year%400 == 0)
 	{

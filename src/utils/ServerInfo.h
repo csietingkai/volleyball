@@ -14,6 +14,12 @@ namespace pt = boost::property_tree;
 
 namespace voba
 {
+	/**
+	 * mysql column type
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.05
+	 */
 	enum class ColumnType : int
 	{
 		UUID,
@@ -24,9 +30,21 @@ namespace voba
 		Unknown
 	};
 	
+	/**
+	 * convert string to ColumnType
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.05
+	 */
 	const ColumnType string_to_column_type(const std::string str);
 	std::ostream& operator <<(std::ostream& strm, const ColumnType& role);
 	
+	/**
+	 * the class represent a column in a table in database
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.05
+	 */
 	class Column
 	{
 		public:
@@ -55,6 +73,12 @@ namespace voba
 			bool nullable;
 	};
 	
+	/**
+	 * the class represent a table in database
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.05
+	 */
 	class Table
 	{
 		public:
@@ -83,8 +107,8 @@ namespace voba
 	/**
 	 * get the configuration of MySQL database
 	 * 
-	 * @auther tingkai
-	 * @date 2019.01.27
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.05
 	 */
 	class ServerInfo
 	{

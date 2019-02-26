@@ -11,6 +11,10 @@ voba::UUID::UUID(const std::string str)
 	{
 		this->id = str;
 	}
+	else
+	{
+		this->id = "00000000-0000-0000-0000-000000000000";
+	}
 }
 
 const voba::UUID& voba::UUID::random_uuid()

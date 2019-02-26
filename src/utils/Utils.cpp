@@ -3,6 +3,7 @@
 // public function
 const std::string voba::Utils::to_upper_case(const std::string str)
 {
+	// use for loop run through string and transform uppercase to lowercase
 	std::string ret = "";
 	
 	for (unsigned int i = 0; i < str.length(); i++)
@@ -22,6 +23,7 @@ const std::string voba::Utils::to_upper_case(const std::string str)
 
 const std::string voba::Utils::to_lower_case(const std::string str)
 {
+	// use for loop run through string and transform lowercase to uppercase
 	std::string ret = "";
 	
 	for (unsigned int i = 0; i < str.length(); i++)
@@ -40,6 +42,7 @@ const std::string voba::Utils::to_lower_case(const std::string str)
 
 const bool voba::Utils::replace(std::string& str, const std::string& from, const std::string& to)
 {
+	// find the position of 'str', replace 'from' to 'to'
 	size_t start_pos = str.find(from);
 	if(start_pos == std::string::npos)
 	{
@@ -51,8 +54,9 @@ const bool voba::Utils::replace(std::string& str, const std::string& from, const
 
 const std::string voba::Utils::trim(const std::string str)
 {
-	std::string ret = str;
+	// remove space from start of string and end of string
 	// also remove add 'tab' & 'new line' in the string
+	std::string ret = str;
 	ret.erase(std::remove(ret.begin(), ret.end(), '\t'), ret.end());
 	ret.erase(std::remove(ret.begin(), ret.end(), '\n'), ret.end());
 	size_t first = ret.find_first_not_of(' ');
@@ -66,6 +70,7 @@ const std::string voba::Utils::trim(const std::string str)
 
 const std::vector<std::string> voba::Utils::split(const std::string str, const char separator)
 {
+	// split a string into vector
 	std::stringstream ss(str);
 	std::vector<std::string> result;
 
@@ -81,11 +86,13 @@ const std::vector<std::string> voba::Utils::split(const std::string str, const c
 
 const std::string voba::Utils::random_string()
 {
+	// call random_string
 	return voba::Utils::random_string(6);
 }
 
 const std::string voba::Utils::random_string(const int length)
 {
+	// shuffle the sorted string and get first 'length' length string
 	std::string str("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
 	
 	std::random_device rd;

@@ -3,11 +3,12 @@
 template <class T>
 const std::string voba::MySQLConnector<T>::CLASS_NAME = "MySQLConnector."+T::CLASS_NAME;
 
-// constructor
 template <class T>
 voba::MySQLConnector<T>::MySQLConnector()
 	: Logable(voba::MySQLConnector<T>::CLASS_NAME)
 {
+	// get table by class name
+	// the create connnection to mysql
 	this->table = this->info.get_table(T::CLASS_NAME);
 	
 	this->driver = get_driver_instance();
@@ -20,6 +21,7 @@ voba::MySQLConnector<T>::MySQLConnector()
 template <class T>
 voba::MySQLConnector<T>::~MySQLConnector()
 {
+	// delete variable initialize at constructor
 	delete connection;
 	delete statement;
 }
@@ -27,6 +29,7 @@ voba::MySQLConnector<T>::~MySQLConnector()
 template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select()
 {
+	// use SqlCommandBuilder generate query and execute
 	sql::ResultSet *result_set;
 	
 	std::string query = this->builder.select().from(this->table).to_string();
@@ -48,6 +51,7 @@ sql::ResultSet* voba::MySQLConnector<T>::select()
 template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const voba::UUID id)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column cid("id", voba::ColumnType::UUID);
 	cid.set_value(id.to_string());
 	std::list<voba::Column> columns;
@@ -58,6 +62,7 @@ sql::ResultSet* voba::MySQLConnector<T>::select(const voba::UUID id)
 template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_conditions)
 {
+	// use SqlCommandBuilder generate query and execute
 	sql::ResultSet *result_set;
 	
 	std::string query = this->builder.select().from(this->table).where(where_conditions).to_string();
@@ -79,6 +84,7 @@ sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_co
 template <class T>
 const int voba::MySQLConnector<T>::remove(const T t)
 {
+	// use SqlCommandBuilder generate query and execute
 	Column tid("id", voba::ColumnType::UUID);
 	tid.set_value(t.get_id().to_string());
 	return this->remove(tid);
@@ -95,6 +101,7 @@ const int voba::MySQLConnector<T>::remove(const voba::Column where_condition)
 template <class T>
 const int voba::MySQLConnector<T>::remove(const std::list<voba::Column> where_conditions)
 {
+	// use SqlCommandBuilder generate query and execute
 	int ret = 0;
 	
 	std::string query = this->builder.remove().from(this->table).where(where_conditions).to_string();
@@ -117,6 +124,7 @@ const int voba::MySQLConnector<T>::remove(const std::list<voba::Column> where_co
 template <class T>
 const int voba::MySQLConnector<T>::execute(const std::string query)
 {
+	// use SqlCommandBuilder generate query and execute
 	int ret = 0;
 	
 	try
@@ -136,6 +144,7 @@ const int voba::MySQLConnector<T>::execute(const std::string query)
 template <class T>
 void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 {
+	// handle function when catch sql exception
 	std::string error_msg = "# ERR: ";
 	error_msg += e.what();
 	error_msg += " (MySQL error code: ";
@@ -149,6 +158,7 @@ void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 // Game specialization
 template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID);
 	id.set_value(g.get_id().to_string());
 	voba::Column team1_id("team_1_id", voba::ColumnType::UUID);
@@ -179,6 +189,7 @@ template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g
 
 template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column team1_id("team_1_id", voba::ColumnType::UUID);
 	team1_id.set_value(g.get_team1().get_id().to_string());
 	voba::Column team2_id("team_2_id", voba::ColumnType::UUID);
@@ -215,6 +226,7 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 // Person specialization
 template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID);
 	id.set_value(p.get_id().to_string());
 	voba::Column name("name", voba::ColumnType::String);
@@ -248,6 +260,7 @@ template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Pers
 
 template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column name("name", voba::ColumnType::String);
 	name.set_value(p.get_name());
 	voba::Column age("age", voba::ColumnType::Integer);
@@ -283,6 +296,7 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 // Team specialization
 template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID);
 	id.set_value(t.get_id().to_string());
 	voba::Column name("name", voba::ColumnType::String);
@@ -315,6 +329,7 @@ template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t
 
 template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team t)
 {
+	// use SqlCommandBuilder generate query and execute
 	voba::Column name("name", voba::ColumnType::String);
 	name.set_value(t.get_name());
 	voba::Column prefer_week("prefer_week", voba::ColumnType::String);

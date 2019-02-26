@@ -18,8 +18,8 @@ namespace voba
 	/**
 	 * role for controll if this user can do this action or not
 	 * 
-	 * @auther tingkai
-	 * @date 2019.01.23
+	 * @CreatedBy tingkai
+	 * @Date 2019.01.23
 	 */
 	enum class Role : int
 	{
@@ -37,10 +37,10 @@ namespace voba
 	/**
 	 * correspond data structure in database 'Auth' table
 	 *  
-	 * @see auth.h: enum Role, type int
+	 * @see Role
 	 * 
-	 * @auther tingkai
-	 * @date 2019.01.23
+	 * @CreatedBy tingkai
+	 * @Date 2019.01.23
 	 */
 	struct User
 	{
@@ -58,20 +58,18 @@ namespace voba
 	 * @param account(string) : username value
 	 * @param pwd(string) : password value
 	 * 
-	 * @return user(User) : user object
+	 * @see User
 	 * 
-	 * @see auth.h: struct User(string, string, string, Role)
-	 * 
-	 * @auther tingkai
-	 * @date 2019.01.23
+	 * @CreateBy tingkai
+	 * @Date 2019.01.23
 	 */
 	const User auth(const std::string account, const std::string pwd);
 	
 	/**
 	 * the situation of making auth
 	 * 
-	 * @auther tingkai
-	 * @date 2019.02.05
+	 * @CreatedBy tingkai
+	 * @Date 2019.02.05
 	 */
 	enum class AuthState : int
 	{
@@ -90,12 +88,10 @@ namespace voba
 	 * @param current_user(User) : the user create other user
 	 * @param new_user(User) : the other user create by other one
 	 * 
-	 * @return success(bool) : create new user or not
+	 * @see User
 	 * 
-	 * @see auth.h: struct User(string, string, string, Role)
-	 * 
-	 * @auther tingkai
-	 * @date 2019.02.04
+	 * @CreatedBy tingkai
+	 * @Date 2019.02.04
 	 */
 	const AuthState create_auth(const User current_user, const User new_user);
 }

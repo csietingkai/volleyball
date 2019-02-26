@@ -18,16 +18,39 @@
 
 namespace voba
 {
+	/**
+	 * @CreatedBy tingkai
+	 * @Date 2019.12.07
+	 */
 	template <class T>
 	class MySQLConnector : Logable
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			// constructors
+			/**
+			 * constructor of MySQLConnector <br/>
+			 * initialize connection
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			MySQLConnector();
+			/**
+			 * destructor of MySQLConnector <br/>
+			 * close connection
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			~MySQLConnector();
 			
+			/**
+			 * select all rows
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			sql::ResultSet* select();
 			sql::ResultSet* select(const UUID id);
 			sql::ResultSet* select(const std::list<Column> where_conditions);

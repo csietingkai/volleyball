@@ -1,11 +1,15 @@
 #include "Time.h"
 
+// ======= Class Time ======= //
+
 const std::string voba::Time::CLASS_NAME = "Time";
 
 // constructor
 voba::Time::Time(const int hour, const int minute, const int second)
 	: Logable(voba::Time::CLASS_NAME)
 {
+	// set parameters as member variables
+	// check the member variables had set are legel
 	this->hour = hour;
 	this->minute = minute;
 	this->second = second;
@@ -15,12 +19,57 @@ voba::Time::Time(const int hour, const int minute, const int second)
 voba::Time::Time(const Time& other)
 	: Logable(voba::Time::CLASS_NAME)
 {
+	// call assign operator for copy constructor
 	this->operator=(other);
 }
 
-// public function
+// getters & setters
+void voba::Time::set_hour(const int hour)
+{ 
+	// set hour value
+	// check hour value is legel
+	this->hour = hour;
+	this->check_member_vars();
+}
+
+void voba::Time::set_minute(const int minute)
+{
+	// set minute value
+	// check minute value is legel
+	this->minute = minute;
+	this->check_member_vars();
+}
+
+void voba::Time::set_second(const int second)
+{
+	// set second value
+	// check second value is legel
+	this->second = second;
+	this->check_member_vars();
+}
+
+const int voba::Time::get_hour() const
+{
+	// return hour value
+	return this->hour;
+}
+
+const int voba::Time::get_minute() const
+{
+	// return minute value
+	return this->minute;
+}
+
+const int voba::Time::get_second() const
+{ 
+	// return second value
+	return this->second;
+}
+
 const std::string voba::Time::to_string() const
 {
+	// transform member variables data into string
+	// format: hh:mm:ss
 	std::string re = "";
 	
 	re += (this->get_hour()<10?"0":"")+std::to_string(this->get_hour())+":";
@@ -29,9 +78,11 @@ const std::string voba::Time::to_string() const
 	
 	return re;
 }
-		
+	
+// public function	
 const voba::Time voba::Time::Now()
 {
+	// use starndard c library to generate current time
 	time_t t = time(0);
 	tm* tt = localtime(&t);
 	int hour = tt->tm_hour;
@@ -44,6 +95,7 @@ const voba::Time voba::Time::Now()
 
 const voba::Time voba::Time::next_hour() const
 {
+	// hour plus one then return a new instance
 	int hour = this->get_hour()+1;
 	int minute = this->get_minute();
 	int second = this->get_second();
@@ -57,6 +109,7 @@ const voba::Time voba::Time::next_hour() const
 
 const voba::Time voba::Time::previous_hour() const
 {
+	// hour minus one then return a new instance
 	int hour = this->get_hour()-1;
 	int minute = this->get_minute();
 	int second = this->get_second();
@@ -70,6 +123,7 @@ const voba::Time voba::Time::previous_hour() const
 
 const voba::Time voba::Time::next_minute() const
 {
+	// minute plus one then return a new instance
 	bool carry = false;
 	
 	int hour = this->get_hour();
@@ -90,6 +144,7 @@ const voba::Time voba::Time::next_minute() const
 
 const voba::Time voba::Time::previous_minute() const
 {
+	// minute minus one then return a new instance
 	bool carry = false;
 	
 	int hour = this->get_hour();
@@ -110,6 +165,7 @@ const voba::Time voba::Time::previous_minute() const
 
 const voba::Time voba::Time::next_second() const
 {
+	// second plus one then return a new instance
 	bool carry = false;
 	
 	int hour = this->get_hour();
@@ -130,6 +186,7 @@ const voba::Time voba::Time::next_second() const
 
 const voba::Time voba::Time::previous_second() const
 {
+	// second minus one then return a new instance
 	bool carry = false;
 	
 	int hour = this->get_hour();
@@ -148,7 +205,7 @@ const voba::Time voba::Time::previous_second() const
 	return ret;
 }
 
-const voba::Time& voba::Time::operator =(const Time& other)
+const voba::Time& voba::Time::operator =(const voba::Time& other)
 {
 	this->hour = other.get_hour();
 	this->minute = other.get_minute();
@@ -157,7 +214,7 @@ const voba::Time& voba::Time::operator =(const Time& other)
 	return *this;
 }
 
-const bool voba::Time::operator ==(const Time& other) const
+const bool voba::Time::operator ==(const voba::Time& other) const
 {
 	bool ret = true;
 	ret = ret && (this->hour == other.get_hour());
@@ -166,7 +223,12 @@ const bool voba::Time::operator ==(const Time& other) const
 	return ret;
 }
 
-const bool voba::Time::operator <(const Time& other) const
+const bool voba::Time::operator !=(const voba::Time& other) const
+{
+	return !this->operator==(other);
+}
+
+const bool voba::Time::operator <(const voba::Time& other) const
 {
 	bool ret = this->get_hour() < other.get_hour();
 	if(this->get_hour() == other.get_hour())
@@ -180,10 +242,29 @@ const bool voba::Time::operator <(const Time& other) const
 	return ret;
 }
 
+const bool voba::Time::operator >(const voba::Time& other) const
+{
+	return other.operator<(*this);
+}
+
+const bool voba::Time::operator <=(const voba::Time& other) const
+{
+	return !this->operator>(other);
+}
+
+const bool voba::Time::operator >=(const voba::Time& other) const
+{
+	return !this->operator<(other);
+}
+
 // private function
 void voba::Time::check_member_vars()
 {
 	// TODO use 'logger.error' or 'assert' or both?
+	// check 
+	// 0 <= hour < 24
+	// 0 <= minute < 60
+	// 0 <= second < 60
 	assert(this->hour < HOUR_PER_DAY && this->hour >= 0);
 	assert(this->minute < MINUTE_PER_HOUR && this->minute >= 0);
 	assert(this->second < SECOND_PER_MINUTE && this->second >= 0);

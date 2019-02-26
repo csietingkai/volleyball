@@ -100,17 +100,20 @@ const voba::Table& voba::Table::operator =(const voba::Table& other)
 // constructor
 voba::ServerInfo::ServerInfo()
 {
+	// use default server to my mysql server at mysql.cs.ccu.edu.tw
 	this->init("resources/server_info.xml");
 }
 
 voba::ServerInfo::ServerInfo(const std::string xml_path)
 {
+	// custom server info to other database
 	this->init(xml_path);
 }
 
 // public
 const std::string voba::ServerInfo::get_table_name(const std::string class_name) const
 {
+	// find a class correspond table name
 	std::string ret = "";
 	for (Table table : this->tables)
 	{
@@ -125,6 +128,7 @@ const std::string voba::ServerInfo::get_table_name(const std::string class_name)
 
 const voba::Table voba::ServerInfo::get_table(const std::string class_name) const
 {
+	// find a class correspond table
 	voba::Table ret;
 	for (Table table : this->tables)
 	{
@@ -140,6 +144,7 @@ const voba::Table voba::ServerInfo::get_table(const std::string class_name) cons
 // private 
 void voba::ServerInfo::init(const std::string xml_path)
 {
+	// read xml file and bind to ServerInfo class
 	const std::string ROOT_NAME = "connection";
 	const std::string SERVER_NODE_NAME = ROOT_NAME+".server.<xmlattr>.value";
 	const std::string ACCOUNT_NODE_NAME = ROOT_NAME+".account.<xmlattr>.value";
