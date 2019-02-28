@@ -124,6 +124,12 @@ const voba::Week voba::Date::get_week() const
 
 const std::string voba::Date::to_string() const
 {
+	// call show week type to_string
+	return this->to_string(true);
+}
+
+const std::string voba::Date::to_string(const bool show_week) const
+{
 	// transform member variables data into string
 	// format: yyyy-mm-dd, week
 	std::string re = "";
@@ -132,7 +138,10 @@ const std::string voba::Date::to_string() const
 	re += (this->get_month()<10?"0":"")+std::to_string(this->get_month())+"-";
 	re += (this->get_day()<10?"0":"")+std::to_string(this->get_day())+", ";
 	
-	re += DAY_OF_WEEK[static_cast<int>(get_week())];
+	if (show_week)
+	{
+		re += DAY_OF_WEEK[static_cast<int>(get_week())];
+	}
 	
 	return re;
 }

@@ -109,6 +109,15 @@ namespace voba
 			 * @Date 2019.01.23
 			 */
 			const std::string to_string() const;
+			/**
+			 * return full info of Time
+			 * 
+			 * @param show_week(bool)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.01.23
+			 */
+			const std::string to_string(const bool show_week) const;
 			
 			/**
 			 * return current datetime

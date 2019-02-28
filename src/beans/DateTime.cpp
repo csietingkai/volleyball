@@ -53,9 +53,15 @@ const voba::Time voba::DateTime::get_time() const
 
 const std::string voba::DateTime::to_string() const
 {
+	// call show week type to_string
+	return this->to_string(true);
+}
+
+const std::string voba::DateTime::to_string(const bool show_week) const
+{
 	// transform member variables data into string
 	// format: yyyy-mm-dd, week hh:mm:ss
-	return this->date.to_string()+" "+this->time.to_string();
+	return this->date.to_string(show_week)+" "+this->time.to_string();
 }
 
 // public function
