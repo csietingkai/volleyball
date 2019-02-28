@@ -10,43 +10,154 @@
 
 namespace voba
 {
-	class Team : Logable, IModel
+	/**
+	 * a team model
+	 * 
+	 * @Implement Logable
+	 * @Implement IModel
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2018.12.18
+	 */
+	class Team : Logable, public IModel
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			// constructors
+			/**
+			 * constructor of Team class
+			 * 
+			 * @param name(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Team(const std::string name);
+			/**
+			 * copy constructor of Team class
+			 * 
+			 * @param other(Team)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Team(const Team& other);
 			
-			// setters
-			void set_name(const std::string name) { this->name = name; };
-			
-			// getters
-			const UUID get_id() const override { return IModel::get_id(); };
-			const std::string get_name() const { return this->name; };
+			/**
+			 * set team name
+			 * 
+			 * @param name(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_name(const std::string name);
+			/**
+			 * get team name
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const std::string get_name() const;
+			/**
+			 * get team member
+			 * 
+			 * @param index(int)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const Person& get_member(const unsigned int index) const;
+			/**
+			 * get team prefer week as string
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const std::string get_prefer_week() const;
+			/**
+			 * get team prefer game time as string
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const std::string get_prefer_time() const;
-			const unsigned int size() const { return this->personset.size(); };
+			/**
+			 * get how many member in a team
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const unsigned int size() const;
+			/**
+			 * return full info of Team
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const std::string to_string() const;
 			
-			// other member function
+			/**
+			 * add member into team
+			 * 
+			 * @param member(Person)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			void add_member(const Person& member);
+			/**
+			 * remove member from team
+			 * 
+			 * @param member(Person)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			void remove_member(const Person& member);
-			void add_prefer_week(const Week week) { this->prefer_week.insert(week); };
-			void remove_prefer_week(const Week week) { this->prefer_week.erase(week); };
-			void add_prefer_time(const Time time) { this->prefer_time.insert(time); };
-			void remove_prefer_time(const Time time) { this->prefer_time.erase(time); };
+			/**
+			 * make a week day available
+			 * 
+			 * @param week(Week)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void add_prefer_week(const Week week);
+			/**
+			 * make a week day unavailable
+			 * 
+			 * @param week(Week)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void remove_prefer_week(const Week week);
+			/**
+			 * make a game section available
+			 * 
+			 * @param time(Time)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void add_prefer_time(const Time time);
+			/**
+			 * make a game sectino unavailable
+			 * 
+			 * @param time(Time)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void remove_prefer_time(const Time time);
 			
 			// operators
 			const Team& operator =(const Team& other);
 			const bool operator ==(const Team& other);
-			const bool operator !=(const Team& other) { return !this->operator==(other); };
-			const Person& operator [](const unsigned int index) { return this->get_member(index); };
-			friend std::ostream& operator <<(std::ostream& strm, const Team& other) { strm << other.to_string(); return strm; };
-			
-			void update_id(const UUID id) override { this->id = id; };
+			const bool operator !=(const Team& other);
+			const Person& operator [](const unsigned int index);
+			friend std::ostream& operator <<(std::ostream& strm, const Team& other);
 		
 		private:
 			std::string name;
@@ -54,9 +165,20 @@ namespace voba
 			std::set<Week> prefer_week;
 			std::set<Time> prefer_time;
 			
+			/**
+			 * setting default prefer week days
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			void init_prefer_week();
+			/**
+			 * setting default prefer game time
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			void init_prefer_time();
-			void check_range(const unsigned int index) const;
 	};
 }
 

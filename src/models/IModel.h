@@ -10,11 +10,29 @@ namespace voba
 	class IModel
 	{
 		public:
+			/**
+			 * constructor of interface IModel
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			IModel() {};
 			
-			virtual const UUID get_id() const { return this->id; };
+			/**
+			 * get id value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const UUID get_id() const;
 			
-			virtual void update_id(const UUID id) = 0;
+			/**
+			 * update id value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void update_id(const UUID id);
 		
 		protected:
 			UUID id;

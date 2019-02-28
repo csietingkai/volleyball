@@ -11,39 +11,151 @@
 
 namespace voba
 {
-	class Game : Logable, IModel
+	/**
+	 * a game model
+	 * 
+	 * @Implement Logable
+	 * @Implement IModel
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2018.12.18
+	 */
+	class Game : Logable, public IModel
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			// constructors
+			/**
+			 * constructor of Game class
+			 * 
+			 * @param team1(Team)
+			 * @param team2(Team)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Game(const Team team1, const Team team2);
+			/**
+			 * constructor of Game class
+			 * 
+			 * @param team1(Team)
+			 * @param team2(Team)
+			 * @param judge(Person)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Game(const Team team1, const Team team2, const Person judge);
+			/**
+			 * constructor of Game class
+			 * 
+			 * @param team1(Team)
+			 * @param team2(Team)
+			 * @param game_time(DateTime)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Game(const Team team1, const Team team2, const DateTime game_time);
+			/**
+			 * constructor of Game class
+			 * 
+			 * @param team1(Team)
+			 * @param team2(Team)
+			 * @param judge(Person)
+			 * @param game_time(DateTime)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Game(const Team team1, const Team team2, const Person judge, const DateTime game_time);
+			/**
+			 * constructor of Game class
+			 * 
+			 * @param other(Game)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Game(const Game& other);
 			
-			// setters
-			void set_team1(const Team team1) { this->team1 = team1; };
-			void set_team2(const Team team2) { this->team2 = team2; };
-			void set_judge(const Person judge) { this->judge = judge; };
-			void set_game_time(const DateTime game_time) { this->game_time = game_time; };
-			
-			// getters
-			const UUID get_id() const override { return IModel::get_id(); };
-			const Team get_team1() const { return this->team1; };
-			const Team get_team2() const { return this->team2; };
-			const Person get_judge() const { return this->judge; };
-			const DateTime get_game_time() const { return this->game_time; };
+			/**
+			 * set team1 value
+			 * 
+			 * @param team1(Team)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_team1(const Team team1);
+			/**
+			 * set team2 value
+			 * 
+			 * @param team2(Team)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_team2(const Team team2);
+			/**
+			 * set judge value
+			 * 
+			 * @param judge(Person)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_judge(const Person judge);
+			/**
+			 * set game time value
+			 * 
+			 * @param game_time(DateTime)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_game_time(const DateTime game_time);
+			/**
+			 * get team1 value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const Team get_team1() const;
+			/**
+			 * get team1 value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const Team get_team2() const;
+			/**
+			 * get team1 value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const Person get_judge() const;
+			/**
+			 * get team1 value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const DateTime get_game_time() const;
+			/**
+			 * get team1 value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const std::string to_string() const;
 			
 			// operators
 			const Game& operator =(const Game& other);
 			const bool operator ==(const Game& other);
-			const bool operator !=(const Game& other) { return !this->operator==(other); };
-			friend std::ostream& operator <<(std::ostream& strm, const Game& other) { strm << other.to_string(); return strm; };
-			
-			void update_id(const UUID id) override { this->id = id; };
+			const bool operator !=(const Game& other);
+			friend std::ostream& operator <<(std::ostream& strm, const Game& other);
 			
 		private:
 			Team team1;

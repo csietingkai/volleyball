@@ -2,16 +2,16 @@
 
 const std::string voba::Person::CLASS_NAME = "Person";
 
-// constructor
 voba::Person::Person()
 	: voba::Logable(voba::Person::CLASS_NAME)
 {
-	
+	// do nothing
 }
 
 voba::Person::Person(const std::string name, const unsigned int age, const Gender gender, const std::string phonenumber, const ActiveStatus status)
 	: voba::Logable(voba::Person::CLASS_NAME)
 {
+	// set parameters as member variables
 	this->name = name;
 	this->gender = gender;
 	this->age = age;
@@ -22,10 +22,71 @@ voba::Person::Person(const std::string name, const unsigned int age, const Gende
 voba::Person::Person(const voba::Person& other)
 	: voba::Logable(voba::Person::CLASS_NAME)
 {
+	// call assign operator for copy constructor
 	this->operator=(other);
 }
 
-// public function
+// getters & setters
+void voba::Person::set_name(const std::string name)
+{
+	// set name value
+	this->name = name;
+}
+
+void voba::Person::set_age(const unsigned int age)
+{
+	// set age value
+	this->age = age;
+}
+
+void voba::Person::set_gender(const Gender gender)
+{
+	// set gender value
+	this->gender = gender;
+}
+
+void voba::Person::set_phonenumber(const std::string phonenumber)
+{
+	// set phonenumber value
+	this->phonenumber = phonenumber;
+}
+
+void voba::Person::set_active_status(const voba::ActiveStatus status)
+{
+	// set active status value
+	this->status = status;
+}
+
+const std::string voba::Person::get_name() const
+{
+	// return name value
+	return this->name;
+}
+
+const int voba::Person::get_age() const
+{
+	// return age value
+	return this->age;
+}
+
+const voba::Gender voba::Person::get_gender() const
+{
+	// return gender value
+	return this->gender;
+}
+
+const std::string voba::Person::get_phonenumber() const
+{
+	// return phonenumber value
+	return this->phonenumber;
+}
+
+const voba::ActiveStatus voba::Person::get_active_status() const
+{
+	// return active status value
+	return this->status;
+}
+
 const std::string voba::Person::to_string() const
 {
 	// format: name, age, [male|female], phone number
@@ -66,3 +127,14 @@ const bool voba::Person::operator ==(const voba::Person& other)
 	re = re && (this->get_active_status() == other.get_active_status());
 	return re;
 }
+
+const bool voba::Person::operator !=(const voba::Person& other)
+{
+	return !this->operator==(other);
+}
+
+std::ostream& operator <<(std::ostream& strm, const voba::Person& other)
+{
+	strm << other.to_string(); 
+	return strm;
+};

@@ -9,52 +9,167 @@
 
 namespace voba
 {
+	/**
+	 * gender type
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2018.12.18
+	 */
 	enum class Gender: bool
 	{
 		male = true,
 		female = false
 	};
 
+	/**
+	 * the type represent is the member still active in the team
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2018.12.18
+	 */
 	enum class ActiveStatus: bool
 	{
 		active = true,
 		inactive = false
 	};
 	
-	class Person : Logable, IModel
+	/**
+	 * a person model
+	 * 
+	 * @Implement Logable
+	 * @Implement IModel
+	 * 
+	 * @CreatedBy tingkai
+	 * @Date 2018.12.18
+	 */
+	class Person : Logable, public IModel
 	{
 		public:
 			const static std::string CLASS_NAME;
 			
-			// constructor
+			/**
+			 * empty constuctor of Person class
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Person();
+			/**
+			 * constructor of Person class
+			 * 
+			 * @param name(string)
+			 * @param age(int)
+			 * @param gender(Gender)
+			 * @param phonenumber(string)
+			 * @param status(ActiveStatus)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Person(const std::string name, const unsigned int age, const Gender gender, const std::string phonenumber, const ActiveStatus status);
+			/**
+			 * copy constructor of Person class
+			 * 
+			 * @param other(Person)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			Person(const Person& other);
 			
-			// setters
-			void set_name(const std::string name) { this->name = name; };
-			void set_age(const unsigned int age) { this->age = age; };
-			void set_gender(const Gender gender) { this->gender = gender; };
-			void set_phonenumber(const std::string phonenumber) { this->phonenumber = phonenumber; };
-			void set_active_status(const ActiveStatus status) { this->status = status; };
-			
-			// getters
-			const UUID get_id() const override { return IModel::get_id(); };
-			const std::string get_name() const { return this->name; };
-			const int get_age() const { return this->age; };
-			const Gender get_gender() const { return this->gender; };
-			const std::string get_phonenumber() const { return this->phonenumber; };
-			const ActiveStatus get_active_status() const { return this->status; };
+			/**
+			 * set name value
+			 * 
+			 * @param name(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_name(const std::string name);
+			/**
+			 * set age value
+			 * 
+			 * @param age(int)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_age(const unsigned int age);
+			/**
+			 * set gender value
+			 * 
+			 * @param gender(Gender)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_gender(const Gender gender);
+			/**
+			 * set phonenumber value
+			 * 
+			 * @param phonenumber(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_phonenumber(const std::string phonenumber);
+			/**
+			 * set active status value
+			 * 
+			 * @param status(ActiveStatus)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			void set_active_status(const ActiveStatus status);
+			/**
+			 * get name value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const std::string get_name() const;
+			/**
+			 * get age value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const int get_age() const;
+			/**
+			 * get gender value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const Gender get_gender() const;
+			/**
+			 * get phonenumber value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const std::string get_phonenumber() const;
+			/**
+			 * get active status value
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
+			const ActiveStatus get_active_status() const;
+			/**
+			 * return full info of Person
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2018.12.18
+			 */
 			const std::string to_string() const;
 				
 			// operators
 			const Person& operator =(const Person& other);
 			const bool operator ==(const Person& other);
-			const bool operator !=(const Person& other) { return !this->operator==(other); };
-			friend std::ostream& operator <<(std::ostream& strm, const Person& other) { strm << other.to_string(); return strm; };
-			
-			// NOT RECOMMEND to use mannually
-			void update_id(const UUID id) override { this->id = id; };
+			const bool operator !=(const Person& other);
+			friend std::ostream& operator <<(std::ostream& strm, const Person& other);
 		
 		private:
 			std::string name;
