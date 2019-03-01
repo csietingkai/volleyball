@@ -52,14 +52,87 @@ namespace voba
 			 * @Date 2019.12.07
 			 */
 			sql::ResultSet* select();
+			/**
+			 * select rows by id
+			 * 
+			 * @param id(UUID)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			sql::ResultSet* select(const UUID id);
+			/**
+			 * select rows by where conditions
+			 * 
+			 * @param where_conditions(list<Column>)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			sql::ResultSet* select(const std::list<Column> where_conditions);
-			const int insert(const T t) { return 0; }; // need specialization
-			const int update(const T t) { return 0; }; // need specialization
+			/**
+			 * insert model into database <br/>
+			 * NEED SPECIALIZATION
+			 * 
+			 * @param t(T)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
+			const int insert(const T t) { return 0; };
+			/**
+			 * update model data in database <br/>
+			 * NEED SPECIALIZATION
+			 * 
+			 * @param t(T)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
+			const int update(const T t) { return 0; };
+			/**
+			 * remove the model data from database
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			const int remove(const T t);
+			/**
+			 * remove the model data from database by where condition
+			 * 
+			 * @param where_condition(Column)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			const int remove(const Column where_conditions);
+			/**
+			 * remove the model data from database by where conditions
+			 * 
+			 * @param where_conditions(list<Column>)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			const int remove(const std::list<Column> where_conditions);
 			
+			/**
+			 * excute the query
+			 * 
+			 * @param query(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.01
+			 */
+			sql::ResultSet* execute_query(const std::string query);
+			/**
+			 * excute the query
+			 * 
+			 * @param query(string)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.02.15
+			 */
 			const int execute(const std::string query);
 		
 		private:
@@ -71,6 +144,14 @@ namespace voba
 			Table table;
 			SqlCommandBuilder builder;
 			
+			/**
+			 * print exception cause and code when catch SQLException
+			 * 
+			 * @param e(SQLException)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.12.07
+			 */
 			void print_sql_exception(const sql::SQLException e);
 	};
 	
