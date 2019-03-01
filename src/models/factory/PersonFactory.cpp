@@ -78,6 +78,8 @@ const voba::Person& voba::PersonFactory::select_by_id(const voba::UUID id)
 
 const voba::Person& voba::PersonFactory::create(std::string name, int age, voba::Gender gender, std::string phonenumber, voba::ActiveStatus status)
 {
+	// create a Person instance and give it an id
+	// then sent object to mysql connector
 	voba::PersonFactory::logger.debug("creating person in database");
 	
 	voba::Person *p = new voba::Person(name, age, gender, phonenumber, status);
@@ -88,6 +90,7 @@ const voba::Person& voba::PersonFactory::create(std::string name, int age, voba:
 
 const bool voba::PersonFactory::update(voba::Person& new_person)
 {
+	// simplely call connector's update
 	voba::PersonFactory::logger.debug("updating person in database");
 	
 	int result = voba::PersonFactory::p_connector.update(new_person);
@@ -103,13 +106,13 @@ const bool voba::PersonFactory::update(voba::Person& new_person)
 
 const bool voba::PersonFactory::remove(voba::Person& person)
 {
+	// delete this person in table 'persons' and 'teams'
 	voba::PersonFactory::logger.debug("deleting person in database");
 	
 	int result = 0;
 	result += voba::PersonFactory::p_connector.remove(person);
 	
-	voba::Column member_id("member_id", voba::ColumnType::UUID);
-	member_id.set_value(person.get_id().to_string());
+	voba::Column member_id("member_id", voba::ColumnType::UUID, person.get_id().to_string());
 	result += voba::PersonFactory::t_connector.remove(member_id);
 	
 	if (result >= 1)

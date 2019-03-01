@@ -49,10 +49,11 @@ namespace voba
 	{
 		public:
 			Column() {};
-			Column(const std::string name): name(name), type(ColumnType::String), nullable(false) {};
-			Column(const std::string name, const ColumnType type): name(name), type(type), nullable(false) {};
-			Column(const std::string name, const ColumnType type, const bool nullable): name(name), type(type), nullable(nullable) {};
-			Column(const Column& other) { this->operator=(other); };
+			Column(const std::string name): name(name), type(ColumnType::String), value(""), nullable(false) {};
+			Column(const std::string name, const ColumnType type): name(name), type(type), value(""), nullable(false) {};
+			Column(const std::string name, const ColumnType type, const std::string value): name(name), type(type), value(value), nullable(false) {};
+			Column(const std::string name, const ColumnType type, const bool nullable): name(name), type(type), value(""), nullable(nullable) {};
+			Column(const std::string name, const ColumnType type, const std::string value, const bool nullable): name(name), type(type), value(value), nullable(nullable) {};
 			
 			void set_name(const std::string name) { this->name = name; };
 			void set_type(const ColumnType type) { this->type = type; };

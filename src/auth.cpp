@@ -89,8 +89,7 @@ const voba::User voba::auth(const std::string account, const std::string pwd)
 	sql::Statement *statement = connection->createStatement();
 	
 	voba::SqlCommandBuilder builder;
-	voba::Column where_condition("account", voba::ColumnType::String);
-	where_condition.set_value(account);
+	voba::Column where_condition("account", voba::ColumnType::String, account);
 	std::string query = builder.select().from(table).where(where_condition).to_string();
 	sql::ResultSet *result_set = statement->executeQuery(query);
 	
@@ -149,15 +148,10 @@ const voba::AuthState voba::create_auth(const voba::User current_user, const vob
 		connection->setSchema(info.get_schema());
 		sql::Statement *statement = connection->createStatement();
 		
-		voba::Column id("id", voba::ColumnType::UUID);
-		
-		id.set_value(voba::UUID::random_uuid().to_string());
-		voba::Column account("account", voba::ColumnType::String);
-		account.set_value(new_user.account);
-		voba::Column pwd("pwd", voba::ColumnType::String);
-		pwd.set_value(new_user.pwd);
-		voba::Column role("role", voba::ColumnType::Integer);
-		role.set_value(std::to_string(static_cast<int>(new_user.role)));
+		voba::Column id("id", voba::ColumnType::UUID, voba::UUID::random_uuid().to_string());
+		voba::Column account("account", voba::ColumnType::String, new_user.account);
+		voba::Column pwd("pwd", voba::ColumnType::String, new_user.pwd);
+		voba::Column role("role", voba::ColumnType::Integer, std::to_string(static_cast<int>(new_user.role)));
 		std::list<voba::Column> values = { id, account, pwd, role };
 		
 		voba::SqlCommandBuilder builder;
