@@ -20,7 +20,7 @@ namespace voba
 {
 	/**
 	 * @CreatedBy tingkai
-	 * @Date 2019.12.07
+	 * @Date 2018.12.07
 	 */
 	template <class T>
 	class MySQLConnector : Logable
@@ -33,7 +33,7 @@ namespace voba
 			 * initialize connection
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			MySQLConnector();
 			/**
@@ -41,7 +41,7 @@ namespace voba
 			 * close connection
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			~MySQLConnector();
 			
@@ -49,7 +49,7 @@ namespace voba
 			 * select all rows
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			sql::ResultSet* select();
 			/**
@@ -58,7 +58,7 @@ namespace voba
 			 * @param id(UUID)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			sql::ResultSet* select(const UUID id);
 			/**
@@ -67,7 +67,7 @@ namespace voba
 			 * @param where_conditions(list<Column>)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			sql::ResultSet* select(const std::list<Column> where_conditions);
 			/**
@@ -77,7 +77,7 @@ namespace voba
 			 * @param t(T)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			const int insert(const T t) { return 0; };
 			/**
@@ -87,14 +87,14 @@ namespace voba
 			 * @param t(T)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			const int update(const T t) { return 0; };
 			/**
 			 * remove the model data from database
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			const int remove(const T t);
 			/**
@@ -103,7 +103,7 @@ namespace voba
 			 * @param where_condition(Column)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			const int remove(const Column where_conditions);
 			/**
@@ -112,7 +112,7 @@ namespace voba
 			 * @param where_conditions(list<Column>)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			const int remove(const std::list<Column> where_conditions);
 			
@@ -150,9 +150,19 @@ namespace voba
 			 * @param e(SQLException)
 			 * 
 			 * @CreatedBy tingkai
-			 * @Date 2019.12.07
+			 * @Date 2018.12.07
 			 */
 			void print_sql_exception(const sql::SQLException e);
+			
+			/**
+			 * check T is not empty or null
+			 * 
+			 * @param t(T)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.14
+			 */
+			const bool validate(const T t);
 	};
 	
 	template<> const int MySQLConnector<Game>::insert(const Game g);

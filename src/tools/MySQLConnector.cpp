@@ -84,6 +84,12 @@ sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_co
 template <class T>
 const int voba::MySQLConnector<T>::remove(const T t)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Model with empty ID while removing");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	Column tid("id", voba::ColumnType::UUID);
 	tid.set_value(t.get_id().to_string());
@@ -174,9 +180,33 @@ void voba::MySQLConnector<T>::print_sql_exception(const sql::SQLException e)
 	this->logger.error(error_msg);
 }
 
+template <class T>
+const bool voba::MySQLConnector<T>::validate(const T t)
+{
+	bool is_empty = false;
+	UUID emptyUUID;
+	
+	if (is_empty)
+	{
+		is_empty = true;
+	}
+	else if (emptyUUID == t.get_id())
+	{
+		is_empty = true;
+	}
+	
+	return !is_empty;
+}
+
 // Game specialization
 template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Game with empty ID while inserting");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID, g.get_id().to_string());
 	voba::Column team1_id("team_1_id", voba::ColumnType::UUID, g.get_team1().get_id().to_string());
@@ -203,6 +233,12 @@ template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g
 
 template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Game with empty ID while updating");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column team1_id("team_1_id", voba::ColumnType::UUID, g.get_team1().get_id().to_string());
 	voba::Column team2_id("team_2_id", voba::ColumnType::UUID, g.get_team2().get_id().to_string());
@@ -235,6 +271,12 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 // Person specialization
 template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Person with empty ID while inserting");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID, p.get_id().to_string());
 	voba::Column name("name", voba::ColumnType::String, p.get_name());
@@ -263,6 +305,12 @@ template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Pers
 
 template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Person p)
 {
+	if (!this->validate(p))
+	{
+		this->logger.warning("Person with empty ID while updating");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column name("name", voba::ColumnType::String, p.get_name());
 	voba::Column age("age", voba::ColumnType::Integer, std::to_string(p.get_age()));
@@ -293,6 +341,12 @@ template<> const int voba::MySQLConnector<voba::Person>::update(const voba::Pers
 // Team specialization
 template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Team with empty ID while inserting");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column id("id", voba::ColumnType::UUID, t.get_id().to_string());
 	voba::Column name("name", voba::ColumnType::String, t.get_name());
@@ -321,6 +375,12 @@ template<> const int voba::MySQLConnector<voba::Team>::insert(const voba::Team t
 
 template<> const int voba::MySQLConnector<voba::Team>::update(const voba::Team t)
 {
+	if (!this->validate(t))
+	{
+		this->logger.warning("Team with empty ID while updating");
+		return -1;
+	}
+	
 	// use SqlCommandBuilder generate query and execute
 	voba::Column name("name", voba::ColumnType::String, t.get_name());
 	voba::Column prefer_week("prefer_week", voba::ColumnType::String, t.get_prefer_week());
