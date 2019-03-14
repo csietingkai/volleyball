@@ -58,7 +58,8 @@ namespace voba
 			const static UUID& from_string(const std::string str);
 			
 			const UUID& operator =(const UUID& other);
-			friend std::ostream& operator <<(std::ostream& strm, const UUID& other) { strm << other.to_string(); return strm; };
+			const bool operator ==(const UUID& other) const;
+			friend std::ostream& operator <<(std::ostream& strm, const UUID& other);
 		
 		private:
 			std::string id;

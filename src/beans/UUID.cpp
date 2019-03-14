@@ -38,6 +38,17 @@ const voba::UUID& voba::UUID::operator =(const voba::UUID& other)
 	return *this;
 }
 
+const bool voba::UUID::operator ==(const voba::UUID& other) const
+{ 
+	return this->id.compare(other.to_string()) == 0;
+}
+
+std::ostream& operator <<(std::ostream& strm, const voba::UUID& other)
+{
+	strm << other.to_string();
+	return strm;
+}
+
 const bool voba::UUID::is_valid(std::string str)
 {
 	static const boost::regex reg("[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12}");
