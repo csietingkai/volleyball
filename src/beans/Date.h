@@ -39,7 +39,7 @@ namespace voba
 		SATURDAY = 6
 	};
 	
-	std::ostream& operator <<(std::ostream& strm, const Week& weel);
+	std::ostream& operator <<(std::ostream& strm, const Week& week);
 
 	/**
 	 * the class to record the date
