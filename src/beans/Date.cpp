@@ -67,7 +67,7 @@ voba::Date::Date(const std::string date_str)
 	static const boost::regex reg("[0-9]{4}-[0-9]{2}-[0-9]{2}");
 	if (boost::regex_match(date_str, reg))
 	{
-		std::vector<std::string> params = voba::Utils::split(date_str, '-');
+		std::vector<std::string> params = voba::Utils::split(date_str, voba::Date::DATE_STRING_SEPERATOR);
 		this->year = std::stoi(params[0]);
 		this->month = std::stoi(params[1]);
 		this->day = std::stoi(params[2]);
@@ -157,12 +157,15 @@ const std::string voba::Date::to_string(const bool show_week) const
 	// format: yyyy-mm-dd, week
 	std::string re = "";
 	
-	re += std::to_string(this->get_year())+"-";
-	re += (this->get_month()<10?"0":"")+std::to_string(this->get_month())+"-";
-	re += (this->get_day()<10?"0":"")+std::to_string(this->get_day())+", ";
+	re += std::to_string(this->get_year());
+	re += voba::Date::DATE_STRING_SEPERATOR;
+	re += (this->get_month()<10?"0":"")+std::to_string(this->get_month());
+	re += voba::Date::DATE_STRING_SEPERATOR;
+	re += (this->get_day()<10?"0":"")+std::to_string(this->get_day());
 	
 	if (show_week)
 	{
+		re += ", ";
 		re += DAY_OF_WEEK[static_cast<int>(get_week())];
 	}
 	

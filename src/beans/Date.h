@@ -53,6 +53,7 @@ namespace voba
 	{
 		public:
 			const static std::string CLASS_NAME;
+			const static char DATE_STRING_SEPERATOR = '-';
 			
 			/**
 			 * constructor of class Date <br>

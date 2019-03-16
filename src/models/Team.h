@@ -23,6 +23,8 @@ namespace voba
 	{
 		public:
 			const static std::string CLASS_NAME;
+			const static char PREFER_WEEK_SEPERATOR = ';';
+			const static char PREFER_TIME_SEPERATOR = ';';
 			
 			/**
 			 * constructor of Team class

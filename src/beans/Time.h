@@ -23,6 +23,7 @@ namespace voba
 	{
 		public:
 			const static std::string CLASS_NAME;
+			const static char TIME_STRING_SEPERATOR = ':';
 			
 			/**
 			 * constructor of class Time<br>

@@ -171,17 +171,17 @@ const voba::Team& voba::Team::operator =(const voba::Team& other)
 	}
 	
 	std::string prefer_week = other.get_prefer_week();
-	std::vector<std::string> weeks = voba::Utils::split(prefer_week, ';');
+	std::vector<std::string> weeks = voba::Utils::split(prefer_week, voba::Team::PREFER_WEEK_SEPERATOR);
 	for (auto it = weeks.begin(); it != weeks.end(); it++)
 	{
 		this->add_prefer_week(static_cast<voba::Week>(std::stoi(*it)));
 	}
 	
 	std::string prefer_time = other.get_prefer_time();
-	std::vector<std::string> times = voba::Utils::split(prefer_time, ';');
+	std::vector<std::string> times = voba::Utils::split(prefer_time, voba::Team::PREFER_TIME_SEPERATOR);
 	for (auto it = times.begin(); it != times.end(); it++)
 	{
-		std::vector<std::string> time_vars = voba::Utils::split(*it, ':');
+		std::vector<std::string> time_vars = voba::Utils::split(*it, voba::Time::TIME_STRING_SEPERATOR);
 		int h = std::stoi(time_vars[0]);
 		int m = std::stoi(time_vars[1]);
 		int s = std::stoi(time_vars[2]);

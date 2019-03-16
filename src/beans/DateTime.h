@@ -36,6 +36,7 @@ namespace voba
 	{
 		public:
 			const static std::string CLASS_NAME;
+			const static char DATETIME_STRING_SEPERATOR = ' ';
 
 			/**
 			 * constructor of class DateTime <br/>

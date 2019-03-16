@@ -26,7 +26,7 @@ voba::DateTime::DateTime(const std::string datetime_str)
 	static const boost::regex reg("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}");
 	if (boost::regex_match(datetime_str, reg))
 	{
-		std::vector<std::string> params = voba::Utils::split(datetime_str, ' ');
+		std::vector<std::string> params = voba::Utils::split(datetime_str, voba::DateTime::DATETIME_STRING_SEPERATOR);
 		voba::Date convert_date(params[0]);
 		voba::Time convert_time(params[1]);
 		this->date = convert_date;
@@ -80,7 +80,7 @@ const std::string voba::DateTime::to_string(const bool show_week) const
 {
 	// transform member variables data into string
 	// format: yyyy-mm-dd, week hh:mm:ss
-	return this->date.to_string(show_week)+" "+this->time.to_string();
+	return this->date.to_string(show_week) + voba::DateTime::DATETIME_STRING_SEPERATOR + this->time.to_string();
 }
 
 // public function

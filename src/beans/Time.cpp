@@ -23,7 +23,7 @@ voba::Time::Time(const std::string time_str)
 	static const boost::regex reg("[0-9]{2}:[0-9]{2}:[0-9]{2}");
 	if (boost::regex_match(time_str, reg))
 	{
-		std::vector<std::string> params = voba::Utils::split(time_str, ':');
+		std::vector<std::string> params = voba::Utils::split(time_str, voba::Time::TIME_STRING_SEPERATOR);
 		this->hour = std::stoi(params[0]);
 		this->minute = std::stoi(params[1]);
 		this->second = std::stoi(params[2]);
@@ -95,8 +95,10 @@ const std::string voba::Time::to_string() const
 	// format: hh:mm:ss
 	std::string re = "";
 	
-	re += (this->get_hour()<10?"0":"")+std::to_string(this->get_hour())+":";
-	re += (this->get_minute()<10?"0":"")+std::to_string(this->get_minute())+":";
+	re += (this->get_hour()<10?"0":"")+std::to_string(this->get_hour());
+	re += voba::Time::TIME_STRING_SEPERATOR;
+	re += (this->get_minute()<10?"0":"")+std::to_string(this->get_minute());
+	re += voba::Time::TIME_STRING_SEPERATOR;
 	re += (this->get_second()<10?"0":"")+std::to_string(this->get_second());
 	
 	return re;
