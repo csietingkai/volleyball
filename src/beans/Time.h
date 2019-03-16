@@ -1,10 +1,13 @@
 #ifndef TIME_H_
 #define TIME_H_
 
+#include <boost/regex.hpp>
 #include <ctime>
 #include <iostream>
+#include <vector>
 
 #include "../tools/Logger.h"
+#include "../utils/Utils.h"
 
 namespace voba
 {
@@ -35,6 +38,18 @@ namespace voba
 			 * @Date 2019.01.23
 			 */
 			Time(const int hour = 0, const int minute = 0, const int second = 0);
+			/**
+			 * constructor of class Time<br>
+			 * it contains hour, time, second
+			 * 
+			 * @param time_str(string): format: [0-9]{2}:[0-9]{2}:[0-9]{2}
+			 * 
+			 * @see Time #check_member_vars
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.16
+			 */
+			Time(const std::string time_str);
 			/**
 			 * copy constructor of class {@link Time}
 			 * 

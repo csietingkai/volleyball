@@ -16,6 +16,29 @@ voba::Time::Time(const int hour, const int minute, const int second)
 	this->check_member_vars();
 }
 
+voba::Time::Time(const std::string time_str)
+	: Logable(voba::Time::CLASS_NAME)
+{
+	// handle a format time string to object
+	static const boost::regex reg("[0-9]{2}:[0-9]{2}:[0-9]{2}");
+	if (boost::regex_match(time_str, reg))
+	{
+		std::vector<std::string> params = voba::Utils::split(time_str, ':');
+		this->hour = std::stoi(params[0]);
+		this->minute = std::stoi(params[1]);
+		this->second = std::stoi(params[2]);
+		this->check_member_vars();
+	}
+	else
+	{
+		this->logger.warning("time string format is not correct");
+		this->hour = 0;
+		this->minute = 0;
+		this->second = 0;
+		this->check_member_vars();
+	}
+}
+
 voba::Time::Time(const Time& other)
 	: Logable(voba::Time::CLASS_NAME)
 {

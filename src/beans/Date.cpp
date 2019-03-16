@@ -60,6 +60,29 @@ voba::Date::Date(const int year, const int month, const int day)
 	this->week = this->calculate_week();
 }
 
+voba::Date::Date(const std::string date_str)
+	: Logable(voba::Date::CLASS_NAME)
+{
+	// handle a format date string to object
+	static const boost::regex reg("[0-9]{4}-[0-9]{2}-[0-9]{2}");
+	if (boost::regex_match(date_str, reg))
+	{
+		std::vector<std::string> params = voba::Utils::split(date_str, '-');
+		this->year = std::stoi(params[0]);
+		this->month = std::stoi(params[1]);
+		this->day = std::stoi(params[2]);
+		this->check_member_vars();
+	}
+	else
+	{
+		this->logger.warning("date string format is not correct");
+		this->year = 1900;
+		this->month = 1;
+		this->day = 1;
+		this->check_member_vars();
+	}
+}
+
 voba::Date::Date(const voba::Date& other)
 	: Logable(voba::Date::CLASS_NAME)
 {

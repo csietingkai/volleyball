@@ -60,6 +60,19 @@ namespace voba
 			 */
 			DateTime(const Date date, const Time time);
 			/**
+			 * constructor of class DateTime <br/>
+			 * it contains date, time
+			 * 
+			 * @param datetime_str(string): format: date format + " " + time format
+			 * 
+			 * @see Date::Date(Date&)
+			 * @see Time::Time(Time&)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.01.23
+			 */
+			DateTime(const std::string datetime_str);
+			/**
 			 * copy constructor of class {@link DateTime}
 			 * 
 			 * @param datetime(DateTime&)

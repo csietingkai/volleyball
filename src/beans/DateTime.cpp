@@ -19,6 +19,25 @@ voba::DateTime::DateTime(const voba::Date date, const voba::Time time)
 	this->time = time;
 }
 
+voba::DateTime::DateTime(const std::string datetime_str)
+	: Logable(voba::DateTime::CLASS_NAME)
+{
+	// handle a format date string to object
+	static const boost::regex reg("[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}");
+	if (boost::regex_match(datetime_str, reg))
+	{
+		std::vector<std::string> params = voba::Utils::split(datetime_str, ' ');
+		voba::Date convert_date(params[0]);
+		voba::Time convert_time(params[1]);
+		this->date = convert_date;
+		this->time = convert_time;
+	}
+	else
+	{
+		this->logger.warning("datetime string format is not correct");
+	}
+}
+
 voba::DateTime::DateTime(const voba::DateTime& datetime)
 	: Logable(voba::DateTime::CLASS_NAME)
 {

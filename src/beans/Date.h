@@ -1,10 +1,13 @@
 #ifndef DATE_H_
 #define DATE_H_
 
+#include <boost/regex.hpp>
 #include <ctime>
 #include <iostream>
+#include <vector>
 
 #include "../tools/Logger.h"
+#include "../utils/Utils.h"
 
 namespace voba
 {
@@ -65,6 +68,18 @@ namespace voba
 			 * @Date 2019.01.23
 			 */
 			Date(const int year = 1900, const int month = 1, const int day = 1);
+			/**
+			 * constructor of class Date <br>
+			 * it contains year, month, day
+			 * 
+			 * @param date_str(string): format: [0-9]{4}-[0-9]{2}-[0-9]{2}
+			 * 
+			 * @see Date #check_member_vars
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.16
+			 */
+			Date(const std::string date_str);
 			/**
 			 * copy constructor of class Date
 			 * 
