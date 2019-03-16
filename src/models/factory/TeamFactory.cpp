@@ -7,24 +7,26 @@ voba::Logger voba::TeamFactory::logger(voba::TeamFactory::CLASS_NAME);
 
 const std::vector<voba::Team> voba::TeamFactory::select_all()
 {
-	/*voba::TeamFactory::logger.debug("selecting all team from database");
+	voba::TeamFactory::logger.debug("selecting all team from database");
 	
 	std::vector<voba::Team> all;
 	
 	voba::UUID id;
 	std::string name;
 	
-	sql::ResultSet* result_set = voba::TeamFactory::t_connector.select();
+	voba::SqlCommandBuilder builder;
+	voba::Column distinct_id("distinct(id)");
+	// TODO get table from MySQLConnector
+	voba::ServerInfo info;
+	voba::Table team_table = info.get_table(voba::Team::CLASS_NAME);
+	std::string query = builder.select(distinct_id).from(team_table).to_string();
+	sql::ResultSet* result_set = voba::TeamFactory::t_connector.execute_query(query);
 	while (result_set->next())
 	{
-		std::cout << result_set->getString(1) << std::endl;
-		std::cout << result_set->getString(2) << std::endl;
-		std::cout << result_set->getString(3) << std::endl;
-		std::cout << result_set->getString(4) << std::endl;
-		std::cout << result_set->getString(5) << std::endl << std::endl;
+		all.push_back(voba::TeamFactory::select_by_id(voba::UUID::from_string(result_set->getString(1))));
 	}
 	
-	return all;*/
+	return all;
 }
 
 const voba::Team& voba::TeamFactory::select_by_id(const voba::UUID id)
@@ -76,14 +78,21 @@ const voba::Team& voba::TeamFactory::create(const std::string name)
 
 const voba::Team& voba::TeamFactory::insert_member(voba::Team& team, const voba::Person& member)
 {
+	team.add_member(member);
 	
+	return team;
 }
 
 const voba::Team& voba::TeamFactory::delete_member(voba::Team& team, const voba::Person& member)
 {
-	voba::Column tid("id", voba::ColumnType::UUID);
-	tid.set_value(team.get_id().to_string());
+	team.remove_member(member);
+	
+	voba::Column tid("id", voba::ColumnType::UUID, team.get_id().to_string());
 	voba::Column mid("member_id", voba::ColumnType::UUID);
+	std::list<voba::Column> where_conditions = { tid, mid };
+	voba::TeamFactory::t_connector.remove(where_conditions);
+	
+	return team;
 }
 
 const bool voba::TeamFactory::update(const voba::Team new_team)
