@@ -186,11 +186,7 @@ const bool voba::MySQLConnector<T>::validate(const T t)
 	bool is_empty = false;
 	UUID emptyUUID;
 	
-	if (is_empty)
-	{
-		is_empty = true;
-	}
-	else if (emptyUUID == t.get_id())
+	if (emptyUUID == t.get_id())
 	{
 		is_empty = true;
 	}
@@ -201,7 +197,7 @@ const bool voba::MySQLConnector<T>::validate(const T t)
 // Game specialization
 template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g)
 {
-	if (!this->validate(t))
+	if (!this->validate(g))
 	{
 		this->logger.warning("Game with empty ID while inserting");
 		return -1;
@@ -233,7 +229,7 @@ template<> const int voba::MySQLConnector<voba::Game>::insert(const voba::Game g
 
 template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g)
 {
-	if (!this->validate(t))
+	if (!this->validate(g))
 	{
 		this->logger.warning("Game with empty ID while updating");
 		return -1;
@@ -271,7 +267,7 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 // Person specialization
 template<> const int voba::MySQLConnector<voba::Person>::insert(const voba::Person p)
 {
-	if (!this->validate(t))
+	if (!this->validate(p))
 	{
 		this->logger.warning("Person with empty ID while inserting");
 		return -1;
