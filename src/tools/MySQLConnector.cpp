@@ -52,15 +52,13 @@ template <class T>
 sql::ResultSet* voba::MySQLConnector<T>::select(const voba::UUID id)
 {
 	// use SqlCommandBuilder generate query and execute
-	voba::Column cid("id", voba::ColumnType::UUID);
-	cid.set_value(id.to_string());
-	std::list<voba::Column> columns;
-	columns.push_back(cid);
+	voba::Column cid("id", voba::ColumnType::UUID, id.to_string());
+	std::list<voba::Column> columns = { cid };
 	return this->select(columns);
 }
 
 template <class T>
-sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<Column> where_conditions)
+sql::ResultSet* voba::MySQLConnector<T>::select(const std::list<voba::Column> where_conditions)
 {
 	// use SqlCommandBuilder generate query and execute
 	sql::ResultSet *result_set;

@@ -69,7 +69,7 @@ namespace voba
 			 * @CreatedBy tingkai
 			 * @Date 2018.12.07
 			 */
-			sql::ResultSet* select(const std::list<Column> where_conditions);
+			sql::ResultSet* select(const std::list<voba::Column> where_conditions);
 			/**
 			 * insert model into database <br/>
 			 * NEED SPECIALIZATION
