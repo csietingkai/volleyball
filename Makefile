@@ -12,6 +12,12 @@ LOGDIR := ./logs
 SRCS := $(wildcard $(SRCDIR)/*.cpp) $(wildcard $(SRCDIR)/**/*.cpp) $(wildcard $(SRCDIR)/**/**/*.cpp)
 OBJS := $(OBJDIR)/main.o $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
+MYSQL_HOST = mysql.cs.ccu.edu.tw
+MYSQL_USER = htk103u
+MYSQL_BACKUP_DIR := ./mysql_backup
+MYSQL_BACKUP_FILE := $(MYSQL_BACKUP_DIR)/backup-`date +'%Y-%m-%d'`.sql
+
+
 all: $(EXE)
 
 $(EXE): $(OBJS)
@@ -30,3 +36,7 @@ clear:
 
 clean:
 	rm -rf $(OBJDIR)/* $(LOGDIR)/*.log $(EXE) 
+
+backup:
+	@mkdir -p $(MYSQL_BACKUP_DIR)
+	mysqldump -h $(MYSQL_HOST) -u $(MYSQL_USER) -p --all-databases --single-transaction > $(MYSQL_BACKUP_FILE)
