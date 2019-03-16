@@ -14,7 +14,7 @@ OBJS := $(OBJDIR)/main.o $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRCS))
 
 MYSQL_HOST = mysql.cs.ccu.edu.tw
 MYSQL_USER = htk103u
-MYSQL_BACKUP_DIR := ./mysql_backup
+MYSQL_BACKUP_DIR := ./resources/mysql_backup
 MYSQL_BACKUP_FILE := $(MYSQL_BACKUP_DIR)/backup-`date +'%Y-%m-%d'`.sql
 
 
