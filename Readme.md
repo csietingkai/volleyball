@@ -9,8 +9,9 @@ Using techniques:
 + C++ Boost
 + Gliffy (to design application structure and view) 
 
-## Build Status
+## Project Status
 [![Build Status](https://travis-ci.org/csietingkai/volleyball.svg?branch=master)](https://travis-ci.org/csietingkai/volleyball)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c41ed6ad92d043ce93192e4b00d9ba59)](https://www.codacy.com/app/csietingkai/volleyball?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=csietingkai/volleyball&amp;utm_campaign=Badge_Grade)
 
 ## Developers: 
 
@@ -34,6 +35,9 @@ sudo apt-get install libgtkmm-3.0-dev
 + [ ] add code coverage test
 + [ ] create data in database for testing
 + [ ] test unit in test.cpp
++ [x] [add ci test](https://travis-ci.org/csietingkai/volleyball)
++ [ ] [add code coverage test](https://coveralls.io)
++ [ ] [add code review tool](https://app.codacy.com/project/csietingkai/volleyball)
 
 ## Fail TODO List
 
