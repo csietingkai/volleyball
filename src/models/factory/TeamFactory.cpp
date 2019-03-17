@@ -95,7 +95,7 @@ const voba::Team& voba::TeamFactory::delete_member(voba::Team& team, const voba:
 	return team;
 }
 
-const bool voba::TeamFactory::update(const voba::Team new_team)
+const bool voba::TeamFactory::update(voba::Team& new_team)
 {
 	// update team's attributes, like prefer times, team name, etc
 	int result = 0;
@@ -105,7 +105,7 @@ const bool voba::TeamFactory::update(const voba::Team new_team)
 	return true;
 }
 
-const bool voba::TeamFactory::remove(const voba::Team team)
+const bool voba::TeamFactory::remove(voba::Team& team)
 {
 	// remove team from table 'Teams' and 'Games' 
 	int result = 0;

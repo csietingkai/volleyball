@@ -69,7 +69,7 @@ namespace voba
 			 * @CreatedBy tingkai
 			 * @Date 2019.03.01
 			 */
-			const static bool update(const Team new_team);
+			const static bool update(Team& new_team);
 			/**
 			 * remove a team from database
 			 * 
@@ -78,7 +78,7 @@ namespace voba
 			 * @CreatedBy tingkai
 			 * @Date 2019.03.01
 			 */
-			const static bool remove(const Team team);
+			const static bool remove(Team& team);
 		
 		private:
 			static MySQLConnector<Team> t_connector;
