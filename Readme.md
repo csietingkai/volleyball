@@ -35,9 +35,9 @@ sudo apt-get install libgtkmm-3.0-dev
 + [ ] add code coverage test
 + [ ] create data in database for testing
 + [ ] test unit in test.cpp
-+ [x] [add ci test](https://travis-ci.org/csietingkai/volleyball)
-+ [ ] [add code coverage test](https://coveralls.io)
-+ [ ] [add code review tool](https://app.codacy.com/project/csietingkai/volleyball)
++ [x] add ci test
++ [ ] add code coverage test
++ [x] add code review tool
 
 ## Fail TODO List
 
