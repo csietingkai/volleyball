@@ -10,6 +10,7 @@ Using techniques:
 + Gliffy (to design application structure and view) 
 
 ## Build Status
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dea171f3d8a34135a7c02bfb013a8281)](https://app.codacy.com/app/csietingkai/volleyball?utm_source=github.com&utm_medium=referral&utm_content=csietingkai/volleyball&utm_campaign=Badge_Grade_Settings)
 [![Build Status](https://travis-ci.org/csietingkai/volleyball.svg?branch=master)](https://travis-ci.org/csietingkai/volleyball)
 
 ## Developers: 
