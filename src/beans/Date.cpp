@@ -238,6 +238,7 @@ const voba::Date voba::Date::previous_month() const
 	if (month < 1)
 	{
 		month += MONTHS_PER_YEAR;
+		carry = true;
 	}
 	voba::Date ret(year, month, day);
 	if (carry)
