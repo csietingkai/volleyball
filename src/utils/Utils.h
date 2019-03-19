@@ -5,6 +5,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <climits>
 #include <iostream>
 #include <random>
 #include <sstream>
@@ -55,6 +56,25 @@ namespace voba
 			 */
 			const static std::vector<std::string> split(const std::string str, const char separator);
 			
+			/**
+			 * generate random integer
+			 * 
+			 * @see Utils #random_integer(int, int)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.19
+			 */
+			const static int random_integer();
+			/**
+			 * generate random integer
+			 * 
+			 * @param min(int)
+			 * @param max(int)
+			 * 
+			 * @CreatedBy tingkai
+			 * @Date 2019.03.19
+			 */
+			const static int random_integer(const int min, const int max);
 			/**
 			 * generate random string which length is 6
 			 * 

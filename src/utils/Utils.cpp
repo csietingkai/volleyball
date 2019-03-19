@@ -84,6 +84,19 @@ const std::vector<std::string> voba::Utils::split(const std::string str, const c
 	return result;
 }
 
+const int voba::Utils::random_integer()
+{
+	return voba::Utils::random_integer(INT_MIN, INT_MAX);
+}
+
+const int voba::Utils::random_integer(const int min, const int max)
+{
+	std::random_device rd;
+	std::mt19937 mt(rd());
+	std::uniform_real_distribution<> dist(min, max);
+	return dist(mt);
+}
+
 const std::string voba::Utils::random_string()
 {
 	// call random_string
