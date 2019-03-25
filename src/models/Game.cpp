@@ -44,7 +44,7 @@ voba::Game::Game(const voba::Game& other)
 	, team1(other.get_team1())
 	, team2(other.get_team2())
 {
-	// do nothing
+	this->operator=(other);
 }
 
 // getters & setters
