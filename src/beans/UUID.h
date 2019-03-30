@@ -59,6 +59,7 @@ namespace voba
 			
 			const UUID& operator =(const UUID& other);
 			const bool operator ==(const UUID& other) const;
+			const bool operator !=(const UUID& other) const;
 			friend std::ostream& operator <<(std::ostream& strm, const UUID& other);
 		
 		private:

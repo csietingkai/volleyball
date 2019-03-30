@@ -43,6 +43,11 @@ const bool voba::UUID::operator ==(const voba::UUID& other) const
 	return this->id.compare(other.to_string()) == 0;
 }
 
+const bool voba::UUID::operator !=(const voba::UUID& other) const
+{ 
+	return !this->operator==(other);
+}
+
 std::ostream& operator <<(std::ostream& strm, const voba::UUID& other)
 {
 	strm << other.to_string();
