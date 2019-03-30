@@ -9,10 +9,15 @@
 #include "../tools/Logger.h"
 #include "../tools/MySQLConnector.h"
 #include "../auth.h" 
-#include "page_enum.h"
 
 namespace voba
 {
+	enum Page : int
+	{
+		LOGIN_PAGE = 0,
+		APP_PAGE = 1
+	};
+	
 	class MainWindow : public Gtk::Window, Logable
 	{
 		public:
