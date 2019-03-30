@@ -12,10 +12,10 @@
 
 namespace voba
 {
-	enum Page : int
+	enum View
 	{
-		LOGIN_PAGE = 0,
-		APP_PAGE = 1
+		LOGIN,
+		APP
 	};
 	
 	class MainWindow : public Gtk::Window, Logable
@@ -38,16 +38,16 @@ namespace voba
 			User user;
 			
 			Gtk::Box box_all;
-			class LoginPage : public Gtk::Box
+			class LoginView : public Gtk::Box
 			{
 				public:
 					const static std::string CLASS_NAME;
 					const static int WINDOW_WIDTH = 250;
 					const static int WINDOW_HEIGHT = 100;
-					const static Page TYPE = Page::LOGIN_PAGE;
+					const static View TYPE = View::LOGIN;
 					
-					LoginPage(MainWindow& parent);
-					virtual ~LoginPage();
+					LoginView(MainWindow& parent);
+					virtual ~LoginView();
 					
 				protected:
 					Gtk::Box vbox_center;
@@ -73,18 +73,18 @@ namespace voba
 					
 					void on_btn_login_clicked();
 			}; 
-			LoginPage login_page;
+			LoginView login_view;
 			
-			class AppPage : public Gtk::Box
+			class AppView : public Gtk::Box
 			{
 				public:
 					const static std::string CLASS_NAME;
 					const static int WINDOW_WIDTH = 1000;
 					const static int WINDOW_HEIGHT = 650;
-					const static Page TYPE = Page::APP_PAGE;
+					const static View TYPE = View::APP;
 					
-					AppPage(MainWindow& parent);
-					virtual ~AppPage();
+					AppView(MainWindow& parent);
+					virtual ~AppView();
 					
 				protected:
 					Gtk::Box vbox_center;
@@ -107,7 +107,7 @@ namespace voba
 					void init_modify_team_page();
 					void init_schedule_page();
 			};
-			AppPage app_page;
+			AppView app_view;
 			
 			void init();
 	};
