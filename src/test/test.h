@@ -5,8 +5,14 @@
 #include <iostream>
 
 #include "../beans/DateTime.h"
+#include "../models/Game.h"
 #include "../models/Person.h"
+#include "../models/Team.h"
+#include "../models/factory/GameFactory.h"
+#include "../models/factory/PersonFactory.h"
+#include "../models/factory/TeamFactory.h"
 #include "../tools/MySQLConnector.h"
+#include "../auth.h"
 
 namespace voba
 {
