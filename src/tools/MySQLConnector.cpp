@@ -246,8 +246,6 @@ template<> const int voba::MySQLConnector<voba::Game>::update(const voba::Game g
 		
 	std::string query = this->builder.update(this->table).set(sets).where(where_conditions).to_string();
 	
-	std::cout << query << std::endl;
-	
 	int ret = 0;
 	try
 	{
