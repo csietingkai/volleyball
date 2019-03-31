@@ -101,16 +101,24 @@ namespace voba
 				private:
 					MainWindow& parent;
 					
-/*					class RegisterPage : public Gtk::Box*/
-/*					{*/
-/*						public:*/
-/*							const static std::string CLASS_NAME;*/
-/*							const static std::string PAGE_NAME;*/
-/*							*/
-/*							RegisterPage(AppView& parent);*/
-/*							virtual ~RegisterPage();*/
-/*					};*/
-/*					RegisterPage register_page;*/
+					class RegisterPage : public Gtk::Box
+					{
+						public:
+							const static std::string CLASS_NAME;
+							const static std::string PAGE_NAME;
+							
+							RegisterPage(AppView& parent);
+							virtual ~RegisterPage();
+						
+						protected:
+							Gtk::Button *btn;
+							
+							void init();
+						
+						private:
+							AppView& parent;
+					};
+					RegisterPage *register_page;
 			};
 			AppView app_view;
 			

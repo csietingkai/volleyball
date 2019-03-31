@@ -16,10 +16,13 @@ voba::MainWindow::AppView::~AppView()
 // protected
 void voba::MainWindow::AppView::init()
 {
-	show_all_children();
+	this->register_page = new voba::MainWindow::AppView::RegisterPage(*this);
+	
 	this->set_position();
 	this->set_attribute();
 	this->set_signal_handler();
+	
+	show_all_children();
 }
 
 void voba::MainWindow::AppView::set_position()
@@ -29,6 +32,7 @@ void voba::MainWindow::AppView::set_position()
 			this->vbox_sidebar.pack_start(this->sidebar, Gtk::PACK_SHRINK);
 			this->vbox_sidebar.pack_start(this->separator, Gtk::PACK_SHRINK);
 			this->vbox_sidebar.pack_start(this->stack, Gtk::PACK_EXPAND_WIDGET);
+				this->stack.add(*this->register_page, voba::MainWindow::AppView::RegisterPage::PAGE_NAME, voba::MainWindow::AppView::RegisterPage::PAGE_NAME);
 }
 
 void voba::MainWindow::AppView::set_attribute()
