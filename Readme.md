@@ -20,19 +20,18 @@ Using techniques:
 
 ## Things To Do Before Execute
 
-```
-sudo apt-get install libboost-all-dev
-sudo apt-get install libmysqlcppconn-dev
-sudo apt-get install libgtkmm-3.0-dev
+``` shell
+$ sudo apt-get install libboost-all-dev
+$ sudo apt-get install libmysqlcppconn-dev
+$ sudo apt-get install libgtkmm-3.0-dev
 ```
 
 ## TODO List
 
 + [x] set team conditions
-+ [ ] implement of class 'Game' & 'Schedule'
++ [x] implement of class 'Game'
 + [ ] frontend view
 + [ ] algorithm for scheduling games
-+ [ ] add code coverage test
 + [ ] create data in database for testing
 + [ ] test unit in test.cpp
 + [x] add ci test
@@ -46,16 +45,16 @@ sudo apt-get install libgtkmm-3.0-dev
 ## Usage
 
 + clone the whole project
-```
+``` shell
 $ git clone git@github.com:csietingkai/volleyball.git
 ```
 
 + generate executable file
-```
+``` shell
 $ make
 ```
 
 + execute the exe file
-```
+``` shell
 $ ./volleyball.exe
 ```
