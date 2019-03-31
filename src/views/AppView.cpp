@@ -17,7 +17,6 @@ voba::MainWindow::AppView::~AppView()
 void voba::MainWindow::AppView::init()
 {
 	show_all_children();
-	this->init_stack_contents();
 	this->set_position();
 	this->set_attribute();
 	this->set_signal_handler();
@@ -44,34 +43,6 @@ void voba::MainWindow::AppView::set_attribute()
 }
 
 void voba::MainWindow::AppView::set_signal_handler()
-{
-	
-}
-
-// private
-void voba::MainWindow::AppView::init_stack_contents()
-{
-	this->init_register_user_page("Create New User");
-	this->init_team_list_page("Team List");
-	this->init_schedule_page("Schedule");
-}
-
-void voba::MainWindow::AppView::init_register_user_page(const std::string page_name)
-{
-	Gtk::Box* hbox_all = new Gtk::Box(Gtk::ORIENTATION_HORIZONTAL);
-	hbox_all->set_border_width(100);
-	Gtk::Button *btn = new Gtk::Button("haha");
-	hbox_all->pack_start(*btn);
-	
-	this->stack.add(*hbox_all, page_name, page_name);
-}
-
-void voba::MainWindow::AppView::init_team_list_page(const std::string page_name)
-{
-	
-}
-
-void voba::MainWindow::AppView::init_schedule_page(const std::string page_name)
 {
 	
 }

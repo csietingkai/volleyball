@@ -101,11 +101,16 @@ namespace voba
 				private:
 					MainWindow& parent;
 					
-					void init_stack_contents();
-					void init_register_user_page();
-					void init_team_list_page();
-					void init_modify_team_page();
-					void init_schedule_page();
+/*					class RegisterPage : public Gtk::Box*/
+/*					{*/
+/*						public:*/
+/*							const static std::string CLASS_NAME;*/
+/*							const static std::string PAGE_NAME;*/
+/*							*/
+/*							RegisterPage(AppView& parent);*/
+/*							virtual ~RegisterPage();*/
+/*					};*/
+/*					RegisterPage register_page;*/
 			};
 			AppView app_view;
 			
