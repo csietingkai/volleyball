@@ -111,14 +111,45 @@ namespace voba
 							virtual ~RegisterPage();
 						
 						protected:
-							Gtk::Button *btn;
+							Gtk::Box *vbox_center;
+								Gtk::Box *hbox_create_msg;
+									Gtk::Label *label_create_msg;
+								Gtk::Box *hbox_username_input;
+									Gtk::Label *label_username;
+									Gtk::Entry *entry_username;
+								Gtk::Box *hbox_password_input;
+									Gtk::Label *label_password;
+									Gtk::Entry *entry_password;
+								Gtk::Box *hbox_password_again_input;
+									Gtk::Label *label_password_again;
+									Gtk::Entry *entry_password_again;
+								Gtk::Box *hbox_roles;
+									Gtk::Label *label_roles;
+									Gtk::Box *vbox_role_options;
+										Gtk::RadioButton *rbtn_admin;
+										Gtk::RadioButton *rbtn_leader;
+										Gtk::RadioButton *rbtn_user;
+								Gtk::Box *hbox_btngroup;
+									Gtk::ButtonBox *btnbox_create;
+										Gtk::Button *btn_create;
 							
 							void init();
+							void new_member_variable();
+							void set_position();
+							void set_attribute();
+							void set_signal_handler();
 						
 						private:
 							AppView& parent;
+							
+							void on_btn_create_clicked();
 					};
 					RegisterPage *register_page;
+					
+					class TeamListPage : public Gtk::Box
+					{
+						public:
+					};
 			};
 			AppView app_view;
 			
