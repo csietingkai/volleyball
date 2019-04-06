@@ -143,6 +143,9 @@ namespace voba
 							AppView& parent;
 							
 							void on_btn_create_clicked();
+							
+							const bool is_all_field_fill();
+							const bool is_password_repeat();
 					};
 					RegisterPage *register_page;
 					

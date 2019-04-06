@@ -123,15 +123,56 @@ void voba::MainWindow::AppView::RegisterPage::on_btn_create_clicked()
 		new_user.role = voba::Role::USER;
 	}
 	
-	if (this->entry_password->get_text().compare(this->entry_password_again->get_text()) == 0)
+	if (!this->is_all_field_fill())
 	{
-		voba::AuthState create_user_state = voba::create_auth(this->parent.parent.user, new_user);
-		std::cout << create_user_state << std::endl;
+		this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+		this->label_create_msg->set_text("Not All Fields Filled!!");
+	}
+	else if (!this->is_password_repeat())
+	{
+		this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+		this->label_create_msg->set_text("Password Is Not The Same!!");
 	}
 	else
 	{
-		this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
-		this->label_create_msg->set_text("create new user failed!!");
+		voba::AuthState create_user_state = voba::create_auth(this->parent.parent.user, new_user);
+		
+		switch (create_user_state)
+		{
+			case voba::AuthState::SUCCESS:
+				this->hbox_create_msg->override_color(Gdk::RGBA("green"), Gtk::STATE_FLAG_NORMAL);
+				this->label_create_msg->set_text("Create User Successfully!!");
+				break;
+			
+			case voba::AuthState::DUPLICATE_ACCOUNT_NAME:
+				this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+				this->label_create_msg->set_text("Username Has Been Used!!");
+				break;
+			
+			case voba::AuthState::AUTH_NOT_ENOUGH:
+				this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+				this->label_create_msg->set_text("You Can't Create This User!!");
+				break;
+			
+			case voba::AuthState::FAIL:
+				this->hbox_create_msg->override_color(Gdk::RGBA("red"), Gtk::STATE_FLAG_NORMAL);
+				this->label_create_msg->set_text("Create New User Failed!!");
+				break;
+		}
 	}
 }
 
+
+const bool voba::MainWindow::AppView::RegisterPage::is_all_field_fill()
+{
+	bool re = true;
+	re = re && (this->entry_username->get_text().compare("") != 0);
+	re = re && (this->entry_password->get_text().compare("") != 0);
+	re = re && (this->entry_password_again->get_text().compare("") != 0);
+	return re;
+}
+
+const bool voba::MainWindow::AppView::RegisterPage::is_password_repeat()
+{
+	return this->entry_password->get_text().compare(this->entry_password_again->get_text()) == 0;
+}
