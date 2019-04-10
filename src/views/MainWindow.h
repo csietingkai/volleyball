@@ -152,7 +152,28 @@ namespace voba
 					class TeamListPage : public Gtk::Box
 					{
 						public:
+							const static std::string CLASS_NAME;
+							const static std::string PAGE_NAME;
+							
+							TeamListPage(AppView& parent);
+							virtual ~TeamListPage();
+						
+						protected:
+							Gtk::Box *hbox_center;
+								Gtk::Box *vbox_team_list;
+								Gtk::Box *vbox_team_detail;
+								Gtk::Box *vbox_person_detail;
+							
+							void init();
+							void new_member_variable();
+							void set_position();
+							void set_attribute();
+							void set_signal_handler();
+						
+						private:
+							AppView& parent;
 					};
+					TeamListPage *team_list_page;
 			};
 			AppView app_view;
 			
