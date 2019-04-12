@@ -1,4 +1,4 @@
-# Volleyball Scheduling (temporarily 
+# Volleyball Scheduling (temporarily shutdown)
 
 A scheduling application for National Chung Cheng University Volleyball League.
 
